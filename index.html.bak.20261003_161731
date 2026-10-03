@@ -991,8 +991,8 @@ section { padding: 110px 24px; }
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <button class="nav-brand" onclick="toggleTheme()" title="Cambiar tema" aria-label="Halat Hernández">
-      <img class="nav-logo-a" src="images/loco-choco-2.png" alt="Halat Hernández">
-      <img class="nav-logo-b" src="images/logo-solo-removebg.png" alt="Halat Hernández">
+      <img class="nav-logo-a" src="images/loco%20choco%20sin%20fondo_2.png" alt="Halat Hernández">
+      <img class="nav-logo-b" src="images/Logo_solo-removebg-preview.png" alt="Halat Hernández">
     </button>
     <ul class="nav-links">
       <li><a onclick="goTo('maison')">La Maison</a></li>
@@ -1024,8 +1024,8 @@ section { padding: 110px 24px; }
 <section class="hero">
   <div class="hero-content">
     <div class="hero-logo-swap">
-      <img class="logo-a" src="images/loco-choco-1.png" alt="Halat Hernández — Bombones de Autor">
-      <img class="logo-b" src="images/loco-dorado-1.png" alt="Halat Hernández — Bombones de Autor">
+      <img class="logo-a" src="images/loco%20choco%20sin%20fondo_1.png" alt="Halat Hernández — Bombones de Autor">
+      <img class="logo-b" src="images/loco%20dorado%20sin%20fondo_1.png" alt="Halat Hernández — Bombones de Autor">
     </div>
     <p class="hero-tag">Bombones de Autor · 2026</p>
     <h1 class="hero-title">
