@@ -70,6 +70,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 @keyframes goldDrift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
+/* ═══ NAV ═══ */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: rgba(10, 22, 40, 0.92);
@@ -115,6 +116,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: 1.5rem; padding: 0;
 }
 
+/* ═══ HERO ═══ */
 .hero {
   min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
@@ -192,6 +194,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .btn svg { width: 16px; height: 16px; }
 
+/* ═══ SECCIONES ═══ */
 section { padding: 110px 24px; }
 .section-label {
   font-size: 0.68rem; color: var(--gold-500);
@@ -216,6 +219,7 @@ section { padding: 110px 24px; }
 .bg-marble .section-text { color: rgba(10, 22, 40, 0.68); }
 .bg-marble .section-label { color: var(--gold-600); }
 
+/* ═══ LA MAISON ═══ */
 .maison { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 .maison-visual {
   position: relative; aspect-ratio: 4/5;
@@ -262,6 +266,7 @@ section { padding: 110px 24px; }
   background: linear-gradient(90deg, var(--gold-500), transparent);
 }
 
+/* ═══ PROCESO ═══ */
 .proceso-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 4rem; }
 .proceso-item { position: relative; padding-top: 1.5rem; }
 .proceso-item::before {
@@ -281,38 +286,41 @@ section { padding: 110px 24px; }
   line-height: 1.75; font-weight: 300;
 }
 
+/* ═══ GALERÍA (UNA SOLA IMAGEN) ═══ */
 .gallery-section { padding: 0; }
-.gallery-strip {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  gap: 1px; background: rgba(201, 169, 97, 0.15);
-}
-.gallery-item {
-  position: relative; aspect-ratio: 3/4; overflow: hidden;
+.gallery-single {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
   background: var(--navy-800);
 }
-.gallery-item img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+.gallery-single img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
-.gallery-item:hover img { transform: scale(1.05); }
-.gallery-item::after {
+.gallery-single:hover img { transform: scale(1.03); }
+.gallery-single::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(5, 10, 20, 0.75));
+  background: linear-gradient(180deg, transparent 40%, rgba(5, 10, 20, 0.85));
   pointer-events: none;
 }
 .gallery-caption {
-  position: absolute; bottom: 1.5rem; left: 1.75rem; right: 1.75rem;
+  position: absolute; bottom: 2.5rem; left: 3rem; right: 3rem;
   z-index: 3;
 }
 .gallery-caption .num {
   font-family: var(--display); font-size: 0.65rem;
-  color: var(--gold-500); letter-spacing: 0.35em; margin-bottom: 0.4rem;
+  color: var(--gold-500); letter-spacing: 0.35em; margin-bottom: 0.5rem;
 }
 .gallery-caption .title {
-  font-family: var(--serif); font-size: 1.15rem;
+  font-family: var(--serif); font-size: 1.75rem;
   font-style: italic; color: var(--cream-100); font-weight: 400;
 }
 
+/* ═══ SABORES ═══ */
 .sabores-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem; }
 .sabor-card {
   background: linear-gradient(180deg, var(--navy-700) 0%, var(--navy-950) 100%);
@@ -364,6 +372,7 @@ section { padding: 110px 24px; }
 
 .sabores-cta { text-align: center; margin-top: 4rem; }
 
+/* ═══ PRESENTACIONES ═══ */
 .presentaciones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem; }
 .pres-card {
   border: 1px solid rgba(10, 22, 40, 0.14);
@@ -427,6 +436,7 @@ section { padding: 110px 24px; }
 }
 .pres-card:hover .pres-cta { color: var(--gold-600); border-color: var(--gold-600); }
 
+/* ═══ SIGNATURE ═══ */
 .signature-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: center; }
 .signature-visual {
   aspect-ratio: 1;
@@ -464,6 +474,7 @@ section { padding: 110px 24px; }
   color: rgba(245, 239, 224, 0.7); font-weight: 300;
 }
 
+/* ═══ B2B ═══ */
 .b2b-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .b2b-list { display: grid; gap: 1rem; margin: 2rem 0 2.5rem; }
 .b2b-item {
@@ -499,6 +510,7 @@ section { padding: 110px 24px; }
   color: rgba(201, 169, 97, 0.4); letter-spacing: 0.15em;
 }
 
+/* ═══ MARIDAJES ═══ */
 .maridajes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
 .maridaje-card {
   padding: 1.75rem 1.5rem; text-align: center;
@@ -517,6 +529,7 @@ section { padding: 110px 24px; }
   line-height: 1.65; font-weight: 300;
 }
 
+/* ═══ CTA FINAL ═══ */
 .final-cta {
   text-align: center;
   background: linear-gradient(180deg, var(--navy-800), var(--navy-950));
@@ -537,6 +550,7 @@ section { padding: 110px 24px; }
   max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.85;
 }
 
+/* ═══ FOOTER ═══ */
 .footer {
   background: var(--navy-950);
   border-top: 1px solid rgba(201, 169, 97, 0.15);
@@ -575,6 +589,7 @@ section { padding: 110px 24px; }
   font-weight: 300; flex-wrap: wrap; gap: 1rem;
 }
 
+/* ═══ FLOTANTES ═══ */
 .wa-float {
   position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
   width: 56px; height: 56px; border-radius: 50%;
@@ -619,6 +634,7 @@ section { padding: 110px 24px; }
   border: 2px solid var(--navy-950);
 }
 
+/* ═══ RONCANCIO ═══ */
 .ron-window {
   position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 300;
   width: 100%; max-width: 440px;
@@ -934,6 +950,7 @@ section { padding: 110px 24px; }
 .ron-input .send:hover { background: var(--gold-300); transform: scale(1.05); }
 .ron-input .send svg { width: 18px; height: 18px; }
 
+/* ═══ MOBILE MENU ═══ */
 .mobile-menu {
   display: none; position: fixed; inset: 0;
   background: rgba(10, 22, 40, 0.98); z-index: 99;
@@ -960,12 +977,11 @@ section { padding: 110px 24px; }
   --navy-500: #5A3620;
 }
 
+/* ═══ RESPONSIVE ═══ */
 @media (max-width: 960px) {
   .maison, .b2b-grid, .signature-wrap { grid-template-columns: 1fr; gap: 3rem; }
   .proceso-grid, .maridajes-grid { grid-template-columns: repeat(2, 1fr); }
   .sabores-grid, .presentaciones-grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery-strip { grid-template-columns: 1fr; }
-  .gallery-item { aspect-ratio: 4/3; }
 }
 @media (max-width: 768px) {
   section { padding: 80px 20px; }
@@ -980,6 +996,9 @@ section { padding: 110px 24px; }
   .footer-brand img { height: 70px; }
   .maison-quote { font-size: 1.2rem; padding: 1.5rem 0 1.5rem 1.5rem; }
   .maison-quote::before { font-size: 3.5rem; left: 0.5rem; top: 0.25rem; }
+  .gallery-single { aspect-ratio: 4/5; }
+  .gallery-caption { bottom: 1.5rem; left: 1.5rem; right: 1.5rem; }
+  .gallery-caption .title { font-size: 1.35rem; }
   .ron-window {
     bottom: 0; right: 0; left: 0; max-width: 100%;
     height: 94vh; border-radius: 12px 12px 0 0;
@@ -1023,6 +1042,7 @@ section { padding: 110px 24px; }
   <a onclick="goTo('contacto')">Contacto</a>
 </div>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
     <div class="hero-logo-swap">
@@ -1044,6 +1064,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
+<!-- LA MAISON -->
 <section id="maison" class="bg-navy">
   <div class="container">
     <div class="maison">
@@ -1068,6 +1089,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
+<!-- PROCESO -->
 <section id="proceso" class="bg-navy-alt">
   <div class="container">
     <div class="reveal" style="text-align:center;">
@@ -1084,32 +1106,18 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
+<!-- GALERÍA: SOLO "COLOR QUE SE SABOREA" -->
 <section class="gallery-section">
-  <div class="gallery-strip">
-    <div class="gallery-item reveal">
-      <img src="images/imagen-bombones-1.png" alt="Bombones Halat Hernández" onerror="this.style.display='none';">
-      <div class="gallery-caption">
-        <div class="num">01</div>
-        <div class="title">El brillo de lo artesanal</div>
-      </div>
-    </div>
-    <div class="gallery-item reveal">
-      <img src="images/imagen-bombones-2.png" alt="Bombones Halat Hernández" onerror="this.style.display='none';">
-      <div class="gallery-caption">
-        <div class="num">02</div>
-        <div class="title">Color que se saborea</div>
-      </div>
-    </div>
-    <div class="gallery-item reveal">
-      <img src="images/imagen-bombones-4.png" alt="Bombones Halat Hernández" onerror="this.style.display='none';">
-      <div class="gallery-caption">
-        <div class="num">03</div>
-        <div class="title">Detalle que perdura</div>
-      </div>
+  <div class="gallery-single">
+    <img src="images/imagen-bombones-2.png" alt="Color que se saborea — Halat Hernández" onerror="this.style.display='none';">
+    <div class="gallery-caption">
+      <div class="num">02</div>
+      <div class="title">Color que se saborea</div>
     </div>
   </div>
 </section>
 
+<!-- SABORES -->
 <section id="sabores" class="bg-navy">
   <div class="container">
     <div class="reveal" style="text-align:center;">
@@ -1198,6 +1206,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
+<!-- PRESENTACIONES -->
 <section id="presentaciones" class="bg-marble">
   <div class="container">
     <div class="reveal" style="text-align:center;">
@@ -1255,6 +1264,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
+<!-- SIGNATURE -->
 <section class="bg-navy">
   <div class="container">
     <div class="signature-wrap">
@@ -1280,6 +1290,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
+<!-- EMPRESAS -->
 <section id="empresas" class="bg-navy-alt">
   <div class="container">
     <div class="b2b-grid">
@@ -1296,7 +1307,7 @@ section { padding: 110px 24px; }
       </div>
       <div class="reveal">
         <div class="b2b-visual visual-wrap">
-          <img class="visual-img" src="images/imagen-4-y-4-bombones.png" alt="Empresas Halat Hernández" onerror="this.style.display='none';">
+          <img class="visual-img" src="images/presentacion-4.png" alt="Empresas Halat Hernández" onerror="this.style.display='none';">
           <div class="visual-fallback"><span class="sigil">B2B</span></div>
         </div>
       </div>
@@ -1304,6 +1315,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
+<!-- MARIDAJES -->
 <section class="bg-navy">
   <div class="container">
     <div class="reveal" style="text-align:center;">
@@ -1319,6 +1331,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
+<!-- CTA FINAL -->
 <section id="contacto" class="final-cta">
   <div class="inner reveal">
     <p class="section-label">Solicita tu caja personalizada</p>
@@ -1331,6 +1344,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
@@ -1411,7 +1425,7 @@ const CONFIG = {
   whatsapp: '573208209369',
   brandName: 'Halat Hernández',
   botName: 'Roncaccio',
-  storageKey: 'halat-roncancio-v9'
+  storageKey: 'halat-roncancio-v11'
 };
 
 const BOX_TYPES = {
