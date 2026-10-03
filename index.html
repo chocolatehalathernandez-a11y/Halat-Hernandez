@@ -589,9 +589,10 @@ section { padding: 110px 24px; }
   font-weight: 300; flex-wrap: wrap; gap: 1rem;
 }
 
-/* ═══ FLOTANTES ═══ */
+/* ═══ FLOTANTES CENTRADOS ═══ */
 .wa-float {
-  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+  position: fixed; bottom: 1.5rem; z-index: 200;
+  left: calc(50% - 62px); right: auto;
   width: 56px; height: 56px; border-radius: 50%;
   background: var(--navy-900); border: 1px solid rgba(201, 169, 97, 0.5);
   display: flex; align-items: center; justify-content: center;
@@ -601,12 +602,13 @@ section { padding: 110px 24px; }
 .wa-float:hover {
   border-color: var(--gold-500);
   box-shadow: 0 0 30px rgba(201, 169, 97, 0.35);
-  transform: scale(1.05);
+  transform: translateY(-3px);
 }
 .wa-float svg { width: 26px; height: 26px; fill: var(--gold-500); }
 
 .ron-launcher {
-  position: fixed; bottom: 1.5rem; right: 5.5rem; z-index: 200;
+  position: fixed; bottom: 1.5rem; z-index: 200;
+  left: calc(50% + 6px); right: auto;
   width: 56px; height: 56px; border-radius: 50%;
   background: linear-gradient(135deg, var(--gold-500), var(--gold-600));
   border: 1px solid var(--gold-500);
@@ -616,7 +618,7 @@ section { padding: 110px 24px; }
   color: var(--navy-900);
   font-family: var(--display); font-weight: 700; font-size: 1.3rem;
 }
-.ron-launcher:hover { transform: scale(1.08); box-shadow: 0 0 45px rgba(201, 169, 97, 0.55); }
+.ron-launcher:hover { transform: translateY(-3px); box-shadow: 0 0 45px rgba(201, 169, 97, 0.55); }
 .ron-launcher .pulse {
   position: absolute; inset: 0; border-radius: 50%;
   background: var(--gold-500); animation: ronPulse 2.5s infinite; z-index: -1;
@@ -634,11 +636,12 @@ section { padding: 110px 24px; }
   border: 2px solid var(--navy-950);
 }
 
-/* ═══ RONCANCIO ═══ */
+/* Ventana de Roncaccio centrada */
 .ron-window {
-  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 300;
+  position: fixed; bottom: 5.5rem; z-index: 300;
+  left: 50%; transform: translateX(-50%); right: auto;
   width: 100%; max-width: 440px;
-  height: 760px; max-height: calc(100vh - 3rem);
+  height: 720px; max-height: calc(100vh - 7rem);
   background: var(--navy-900);
   border: 1px solid rgba(201, 169, 97, 0.4);
   border-radius: 6px;
@@ -647,8 +650,8 @@ section { padding: 110px 24px; }
 }
 .ron-window.open { display: flex; animation: ronOpen 0.35s ease; }
 @keyframes ronOpen {
-  from { opacity: 0; transform: translateY(24px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateX(-50%) translateY(24px) scale(0.98); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 }
 
 .ron-header {
@@ -820,7 +823,6 @@ section { padding: 110px 24px; }
   background: rgba(201, 169, 97, 0.08);
   box-shadow: inset 0 0 0 1px rgba(201, 169, 97, 0.15);
 }
-.flavor-row.disabled { opacity: 0.45; pointer-events: none; }
 .flavor-row .fl-name {
   font-family: var(--serif); font-size: 1rem;
   color: var(--cream-100); font-weight: 500;
@@ -999,13 +1001,17 @@ section { padding: 110px 24px; }
   .gallery-single { aspect-ratio: 4/5; }
   .gallery-caption { bottom: 1.5rem; left: 1.5rem; right: 1.5rem; }
   .gallery-caption .title { font-size: 1.35rem; }
-  .ron-window {
-    bottom: 0; right: 0; left: 0; max-width: 100%;
-    height: 94vh; border-radius: 12px 12px 0 0;
-  }
-  .ron-launcher { right: 4.75rem; bottom: 1.25rem; width: 50px; height: 50px; font-size: 1.15rem; }
-  .wa-float { width: 50px; height: 50px; bottom: 1.25rem; right: 1.25rem; }
+  .wa-float { bottom: 1.25rem; left: calc(50% - 52px); width: 50px; height: 50px; }
   .wa-float svg { width: 22px; height: 22px; }
+  .ron-launcher { bottom: 1.25rem; left: calc(50% + 6px); right: auto; width: 50px; height: 50px; font-size: 1.15rem; }
+  .ron-window {
+    bottom: 0; left: 0; right: 0; transform: none;
+    max-width: 100%; height: 94vh; border-radius: 12px 12px 0 0;
+  }
+  @keyframes ronOpen {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
   .hero-ctas { flex-direction: column; align-items: stretch; padding: 0 12px; }
   .btn { width: 100%; justify-content: center; }
   .fl-btn { width: 40px; height: 40px; font-size: 1.25rem; }
@@ -1015,6 +1021,7 @@ section { padding: 110px 24px; }
 </head>
 <body>
 
+<!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <button class="nav-brand" onclick="toggleTheme()" title="Cambiar tema" aria-label="Halat Hernández">
@@ -1425,11 +1432,11 @@ const CONFIG = {
   whatsapp: '573208209369',
   brandName: 'Halat Hernández',
   botName: 'Roncaccio',
-  storageKey: 'halat-roncancio-v11'
+  storageKey: 'halat-roncancio-v12'
 };
 
 const BOX_TYPES = {
-  petit:   { id: 'petit',   name: 'Petit Coffret',     units: 4,  maxFlavors: 1, size: '8.5 × 8.5 cm' },
+  petit:   { id: 'petit',   name: 'Petit Coffret',     units: 4,  maxFlavors: 2, size: '8.5 × 8.5 cm' },
   coffret: { id: 'coffret', name: 'Coffret Signature', units: 12, maxFlavors: 4, size: '12.5 × 16.5 cm' },
   grand:   { id: 'grand',   name: 'Grand Coffret',     units: 24, maxFlavors: 6, size: 'aprox. 24 × 28 cm' }
 };
@@ -1507,16 +1514,25 @@ function escapeHtml(str) {
 
 const R = {
   stage: 'welcome',
+  orderType: '',
   boxes: [],
   currentIndex: -1,
   contact: { nombre: '', telefono: '', ciudad: '', direccion: '', fecha: '', ocasion: '', special: '' },
   contactStep: 0
 };
-const CONTACT_FIELDS = [
+
+const CONTACT_FIELDS_DOMICILIO = [
   { key: 'nombre',    label: 'Nombre completo',     prompt: '¿Cuál es tu <strong>nombre completo</strong>?',            clean: cleanName,   validate: v => v.length >= 3 || 'Por favor escribe al menos tu nombre y apellido.' },
   { key: 'telefono',  label: 'Teléfono / WhatsApp', prompt: '¿Tu <strong>número de WhatsApp</strong>? (10 dígitos)',    clean: cleanPhone,  validate: v => isValidPhone(v) || 'Escribe un número de celular colombiano válido (10 dígitos, empieza en 3).' },
   { key: 'ciudad',    label: 'Ciudad',              prompt: '¿En qué <strong>ciudad</strong> estás?',                  clean: cleanCity,   validate: v => v.length >= 3 || 'Escribe una ciudad válida.' },
   { key: 'direccion', label: 'Dirección de envío',  prompt: '¿Cuál es tu <strong>dirección de envío</strong>?',          clean: cleanAddress,validate: v => v.length >= 6 || 'Necesito una dirección más específica para la entrega.' },
+  { key: 'fecha',     label: 'Fecha requerida',     prompt: '¿Para qué <strong>fecha</strong> la necesitas?<br><small style="color:rgba(245,239,224,0.5);font-size:0.75rem;">Recuerda: mínimo 24h de anticipación.</small>', clean: v => String(v).trim(), validate: () => true },
+  { key: 'ocasion',   label: 'Ocasión (opcional)',  prompt: '¿Cuál es la <strong>ocasión</strong>? (o escribe "sin ocasión")', clean: cleanOccasion, validate: () => true }
+];
+
+const CONTACT_FIELDS_PICKUP = [
+  { key: 'nombre',    label: 'Nombre completo',     prompt: '¿Cuál es tu <strong>nombre completo</strong>?',            clean: cleanName,   validate: v => v.length >= 3 || 'Por favor escribe al menos tu nombre y apellido.' },
+  { key: 'telefono',  label: 'Teléfono / WhatsApp', prompt: '¿Tu <strong>número de WhatsApp</strong>? (10 dígitos)',    clean: cleanPhone,  validate: v => isValidPhone(v) || 'Escribe un número de celular colombiano válido (10 dígitos, empieza en 3).' },
   { key: 'fecha',     label: 'Fecha requerida',     prompt: '¿Para qué <strong>fecha</strong> la necesitas?<br><small style="color:rgba(245,239,224,0.5);font-size:0.75rem;">Recuerda: mínimo 24h de anticipación.</small>', clean: v => String(v).trim(), validate: () => true },
   { key: 'ocasion',   label: 'Ocasión (opcional)',  prompt: '¿Cuál es la <strong>ocasión</strong>? (o escribe "sin ocasión")', clean: cleanOccasion, validate: () => true }
 ];
@@ -1581,6 +1597,18 @@ function distinctFlavors(box) {
   return Object.values(box.flavors).filter(v => v > 0).length;
 }
 
+function checkDomicilioMinimum() {
+  if (R.orderType !== 'domicilio') return { ok: true };
+  const petits = R.boxes.filter(b => b.type === 'petit').length;
+  const others = R.boxes.filter(b => b.type !== 'petit').length;
+  if (others > 0) return { ok: true };
+  if (petits >= 2) return { ok: true };
+  return {
+    ok: false,
+    msg: 'Para envíos a domicilio el pedido mínimo es <strong>2 Petit Coffret</strong> o <strong>1 Coffret Signature (12)</strong> en adelante.'
+  };
+}
+
 let started = false;
 
 function startWelcomeFlow() {
@@ -1598,8 +1626,10 @@ function startWelcomeFlow() {
         botSay('Continúa con los sabores de tu caja. 🍫', 300);
         setTimeout(openFlavorPanel, 600);
       }
+      else if (R.stage === 'flavor-mode' && R.currentIndex >= 0) promptFlavorMode();
       else if (R.stage === 'special') askSpecialRequest();
-      else promptBoxSelect();
+      else if (R.stage === 'box-select') promptBoxSelect();
+      else promptOrderType();
     }, 800);
     return;
   }
@@ -1607,36 +1637,55 @@ function startWelcomeFlow() {
   setTimeout(() => {
     botSay(
       `Hola 👋 Soy <strong>${CONFIG.botName}</strong>, asesor de la casa.<br><br>` +
-      `Te ayudo a cotizar tu <strong>caja personalizada</strong> en 3 minutos.`,
+      `Te ayudo a armar tu <strong>pedido personalizado</strong> en 3 minutos.`,
       450
     );
-    setTimeout(() => {
-      renderQuick([
-        { label: 'Comenzar cotización', className: 'primary', onClick: () => startFlow() },
-        { label: 'Ver presentaciones', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
-      ]);
-    }, 900);
+    setTimeout(() => promptOrderType(), 900);
   }, 400);
 }
 
-function startFlow() {
-  R.boxes = []; R.currentIndex = -1; R.stage = 'box-select';
-  closeFlavorPanel();
-  botSay('Excelente. Vamos a armar tu <strong>cotización personalizada</strong>.', 400);
+function promptOrderType() {
+  R.stage = 'order-type';
+  save();
+  botSay('Primero, ¿cómo prefieres recibirlo?', 400);
   setTimeout(() => {
+    renderQuick([
+      { label: '🛵 Envío a domicilio', className: 'primary', onClick: () => setOrderType('domicilio') },
+      { label: '🏬 Recoger en tienda', className: 'primary', onClick: () => setOrderType('pickup') }
+    ]);
+  }, 600);
+}
+
+function setOrderType(type) {
+  R.orderType = type;
+  save();
+  addMsg(type === 'domicilio' ? 'Envío a domicilio' : 'Recoger en tienda', 'user');
+
+  if (type === 'domicilio') {
     botSay(
-      '<strong>📦 Importante — Envíos:</strong><br>' +
-      'Los envíos se programan con mínimo <strong>24 horas de anticipación</strong>.<br><br>' +
-      'Si necesitas entrega urgente para <strong>hoy o mañana</strong>, tiene un <strong>costo adicional</strong> por logística especial.',
-      450, 'notice'
+      '<strong>📦 Envíos a domicilio:</strong><br><br>' +
+      '· Pedido mínimo: <strong>2 Petit Coffret</strong> o <strong>1 Coffret Signature (12)</strong> en adelante<br>' +
+      '· Preparación con mínimo <strong>24 horas de anticipación</strong><br>' +
+      '· Entregas urgentes tienen costo adicional',
+      600, 'notice'
     );
-  }, 1200);
-  setTimeout(() => promptBoxSelect(), 2400);
+  } else {
+    botSay(
+      '<strong>🏬 Recoger en tienda:</strong><br><br>' +
+      '· Sin pedido mínimo<br>' +
+      '· Preparación con mínimo <strong>24 horas de anticipación</strong>',
+      600, 'notice'
+    );
+  }
+
+  setTimeout(() => promptBoxSelect(), 1600);
 }
 
 function promptBoxSelect() {
   closeFlavorPanel();
-  botSay('¿Qué caja te gustaría cotizar?', 400);
+  R.stage = 'box-select';
+  save();
+  botSay('¿Qué caja te gustaría agregar?', 400);
   setTimeout(() => {
     renderQuick([
       { label: 'Petit Coffret · 4 bombones', className: 'primary', onClick: () => selectBox('petit') },
@@ -1650,17 +1699,76 @@ function promptBoxSelect() {
 function selectBox(type) {
   const bt = BOX_TYPES[type];
   addMsg(bt.name + ' · ' + bt.units + ' bombones', 'user');
-  R.boxes.push({ type: type, flavors: {} });
+  R.boxes.push({ type: type, flavors: {}, flavorMode: '' });
   R.currentIndex = R.boxes.length - 1;
-  R.stage = 'flavor-select';
+  R.stage = 'flavor-mode';
+  save();
+  setTimeout(() => promptFlavorMode(), 500);
+}
+
+function promptFlavorMode() {
+  R.stage = 'flavor-mode';
+  save();
+  botSay(
+    `Para tu <strong>${BOX_TYPES[R.boxes[R.currentIndex].type].name}</strong>, ¿cómo prefieres los sabores?`,
+    400
+  );
+  setTimeout(() => {
+    renderQuick([
+      { label: '✦ Sorpresa de la casa (sin costo)', className: 'primary', onClick: () => setFlavorMode('sorpresa') },
+      { label: '✎ Elegir mis sabores (+ costo)', className: 'primary', onClick: () => setFlavorMode('personalizado') }
+    ]);
+  }, 700);
+}
+
+function setFlavorMode(mode) {
+  const box = R.boxes[R.currentIndex];
+  box.flavorMode = mode;
   save();
 
-  const flavorMsg = bt.maxFlavors === 1
-    ? `Para <strong>${bt.name}</strong> puedes elegir <strong>1 solo sabor</strong> y confirmar la cantidad de unidades.`
-    : `Para <strong>${bt.name}</strong> puedes elegir hasta <strong>${bt.maxFlavors} sabores distintos</strong>.`;
+  if (mode === 'sorpresa') {
+    addMsg('Sorpresa de la casa', 'user');
+    const bt = BOX_TYPES[box.type];
+    const flavorsPicked = FLAVORS.slice(0, Math.min(bt.maxFlavors, FLAVORS.length));
+    const per = Math.floor(bt.units / flavorsPicked.length);
+    let remaining = bt.units;
+    box.flavors = {};
+    flavorsPicked.forEach((f, i) => {
+      const qty = (i === flavorsPicked.length - 1) ? remaining : per;
+      box.flavors[f.id] = qty;
+      remaining -= qty;
+    });
+    save();
+    botSay(
+      `Perfecto, nuestra selección de autor incluirá los sabores más emblemáticos:<br><br>` +
+      `${flavorsPicked.map(f => `· ${f.name}`).join('<br>')}<br><br>` +
+      `Surtido equilibrado.`,
+      500
+    );
+    setTimeout(() => confirmBoxAuto(), 1200);
+  } else {
+    addMsg('Elegir mis sabores', 'user');
+    botSay(
+      'Perfecto. La personalización de sabores tiene <strong>costo adicional</strong> por pieza.<br><br>' +
+      `Elige hasta <strong>${BOX_TYPES[box.type].maxFlavors} sabores</strong> para tu ${BOX_TYPES[box.type].name}.`,
+      500, 'notice'
+    );
+    R.stage = 'flavor-select';
+    save();
+    setTimeout(() => openFlavorPanel(), 900);
+  }
+}
 
-  botSay(flavorMsg + ` Distribuye las <strong>${bt.units} unidades</strong> con <strong>+ / −</strong>.`, 450);
-  setTimeout(() => openFlavorPanel(), 900);
+function confirmBoxAuto() {
+  const box = R.boxes[R.currentIndex];
+  const bt = BOX_TYPES[box.type];
+  const lines = FLAVORS
+    .filter(f => (box.flavors[f.id] || 0) > 0)
+    .map(f => `• ${box.flavors[f.id]} × ${f.short}`)
+    .join('<br>');
+  closeFlavorPanel();
+  botSay(`<strong>${bt.name}</strong> agregada:<br>${lines}`, 400);
+  setTimeout(() => promptNextAction(), 900);
 }
 
 function openFlavorPanel() {
@@ -1700,18 +1808,16 @@ function renderFlavorPanel() {
   list.innerHTML = FLAVORS.map(f => {
     const count = box.flavors[f.id] || 0;
     const isActive = count > 0;
-    const otherFlavorActive = bt.maxFlavors === 1 && distinct === 1 && !isActive;
-    const disabled = otherFlavorActive;
     return `
-      <div class="flavor-row ${isActive ? 'active' : ''} ${disabled ? 'disabled' : ''}">
+      <div class="flavor-row ${isActive ? 'active' : ''}">
         <div>
           <div class="fl-name">${f.name}</div>
-          <div class="fl-meta">${isActive ? `${count} unidad${count !== 1 ? 'es' : ''}` : (disabled ? 'Bloqueado · 1 sabor por caja' : '')}</div>
+          <div class="fl-meta">${isActive ? `${count} unidad${count !== 1 ? 'es' : ''}` : ''}</div>
         </div>
         <div class="flavor-controls">
           <button class="fl-btn minus" ${count === 0 ? 'disabled' : ''} onclick="flavorAdjust('${f.id}', -1)">−</button>
           <span class="fl-count">${count}</span>
-          <button class="fl-btn plus" ${disabled ? 'disabled' : ''} onclick="flavorAdjust('${f.id}', 1)">+</button>
+          <button class="fl-btn plus" onclick="flavorAdjust('${f.id}', 1)">+</button>
         </div>
       </div>
     `;
@@ -1750,7 +1856,7 @@ function flavorAdjust(flavorId, delta) {
   if (delta > 0) {
     if (total >= bt.units) return;
     if (current === 0 && distinct >= bt.maxFlavors) {
-      botSay(`Para esta caja puedes elegir hasta <strong>${bt.maxFlavors} sabor${bt.maxFlavors > 1 ? 'es distintos' : ''}</strong>.`, 300);
+      botSay(`Para esta caja puedes elegir hasta <strong>${bt.maxFlavors} sabores distintos</strong>.`, 300);
       return;
     }
     box.flavors[flavorId] = current + 1;
@@ -1772,13 +1878,8 @@ function confirmBox() {
     .join('<br>');
   closeFlavorPanel();
   addMsg('Confirmar esta caja', 'user');
-  botSay(`<strong>${bt.name}</strong> registrada:<br>${lines}`, 400);
-  setTimeout(() => {
-    renderQuick([
-      { label: '+ Agregar otra caja', className: 'primary', onClick: () => { R.currentIndex = -1; promptBoxSelect(); } },
-      { label: 'Continuar con mis datos', className: 'primary', onClick: () => askSpecialRequest() }
-    ]);
-  }, 900);
+  botSay(`<strong>${bt.name}</strong> agregada:<br>${lines}`, 400);
+  setTimeout(() => promptNextAction(), 900);
 }
 
 function cancelCurrentBox() {
@@ -1787,20 +1888,32 @@ function cancelCurrentBox() {
   closeFlavorPanel();
   save();
   botSay('Caja eliminada.', 300);
-  setTimeout(() => {
-    if (R.boxes.length === 0) promptBoxSelect();
-    else {
-      renderQuick([
-        { label: '+ Agregar otra caja', className: 'primary', onClick: () => promptBoxSelect() },
-        { label: 'Continuar con mis datos', className: 'primary', onClick: () => askSpecialRequest() }
-      ]);
-    }
-  }, 600);
+  setTimeout(() => promptNextAction(), 700);
+}
+
+function promptNextAction() {
+  const minCheck = checkDomicilioMinimum();
+  const btns = [];
+  btns.push({ label: '+ Agregar otra caja', className: 'primary', onClick: () => { R.currentIndex = -1; promptBoxSelect(); } });
+
+  if (!minCheck.ok) {
+    btns.push({ label: '⚠️ Necesitas más cajas', className: 'ghost', onClick: () => {
+      botSay(minCheck.msg, 300, 'notice');
+    }});
+  } else {
+    btns.push({ label: 'Continuar con mis datos', className: 'primary', onClick: () => {
+      const check = checkDomicilioMinimum();
+      if (!check.ok) { botSay(check.msg, 300, 'notice'); return; }
+      askSpecialRequest();
+    }});
+  }
+  renderQuick(btns);
 }
 
 function askSpecialRequest() {
   closeFlavorPanel();
   R.stage = 'special';
+  save();
   showInput(true, 'Escribe tu solicitud (máx. 200 caracteres)...');
   botSay(
     '¿Alguna <strong>solicitud especial</strong>?<br><br>' +
@@ -1832,21 +1945,29 @@ function saveSpecial(text) {
   setTimeout(() => startContact(), 600);
 }
 
+function getContactFields() {
+  return R.orderType === 'pickup' ? CONTACT_FIELDS_PICKUP : CONTACT_FIELDS_DOMICILIO;
+}
+
 function startContact() {
-  R.stage = 'contact'; R.contactStep = 0;
-  botSay('Perfecto. Solo faltan tus datos para la cotización.', 400);
+  R.stage = 'contact';
+  R.contactStep = 0;
+  save();
+  botSay('Perfecto. Solo faltan tus datos.', 400);
   setTimeout(() => askContactField(), 800);
 }
 
 function askContactField() {
-  if (R.contactStep >= CONTACT_FIELDS.length) { showSummary(); return; }
-  const field = CONTACT_FIELDS[R.contactStep];
+  const fields = getContactFields();
+  if (R.contactStep >= fields.length) { showSummary(); return; }
+  const field = fields[R.contactStep];
   showInput(true, field.label + '...');
   botSay(field.prompt, 350);
 }
 
 function saveContactField(value) {
-  const field = CONTACT_FIELDS[R.contactStep];
+  const fields = getContactFields();
+  const field = fields[R.contactStep];
   const cleaned = field.clean ? field.clean(value) : value;
   if (field.validate) {
     const res = field.validate(cleaned);
@@ -1864,12 +1985,17 @@ function saveContactField(value) {
 }
 
 function showSummary() {
-  R.stage = 'summary'; save();
-  let html = '<strong>✦ Resumen de tu cotización</strong><br><br>';
+  R.stage = 'summary';
+  save();
+
+  let html = '<strong>✦ Resumen de tu pedido</strong><br><br>';
+
+  html += `<strong>Tipo:</strong> ${R.orderType === 'pickup' ? '🏬 Recoger en tienda' : '🛵 Envío a domicilio'}<br><br>`;
 
   R.boxes.forEach((box, i) => {
     const bt = BOX_TYPES[box.type];
     html += `<strong>Caja ${i + 1}:</strong> ${bt.name} (${bt.units} bombones)<br>`;
+    html += `<em>Modo: ${box.flavorMode === 'sorpresa' ? 'Sorpresa de la casa' : 'Personalizado (+costo)'}</em><br>`;
     FLAVORS
       .filter(f => (box.flavors[f.id] || 0) > 0)
       .forEach(f => {
@@ -1885,8 +2011,10 @@ function showSummary() {
   html += `<strong>Datos de contacto</strong><br>`;
   html += `📛 ${escapeHtml(R.contact.nombre)}<br>`;
   html += `📱 ${formatPhone(R.contact.telefono)}<br>`;
-  html += `📍 ${escapeHtml(R.contact.ciudad)}<br>`;
-  html += `🏠 ${escapeHtml(R.contact.direccion)}<br>`;
+  if (R.orderType === 'domicilio') {
+    html += `📍 ${escapeHtml(R.contact.ciudad)}<br>`;
+    html += `🏠 ${escapeHtml(R.contact.direccion)}<br>`;
+  }
   html += `📅 ${escapeHtml(R.contact.fecha)}<br>`;
   if (R.contact.ocasion && !/^sin ocasión$/i.test(R.contact.ocasion)) {
     html += `🎉 ${escapeHtml(R.contact.ocasion)}<br>`;
@@ -1898,13 +2026,13 @@ function showSummary() {
 
   setTimeout(() => {
     botSay(
-      '<strong>📦 Recordatorio:</strong> los envíos requieren mínimo <strong>24 horas de anticipación</strong>. Entregas urgentes tienen costo adicional.',
+      '<strong>📦 Recordatorio:</strong> preparación con mínimo <strong>24 horas de anticipación</strong>. Entregas urgentes tienen costo adicional.',
       500, 'notice'
     );
   }, 1700);
 
   setTimeout(() => {
-    botSay('¿Envío tu cotización al equipo por WhatsApp?', 500);
+    botSay('¿Envío tu pedido al equipo por WhatsApp?', 500);
     setTimeout(() => renderWhatsAppButton(), 700);
   }, 2700);
 }
@@ -1918,11 +2046,14 @@ function renderWhatsAppButton() {
 }
 
 function buildWhatsAppUrl() {
-  let body = `Hola, quiero cotizar una caja personalizada:\n\n`;
+  let body = `Hola, quiero cotizar un pedido personalizado:\n\n`;
+
+  body += `*Tipo:* ${R.orderType === 'pickup' ? 'Recoger en tienda' : 'Envío a domicilio'}\n\n`;
 
   R.boxes.forEach((box, i) => {
     const bt = BOX_TYPES[box.type];
     body += `*Caja ${i + 1}:* ${bt.name} (${bt.units} bombones)\n`;
+    body += `Modo de sabores: ${box.flavorMode === 'sorpresa' ? 'Sorpresa de la casa' : 'Personalizado (+costo adicional)'}\n`;
     FLAVORS
       .filter(f => (box.flavors[f.id] || 0) > 0)
       .forEach(f => {
@@ -1938,15 +2069,20 @@ function buildWhatsAppUrl() {
   body += `*Datos de contacto:*\n`;
   body += `- Nombre: ${R.contact.nombre}\n`;
   body += `- Teléfono: ${formatPhone(R.contact.telefono)}\n`;
-  body += `- Ciudad: ${R.contact.ciudad}\n`;
-  body += `- Dirección: ${R.contact.direccion}\n`;
+  if (R.orderType === 'domicilio') {
+    body += `- Ciudad: ${R.contact.ciudad}\n`;
+    body += `- Dirección: ${R.contact.direccion}\n`;
+  }
   body += `- Fecha requerida: ${R.contact.fecha}\n`;
   if (R.contact.ocasion && !/^sin ocasión$/i.test(R.contact.ocasion)) {
     body += `- Ocasión: ${R.contact.ocasion}\n`;
   }
 
-  body += `\n*Nota:* Entiendo que los envíos se programan con mínimo 24h de anticipación y que entregas urgentes tienen costo adicional.\n`;
-  body += `\nEntiendo que el precio final depende de la dirección y adicionales, y que una asesora me contactará por WhatsApp.`;
+  body += `\n*Nota:* Preparación con mínimo 24h de anticipación. Entregas urgentes tienen costo adicional.\n`;
+  if (R.boxes.some(b => b.flavorMode === 'personalizado')) {
+    body += `*Nota 2:* La personalización de sabores tiene costo adicional por pieza.\n`;
+  }
+  body += `\nEntiendo que el precio final depende de los detalles y que una asesora me contactará por WhatsApp.`;
 
   return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(body)}`;
 }
@@ -1968,13 +2104,13 @@ function openEditMenu() {
 function editLastBox() {
   if (R.boxes.length === 0) { promptBoxSelect(); return; }
   R.currentIndex = R.boxes.length - 1;
-  R.stage = 'flavor-select'; save();
-  botSay('Perfecto, ajusta los sabores y confirma cuando estés listo. 🍫', 400);
-  setTimeout(() => openFlavorPanel(), 700);
+  save();
+  promptFlavorMode();
 }
 
 function editContact() {
-  R.stage = 'contact'; R.contactStep = 0;
+  R.stage = 'contact';
+  R.contactStep = 0;
   R.contact.nombre = '';
   R.contact.telefono = '';
   R.contact.ciudad = '';
@@ -2004,6 +2140,7 @@ function resetOrder(confirmed) {
   if (!confirmed) return;
   clear();
   R.stage = 'welcome';
+  R.orderType = '';
   R.boxes = [];
   R.currentIndex = -1;
   R.contact = { nombre: '', telefono: '', ciudad: '', direccion: '', fecha: '', ocasion: '', special: '' };
@@ -2013,7 +2150,7 @@ function resetOrder(confirmed) {
   closeFlavorPanel();
   showInput(false);
   botSay('Empezamos de nuevo. 🌟', 300);
-  setTimeout(() => startFlow(), 700);
+  setTimeout(() => promptOrderType(), 700);
 }
 
 function openRoncaccio() {
