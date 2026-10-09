@@ -467,17 +467,23 @@ section { padding: 110px 24px; }
 @keyframes ronPulse { 0%,100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.3); opacity: 0; } }
 .ron-launcher .badge { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; border-radius: 50%; background: var(--wa-green); color: #fff; font-family: var(--sans); font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid var(--navy-950); }
 
+/* ═══════════════════════════════════════════════════════════════
+   RONCACCIO — REDISEÑO UX
+   ═══════════════════════════════════════════════════════════════ */
 .ron-window {
   position: fixed;
   top: 0; bottom: 0; left: 0;
   z-index: 300;
-  width: 100%; max-width: 440px;
+  width: 100%; max-width: 460px;
   height: 100vh;
+  height: 100dvh;
   background: linear-gradient(180deg, var(--navy-900) 0%, var(--navy-950) 100%);
   border-right: 1px solid rgba(201, 169, 97, 0.35);
   border-radius: 0 14px 14px 0;
-  display: none; flex-direction: column; overflow: hidden;
-  box-shadow: 40px 0 100px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(201, 169, 97, 0.05), inset -1px 0 0 rgba(245, 239, 224, 0.05);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 40px 0 100px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(201, 169, 97, 0.05);
 }
 .ron-window.open { display: flex; animation: ronOpen 0.45s cubic-bezier(0.25, 0.1, 0.25, 1); }
 @keyframes ronOpen {
@@ -559,9 +565,14 @@ section { padding: 110px 24px; }
 }
 
 .ron-messages {
-  flex: 1; overflow-y: auto; padding: 26px 22px;
-  display: flex; flex-direction: column; gap: 14px;
+  flex: 1 1 0;
   min-height: 0;
+  overflow-y: auto;
+  padding: 22px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: rgba(201, 169, 97, 0.3) transparent;
 }
@@ -584,11 +595,16 @@ section { padding: 110px 24px; }
   to { opacity: 1; transform: translateY(0); }
 }
 .msg.bot {
-  background: linear-gradient(135deg, rgba(201, 169, 97, 0.08), rgba(201, 169, 97, 0.04));
-  border: 1px solid rgba(201, 169, 97, 0.18);
-  color: var(--cream-200); align-self: flex-start;
+  background: linear-gradient(135deg, rgba(201, 169, 97, 0.12), rgba(201, 169, 97, 0.05));
+  border: 1px solid rgba(201, 169, 97, 0.22);
+  color: var(--cream-200);
+  align-self: flex-start;
   border-top-left-radius: 4px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  max-width: 88%;
+  padding: 12px 16px;
+  word-wrap: break-word;
+  line-height: 1.55;
 }
 .msg.user {
   background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
@@ -596,8 +612,11 @@ section { padding: 110px 24px; }
   align-self: flex-end;
   border-top-right-radius: 4px;
   font-weight: 500;
-  box-shadow: 0 4px 14px rgba(201, 169, 97, 0.25);
+  box-shadow: 0 4px 14px rgba(201, 169, 97, 0.3);
   letter-spacing: 0.01em;
+  max-width: 82%;
+  padding: 12px 16px;
+  word-wrap: break-word;
 }
 .msg.bot strong { color: var(--gold-400); font-weight: 600; }
 .msg.bot em { color: var(--gold-300); font-style: italic; }
@@ -684,11 +703,21 @@ section { padding: 110px 24px; }
 }
 
 .ron-quick {
-  display: flex; flex-direction: column; gap: 8px;
-  padding: 14px 18px 16px;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.15));
-  border-top: 1px solid rgba(201, 169, 97, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+  background: linear-gradient(180deg, rgba(10, 22, 40, 0.6), var(--navy-950));
+  border-top: 1px solid rgba(201, 169, 97, 0.15);
   flex-shrink: 0;
+  max-height: 45vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 169, 97, 0.3) transparent;
+}
+.ron-quick::-webkit-scrollbar { width: 4px; }
+.ron-quick::-webkit-scrollbar-thumb {
+  background: rgba(201, 169, 97, 0.3); border-radius: 2px;
 }
 .ron-quick:empty { display: none; padding: 0; }
 
@@ -708,6 +737,7 @@ section { padding: 110px 24px; }
   font-family: var(--sans);
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
 }
 .quick-btn::before {
   content: '';
@@ -842,11 +872,13 @@ section { padding: 110px 24px; }
 }
 
 .ron-flavor-panel {
-  display: none; flex-direction: column;
+  display: none;
+  flex-direction: column;
   border-top: 1px solid rgba(201, 169, 97, 0.28);
   background: linear-gradient(180deg, var(--navy-950), #030710);
   flex-shrink: 0;
-  max-height: 62%;
+  max-height: 50vh;
+  overflow: hidden;
 }
 .ron-flavor-panel.active { display: flex; }
 
@@ -971,43 +1003,66 @@ section { padding: 110px 24px; }
 .fp-actions .quick-btn { flex: 1; min-width: 0; }
 
 .ron-input {
-  display: flex; gap: 8px;
+  display: flex;
+  gap: 8px;
   padding: 14px 16px;
-  border-top: 1px solid rgba(201, 169, 97, 0.2);
+  padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid rgba(201, 169, 97, 0.25);
   background: linear-gradient(180deg, var(--navy-900), var(--navy-950));
   flex-shrink: 0;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.4);
 }
 .ron-input.hidden { display: none; }
+
 .ron-input input {
-  flex: 1; background: rgba(245, 239, 224, 0.03);
-  border: 1px solid rgba(201, 169, 97, 0.25);
-  border-radius: 24px; padding: 12px 18px;
-  color: var(--cream-100); font-family: var(--sans);
-  font-size: 0.875rem; outline: none;
-  transition: all 0.3s;
+  flex: 1;
+  min-width: 0;
+  background: rgba(245, 239, 224, 0.05);
+  border: 1.5px solid rgba(201, 169, 97, 0.35);
+  border-radius: 24px;
+  padding: 13px 20px;
+  color: var(--cream-100);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.25s ease;
   letter-spacing: 0.01em;
+  caret-color: var(--gold-400);
 }
 .ron-input input:focus {
   border-color: var(--gold-500);
-  background: rgba(201, 169, 97, 0.05);
-  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+  background: rgba(201, 169, 97, 0.08);
+  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.15);
 }
-.ron-input input::placeholder { color: rgba(245, 239, 224, 0.3); }
+.ron-input input::placeholder {
+  color: rgba(245, 239, 224, 0.35);
+  font-style: italic;
+}
+
 .ron-input .send {
-  width: 46px; height: 46px; border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
   border: none;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--navy-900); flex-shrink: 0;
-  transition: all var(--transition);
-  box-shadow: 0 4px 14px rgba(201, 169, 97, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy-900);
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(201, 169, 97, 0.35);
+  cursor: pointer;
 }
 .ron-input .send:hover {
   background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(201, 169, 97, 0.4);
+  transform: scale(1.06);
+  box-shadow: 0 6px 22px rgba(201, 169, 97, 0.5);
 }
-.ron-input .send svg { width: 18px; height: 18px; }
+.ron-input .send:active { transform: scale(0.96); }
+.ron-input .send svg { width: 20px; height: 20px; }
 
 .summary-block {
   align-self: stretch;
@@ -1158,6 +1213,91 @@ section { padding: 110px 24px; }
   text-align: center;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — Confetti fall animation
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg) scale(0.7);
+    opacity: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — Coupon code dentro del chat
+   ═══════════════════════════════════════════════════════════════ */
+.msg.bot code.coupon-code {
+  display: inline-block;
+  background: rgba(201, 169, 97, 0.22);
+  border: 1px dashed var(--gold-400);
+  color: var(--gold-200);
+  font-family: 'Courier New', monospace;
+  font-size: 0.95em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin: 4px 0;
+}
+
+.coupon-banner {
+  align-self: stretch;
+  max-width: 100%;
+  padding: 18px 18px;
+  background: linear-gradient(135deg, rgba(201, 169, 97, 0.18), rgba(201, 169, 97, 0.06));
+  border: 1.5px solid var(--gold-500);
+  border-radius: 12px;
+  text-align: center;
+  animation: successPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin: 4px 0;
+}
+.coupon-banner .cb-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  display: block;
+}
+.coupon-banner .cb-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--cream-100);
+  margin-bottom: 8px;
+}
+.coupon-banner .cb-code {
+  display: inline-block;
+  background: rgba(10, 22, 40, 0.5);
+  border: 1px dashed var(--gold-400);
+  color: var(--gold-200);
+  font-family: 'Courier New', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin: 8px 0;
+  user-select: all;
+  cursor: pointer;
+}
+.coupon-banner .cb-code:hover {
+  background: rgba(201, 169, 97, 0.2);
+  border-style: solid;
+}
+.coupon-banner .cb-desc {
+  font-size: 0.78rem;
+  color: rgba(245, 239, 224, 0.65);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+.coupon-banner .cb-expire {
+  font-size: 0.68rem;
+  color: rgba(245, 239, 224, 0.4);
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+}
+
 @media (max-width: 480px) {
   .g-recaptcha { transform: scale(0.85); transform-origin: center; }
   .captcha-toast {
@@ -1195,14 +1335,25 @@ section { padding: 110px 24px; }
   .wa-float svg { width: 22px; height: 22px; }
   .ron-launcher { bottom: 6rem; left: calc(50% + 6px); right: auto; width: 50px; height: 50px; font-size: 1.15rem; }
   .ron-window {
-    bottom: 6rem; left: 12px; right: 12px; transform: none;
-    max-width: calc(100% - 24px); height: 78vh;
-    border-radius: 14px;
+    top: 0; bottom: 0; left: 0; right: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    border-radius: 0;
+    border-right: none;
+    transform: none;
   }
   @keyframes ronOpen {
     from { opacity: 0; transform: translateY(24px) scale(0.98); }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
+  .ron-quick { max-height: 42vh; padding: 10px 14px; }
+  .ron-messages { padding: 18px 16px 24px; }
+  .ron-input { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); }
+  .ron-input input { padding: 12px 16px; font-size: 0.88rem; }
+  .ron-input .send { width: 44px; height: 44px; }
+  .ron-input .send svg { width: 18px; height: 18px; }
   .hero-ctas { flex-direction: column; align-items: stretch; padding: 0 12px; }
   .btn { width: 100%; justify-content: center; }
   .fl-btn { width: 40px; height: 40px; font-size: 1.25rem; }
@@ -1663,6 +1814,13 @@ const STAGE_PROGRESS = {
   'done':           100
 };
 
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — Claves de almacenamiento para historial y cupones
+   ═══════════════════════════════════════════════════════════════ */
+const HISTORY_KEY = 'halat-order-history';
+const COUPON_KEY = 'halat-active-coupon';
+const ABANDONED_KEY = 'halat-abandoned';
+
 let captchaV2Verified = false;
 
 function checkHoneypot() {
@@ -1799,14 +1957,19 @@ function addMsg(html, sender='bot', extraClass='') {
   d.className = 'msg ' + sender + (extraClass ? ' ' + extraClass : '');
   d.innerHTML = html;
   $msgs.appendChild(d);
-  $msgs.scrollTop = $msgs.scrollHeight;
+  requestAnimationFrame(() => {
+    $msgs.scrollTop = $msgs.scrollHeight;
+  });
 }
 function showTyping() {
   if (document.getElementById('ronTyping')) return;
   const t = document.createElement('div');
   t.className = 'msg typing'; t.id = 'ronTyping';
   t.innerHTML = '<span></span><span></span><span></span>';
-  $msgs.appendChild(t); $msgs.scrollTop = $msgs.scrollHeight;
+  $msgs.appendChild(t);
+  requestAnimationFrame(() => {
+    $msgs.scrollTop = $msgs.scrollHeight;
+  });
 }
 function hideTyping() { const t = $('ronTyping'); if (t) t.remove(); }
 function botSay(html, delay, extraClass) {
@@ -1841,11 +2004,21 @@ function showInput(show, placeholder) {
   $inputWrap.classList.toggle('hidden', !show);
   if (show) {
     if (placeholder) $input.placeholder = placeholder;
-    setTimeout(() => $input.focus(), 100);
+    setTimeout(() => {
+      try { $input.focus({ preventScroll: true }); } catch(e) { $input.focus(); }
+      if ($inputWrap.scrollIntoView) {
+        $inputWrap.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+    }, 120);
   }
 }
 
-function save() { try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(R)); } catch(e) {} }
+function save() {
+  try {
+    const toSave = { ...R, savedAt: Date.now() };
+    localStorage.setItem(CONFIG.storageKey, JSON.stringify(toSave));
+  } catch(e) {}
+}
 function load() {
   try {
     const raw = localStorage.getItem(CONFIG.storageKey);
@@ -1869,6 +2042,236 @@ function checkDomicilioMinimum() {
   };
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — Utilidades de saludo por hora
+   ═══════════════════════════════════════════════════════════════ */
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 12) return 'Buenos días';
+  if (h < 18) return 'Buenas tardes';
+  return 'Buenas noches';
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — Confetti + Sonido de celebración
+   ═══════════════════════════════════════════════════════════════ */
+function celebrate() {
+  let container = document.getElementById('confettiContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'confettiContainer';
+    container.style.cssText = `
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    `;
+    document.body.appendChild(container);
+  }
+
+  const colors = ['#C9A961', '#E8D5A3', '#22c55e', '#F5EFE0', '#A8894A', '#D4B876'];
+  const shapes = ['■', '●', '◆', '▲', '✦', '★'];
+
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    const size = 6 + Math.random() * 10;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+    const startX = Math.random() * 100;
+    const duration = 2.2 + Math.random() * 2;
+    const delay = Math.random() * 0.6;
+    const rotation = Math.random() * 720 - 360;
+    const useShape = Math.random() > 0.5;
+
+    piece.style.cssText = `
+      position: absolute;
+      top: -30px;
+      left: ${startX}%;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${useShape ? 'transparent' : color};
+      color: ${color};
+      font-size: ${size + 4}px;
+      line-height: ${size}px;
+      text-align: center;
+      pointer-events: none;
+      border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+      animation: confettiFall ${duration}s cubic-bezier(0.3, 0.6, 0.7, 1) ${delay}s forwards;
+      transform: rotate(${rotation}deg);
+      will-change: transform, opacity;
+    `;
+    if (useShape) piece.textContent = shape;
+    container.appendChild(piece);
+  }
+
+  setTimeout(() => {
+    if (container) container.innerHTML = '';
+  }, 5500);
+}
+
+function playSuccessSound() {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const ctx = new AC();
+
+    // Melodía ascendente do-mi-sol-do (do mayor)
+    const notes = [
+      { freq: 523.25, time: 0 },      // C5
+      { freq: 659.25, time: 0.12 },   // E5
+      { freq: 783.99, time: 0.24 },   // G5
+      { freq: 1046.50, time: 0.36 }   // C6
+    ];
+
+    notes.forEach(({ freq, time }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      const t = ctx.currentTime + time;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.14, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4);
+      osc.start(t);
+      osc.stop(t + 0.45);
+    });
+
+    setTimeout(() => { try { ctx.close(); } catch(e) {} }, 1800);
+  } catch (e) {
+    console.warn('Audio no disponible:', e);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — Historial de pedidos
+   ═══════════════════════════════════════════════════════════════ */
+function saveOrderToHistory() {
+  try {
+    const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    const order = {
+      id: 'HH-' + Date.now().toString(36).toUpperCase(),
+      date: Date.now(),
+      orderType: R.orderType,
+      boxes: R.boxes.map(b => ({
+        type: b.type,
+        name: BOX_TYPES[b.type].name,
+        units: BOX_TYPES[b.type].units,
+        flavorMode: b.flavorMode,
+        flavors: { ...b.flavors }
+      })),
+      totalBoxes: R.boxes.length,
+      contact: {
+        nombre: R.contact.nombre,
+        telefono: R.contact.telefono
+      },
+      status: 'sent'
+    };
+    history.push(order);
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(-10)));
+    return order;
+  } catch (e) {
+    console.warn('No se pudo guardar historial:', e);
+    return null;
+  }
+}
+
+function getOrderHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+  } catch (e) {
+    return [];
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — Sistema de cupones de retorno
+   ═══════════════════════════════════════════════════════════════ */
+function generateCoupon(orderSuffix) {
+  const suffix = orderSuffix || Math.random().toString(36).substring(2, 6).toUpperCase();
+  const random = Math.random().toString(36).substring(2, 4).toUpperCase();
+  const couponCode = `HALAT-${suffix}${random}`;
+
+  const couponData = {
+    code: couponCode,
+    createdAt: Date.now(),
+    expiresAt: Date.now() + (30 * 24 * 60 * 60 * 1000), // 30 días
+    used: false,
+    benefit: 'Tarjeta personalizada + empaque especial sin costo'
+  };
+
+  try {
+    localStorage.setItem(COUPON_KEY, JSON.stringify(couponData));
+  } catch (e) {
+    console.warn('No se pudo guardar cupón:', e);
+  }
+  return couponData;
+}
+
+function getActiveCoupon() {
+  try {
+    const raw = localStorage.getItem(COUPON_KEY);
+    if (!raw) return null;
+    const coupon = JSON.parse(raw);
+    if (coupon.used) return null;
+    if (Date.now() > coupon.expiresAt) {
+      localStorage.removeItem(COUPON_KEY);
+      return null;
+    }
+    return coupon;
+  } catch (e) {
+    return null;
+  }
+}
+
+function markCouponUsed() {
+  try {
+    const raw = localStorage.getItem(COUPON_KEY);
+    if (!raw) return;
+    const coupon = JSON.parse(raw);
+    coupon.used = true;
+    coupon.usedAt = Date.now();
+    localStorage.setItem(COUPON_KEY, JSON.stringify(coupon));
+  } catch (e) {}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — Flujo de retención con contexto
+   ═══════════════════════════════════════════════════════════════ */
+function resumeFlow(stage) {
+  if (stage === 'summary') showSummary();
+  else if (stage === 'contact') askContactField();
+  else if (stage === 'flavor-select' && R.currentIndex >= 0) {
+    botSay('Continúa con los sabores de tu caja. 🍫', 300);
+    setTimeout(openFlavorPanel, 600);
+  }
+  else if (stage === 'flavor-mode' && R.currentIndex >= 0) promptFlavorMode();
+  else if (stage === 'special') askSpecialRequest();
+  else if (stage === 'box-select') promptBoxSelect();
+  else promptOrderType();
+}
+
+function repeatLastOrder(lastOrder) {
+  R.orderType = lastOrder.orderType || 'domicilio';
+  R.boxes = lastOrder.boxes.map(b => ({
+    type: b.type,
+    flavors: { ...b.flavors },
+    flavorMode: b.flavorMode || 'sorpresa'
+  }));
+  R.currentIndex = R.boxes.length - 1;
+  save();
+
+  addMsg('Repetir mi última caja', 'user');
+  botSay(
+    `<strong>¡Perfecto!</strong> Cargué tu selección anterior: <strong>${lastOrder.totalBoxes} caja${lastOrder.totalBoxes > 1 ? 's' : ''}</strong>.<br><br>` +
+    `Solo necesito confirmar tus datos de entrega.`,
+    500
+  );
+  setTimeout(() => startContact(), 1400);
+}
+
 let started = false;
 
 function startWelcomeFlow() {
@@ -1877,31 +2280,87 @@ function startWelcomeFlow() {
 
   updateProgress('welcome');
 
+  /* ─── MEJORA: contexto de retención ─── */
   const saved = load();
-  if (saved && saved.stage && saved.stage !== 'welcome') {
+  const savedAt = saved && saved.savedAt ? saved.savedAt : 0;
+  const hoursSinceSave = savedAt ? (Date.now() - savedAt) / 3600000 : Infinity;
+  const activeCoupon = getActiveCoupon();
+  const history = getOrderHistory();
+  const lastOrder = history.length > 0 ? history[history.length - 1] : null;
+  const daysSinceLast = lastOrder ? (Date.now() - lastOrder.date) / 86400000 : Infinity;
+
+  // Prioridad 1: Carrito abandonado reciente (< 48h) — Retomar
+  if (saved && saved.stage && saved.stage !== 'welcome' && saved.stage !== 'summary' && hoursSinceSave < 48 && R.boxes.length === 0) {
     Object.assign(R, saved);
-    botSay('Hola de nuevo 👋 Retomo tu cotización donde quedamos.', 400);
-    updateProgress(R.stage);
     setTimeout(() => {
-      if (R.stage === 'summary') showSummary();
-      else if (R.stage === 'contact') askContactField();
-      else if (R.stage === 'flavor-select' && R.currentIndex >= 0) {
-        botSay('Continúa con los sabores de tu caja. 🍫', 300);
-        setTimeout(openFlavorPanel, 600);
+      if (hoursSinceSave < 1) {
+        botSay('¡Justo a tiempo! 🍫 Retomo tu caja donde la dejaste.', 400);
+      } else if (hoursSinceSave < 24) {
+        botSay('Qué bueno verte de nuevo. ✨ Tu caja sigue aquí.', 400);
+      } else {
+        botSay('Han pasado unas horas, pero tu selección sigue guardada. ¿Retomamos? 🎁', 400);
       }
-      else if (R.stage === 'flavor-mode' && R.currentIndex >= 0) promptFlavorMode();
-      else if (R.stage === 'special') askSpecialRequest();
-      else if (R.stage === 'box-select') promptBoxSelect();
-      else promptOrderType();
-    }, 800);
+      updateProgress(R.stage);
+      setTimeout(() => resumeFlow(R.stage), 900);
+    }, 400);
     return;
   }
 
+  // Prioridad 2: Cupón activo pendiente
+  if (activeCoupon) {
+    setTimeout(() => {
+      const daysLeft = Math.ceil((activeCoupon.expiresAt - Date.now()) / 86400000);
+      addMsg(`
+        <div class="coupon-banner">
+          <span class="cb-icon">🎁</span>
+          <div class="cb-title">¡Tienes un regalo pendiente!</div>
+          <div class="cb-code" onclick="copyCoupon('${activeCoupon.code}')" title="Click para copiar">${activeCoupon.code}</div>
+          <div class="cb-desc">${activeCoupon.benefit}</div>
+          <div class="cb-expire">Válido por ${daysLeft} día${daysLeft !== 1 ? 's' : ''} · Click en el código para copiarlo</div>
+        </div>
+      `, 'bot');
+      setTimeout(() => {
+        renderQuick([
+          { label: 'Usar mi regalo ahora', sub: 'Aplicar en nuevo pedido', icon: '🎁', className: 'primary', onClick: () => promptOrderType() },
+          { label: 'Ver presentaciones', sub: 'Colecciones disponibles', icon: '◈', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
+        ]);
+      }, 900);
+    }, 400);
+    return;
+  }
+
+  // Prioridad 3: Cliente recurrente (> 7 días desde último pedido)
+  if (lastOrder && daysSinceLast > 7 && daysSinceLast < 90) {
+    setTimeout(() => {
+      const firstName = (lastOrder.contact.nombre || '').split(' ')[0] || '';
+      addMsg(`
+        <div class="welcome-hero">
+          <div class="wh-logo">R</div>
+          <div class="wh-title">¡Hola de nuevo${firstName ? ', ' + escapeHtml(firstName) : ''}! 👋</div>
+          <div class="wh-sub">Han pasado ${Math.floor(daysSinceLast)} días desde tu último pedido.<br>¿Repetimos o probamos algo nuevo?</div>
+          <div class="welcome-chips">
+            <span class="chip">✦ Mismos sabores</span>
+            <span class="chip">✦ Nueva creación</span>
+          </div>
+        </div>
+      `, 'bot');
+      setTimeout(() => {
+        renderQuick([
+          { label: 'Repetir mi última caja', sub: lastOrder.totalBoxes + ' caja' + (lastOrder.totalBoxes > 1 ? 's' : ''), icon: '↺', className: 'primary', onClick: () => repeatLastOrder(lastOrder) },
+          { label: 'Crear algo nuevo', sub: 'Nueva selección', icon: '✦', className: 'primary', onClick: () => promptOrderType() },
+          { label: 'Ver presentaciones', sub: 'Colecciones disponibles', icon: '◈', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
+        ]);
+      }, 900);
+    }, 400);
+    return;
+  }
+
+  // Prioridad 4: Flujo normal con saludo por hora
   setTimeout(() => {
     const welcomeHTML = `
       <div class="welcome-hero">
         <div class="wh-logo">R</div>
-        <div class="wh-title">Bienvenido a ${CONFIG.brandName}</div>
+        <div class="wh-title">${getGreeting()} ✨</div>
         <div class="wh-sub">Soy <strong>Roncaccio</strong>, tu asesor personal.<br>Te ayudaré a crear una pieza única en menos de 3 minutos.</div>
         <div class="welcome-chips">
           <span class="chip">✦ Personalización</span>
@@ -1918,6 +2377,22 @@ function startWelcomeFlow() {
       ]);
     }, 900);
   }, 400);
+}
+
+function copyCoupon(code) {
+  try {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(code).then(() => {
+        showCaptchaToast('✓ Código copiado: ' + code);
+      }).catch(() => {
+        showCaptchaToast('Código: ' + code);
+      });
+    } else {
+      showCaptchaToast('Código: ' + code);
+    }
+  } catch (e) {
+    showCaptchaToast('Código: ' + code);
+  }
 }
 
 function promptOrderType() {
@@ -2047,7 +2522,11 @@ function confirmBoxAuto() {
     .map(f => `• ${box.flavors[f.id]} × ${f.short}`)
     .join('<br>');
   closeFlavorPanel();
-  botSay(`<strong>${bt.name}</strong> agregada:<br>${lines}`, 400);
+  const cajas = R.boxes.length;
+  const mensaje = cajas === 1
+    ? `¡Hermosa elección! 🍫 Tu <strong>${bt.name}</strong> quedó así:`
+    : `¡Vas increíble! Ese es tu ${cajas}º regalo perfecto 🎁`;
+  botSay(`${mensaje}<br>${lines}`, 400);
   setTimeout(() => promptNextAction(), 900);
 }
 
@@ -2177,7 +2656,11 @@ function confirmBox() {
     .join('<br>');
   closeFlavorPanel();
   addMsg('Confirmar esta caja', 'user');
-  botSay(`<strong>${bt.name}</strong> agregada:<br>${lines}`, 400);
+  const cajas = R.boxes.length;
+  const mensaje = cajas === 1
+    ? `¡Hermosa elección! 🍫 Tu <strong>${bt.name}</strong> quedó así:`
+    : `¡Vas increíble! Ese es tu ${cajas}º regalo perfecto 🎁`;
+  botSay(`${mensaje}<br>${lines}`, 400);
   setTimeout(() => promptNextAction(), 900);
 }
 
@@ -2373,6 +2856,44 @@ function showSummary() {
   }, 2400);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — handleWhatsAppSend con confetti + sonido + historial + cupón
+   ═══════════════════════════════════════════════════════════════ */
+function handleWhatsAppSend() {
+  // 1. Celebración visual y sonora
+  celebrate();
+  playSuccessSound();
+
+  // 2. Guardar pedido en historial
+  const order = saveOrderToHistory();
+
+  // 3. Generar cupón para el próximo pedido
+  const suffix = order ? order.id.slice(-4) : '0001';
+  const coupon = generateCoupon(suffix);
+
+  // 4. Toast de éxito
+  showCaptchaToast('✓ ¡Pedido enviado! Te contactaremos por WhatsApp 💬');
+
+  // 5. Mensaje cálido dentro del chat
+  setTimeout(() => {
+    const couponHTML = `
+      <div class="coupon-banner">
+        <span class="cb-icon">🎁</span>
+        <div class="cb-title">¡Gracias por tu pedido!</div>
+        <div class="cb-desc" style="margin-bottom:8px;">Un asesor te contactará por WhatsApp muy pronto.</div>
+        <div style="font-size:0.75rem;color:var(--gold-300);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px;">Regalo para tu próxima visita</div>
+        <div class="cb-code" onclick="copyCoupon('${coupon.code}')" title="Click para copiar">${coupon.code}</div>
+        <div class="cb-desc">${coupon.benefit}</div>
+        <div class="cb-expire">Válido 30 días · Click en el código para copiarlo</div>
+      </div>
+    `;
+    addMsg(couponHTML, 'bot');
+  }, 600);
+
+  // 6. Reset automático 10s después
+  setTimeout(resetAfterWhatsApp, 10000);
+}
+
 function renderWhatsAppButton() {
   const url = buildWhatsAppUrl();
   renderQuick([
@@ -2382,9 +2903,7 @@ function renderWhatsAppButton() {
       icon: '✓',
       className: 'wa',
       href: url,
-      onClick: () => {
-        setTimeout(resetAfterWhatsApp, 10000);
-      }
+      onClick: handleWhatsAppSend
     },
     {
       label: 'Editar respuestas',
@@ -2430,6 +2949,14 @@ function buildWhatsAppUrl() {
 
   if (R.contact.special) {
     body += `*Solicitud especial:* ${R.contact.special}\n\n`;
+  }
+
+  /* MEJORA: aplicar cupón activo si existe */
+  const activeCoupon = getActiveCoupon();
+  if (activeCoupon) {
+    body += `*Cupón aplicado:* ${activeCoupon.code}\n`;
+    body += `Beneficio: ${activeCoupon.benefit}\n\n`;
+    markCouponUsed();
   }
 
   body += `*Datos de contacto:*\n`;
@@ -2543,7 +3070,7 @@ function toggleRoncaccio() {
 function closeRoncaccio() { $win.classList.remove('open'); }
 
 /* ═══════════════════════════════════════════════════════════════
-   reCAPTCHA v2 — Verificación bajo demanda (v2 reforzado)
+   reCAPTCHA v2 — Verificación bajo demanda
    ═══════════════════════════════════════════════════════════════ */
 
 let pendingElement = null;
@@ -2698,6 +3225,21 @@ document.addEventListener('click', (e) => {
     location.reload();
   }, 10000);
 })();
+
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — Marcar abandono del carrito al cerrar la pestaña
+   ═══════════════════════════════════════════════════════════════ */
+window.addEventListener('beforeunload', () => {
+  if (R.stage !== 'welcome' && R.stage !== 'summary' && R.boxes.length > 0) {
+    try {
+      localStorage.setItem(ABANDONED_KEY, JSON.stringify({
+        stage: R.stage,
+        boxesCount: R.boxes.length,
+        ts: Date.now()
+      }));
+    } catch(e) {}
+  }
+});
 </script>
 
 </body>
