@@ -31,7 +31,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- ═══════════════════════════════════════════════════════
-     reCAPTCHA v2 (único captcha del sitio)
+     reCAPTCHA v2
      ═══════════════════════════════════════════════════════ -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
@@ -45,7 +45,7 @@
 <link rel="manifest" href="favicon_io/site.webmanifest">
 
 <!-- ═══════════════════════════════════════════════════════
-     Open Graph (WhatsApp, Facebook, LinkedIn)
+     Open Graph
      ═══════════════════════════════════════════════════════ -->
 <meta property="og:title" content="Halat Hernández | Bombones de Autora en Bogotá">
 <meta property="og:description" content="Pequeñas joyas de chocolate hechas a mano que celebran el placer, la textura y el aroma. Chocolates de autora en Bogotá.">
@@ -1157,14 +1157,6 @@ section { padding: 110px 24px; }
   --navy-700: #3D2317; --navy-600: #4A2C1A; --navy-500: #5A3620;
 }
 
-/* ─── Bloqueo por reCAPTCHA v2 ─── */
-.is-locked {
-  opacity: 0.4;
-  filter: grayscale(0.7);
-  cursor: not-allowed;
-}
-.is-locked * { cursor: not-allowed !important; }
-
 /* ─── Toast de guía hacia el checkbox ─── */
 .captcha-toast {
   position: fixed;
@@ -1188,6 +1180,16 @@ section { padding: 110px 24px; }
 .captcha-toast.visible {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* Pulso dorado del checkbox cuando se requiere verificar */
+.g-recaptcha.attention {
+  animation: captchaPulse 1.2s ease-in-out 3;
+  border-radius: 4px;
+}
+@keyframes captchaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 169, 97, 0); }
+  50% { box-shadow: 0 0 0 12px rgba(201, 169, 97, 0.35); }
 }
 
 /* ─── Captcha v2 wrap ─── */
@@ -1304,7 +1306,7 @@ section { padding: 110px 24px; }
     </h1>
     <p class="hero-sub">Pequeñas joyas de chocolate que celebran el placer, la textura y el aroma. Hechas a mano. Hechas para ti.</p>
     <div class="hero-ctas">
-      <button class="btn btn-gold is-locked" data-captcha-gated onclick="openRoncaccio()">
+      <button class="btn btn-gold" data-requires-captcha onclick="openRoncaccio()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
         Cotizar mi caja
       </button>
@@ -1446,7 +1448,7 @@ section { padding: 110px 24px; }
     </div>
 
     <div class="sabores-cta reveal">
-      <button class="btn btn-gold is-locked" data-captcha-gated onclick="openRoncaccio()">Armar mi caja personalizada</button>
+      <button class="btn btn-gold" data-requires-captcha onclick="openRoncaccio()">Armar mi caja personalizada</button>
     </div>
   </div>
 </section>
@@ -1460,7 +1462,7 @@ section { padding: 110px 24px; }
     </div>
 
     <div class="presentaciones-grid">
-      <div class="pres-card reveal" onclick="openRoncaccio()">
+      <div class="pres-card reveal" data-requires-captcha onclick="openRoncaccio()">
         <div class="pres-visual visual-wrap">
           <img class="visual-img" src="images/presentacion-4.png" alt="Petit Coffret — caja de 4 bombones Halat Hernández" loading="lazy" onerror="this.style.display='none';">
           <div class="visual-fallback"><span class="pres-symbol">I</span></div>
@@ -1475,7 +1477,7 @@ section { padding: 110px 24px; }
         </div>
       </div>
 
-      <div class="pres-card reveal" onclick="openRoncaccio()">
+      <div class="pres-card reveal" data-requires-captcha onclick="openRoncaccio()">
         <div class="pres-visual visual-wrap">
           <img class="visual-img" src="images/presentacion-12.png" alt="Coffret Signature — caja de 12 bombones Halat Hernández" loading="lazy" onerror="this.style.display='none';">
           <div class="visual-fallback"><span class="pres-symbol">II</span></div>
@@ -1490,7 +1492,7 @@ section { padding: 110px 24px; }
         </div>
       </div>
 
-      <div class="pres-card reveal" onclick="openRoncaccio()">
+      <div class="pres-card reveal" data-requires-captcha onclick="openRoncaccio()">
         <div class="pres-visual visual-wrap">
           <img class="visual-img" src="images/presentacion-24.png" alt="Grand Coffret — caja de 24 bombones Halat Hernández" loading="lazy" onerror="this.style.display='none';">
           <div class="visual-fallback"><span class="pres-symbol">III</span></div>
@@ -1545,7 +1547,7 @@ section { padding: 110px 24px; }
           <div class="b2b-item"><span class="icon">✦</span><div class="txt"><strong>Para empresas y eventos</strong>Presencia memorable en celebraciones, recepciones, lanzamientos y detalles de bienvenida.</div></div>
           <div class="b2b-item"><span class="icon">✦</span><div class="txt"><strong>Tu mensaje, a tu manera</strong>Explora opciones para etiquetas, tarjetas y cartas personalizadas junto a nuestro equipo.</div></div>
         </div>
-        <button class="btn btn-gold is-locked" data-captcha-gated onclick="openRoncaccio()">Cotizar para empresa</button>
+        <button class="btn btn-gold" data-requires-captcha onclick="openRoncaccio()">Cotizar para empresa</button>
       </div>
       <div class="reveal">
         <div class="b2b-visual visual-wrap">
@@ -1588,7 +1590,7 @@ section { padding: 110px 24px; }
       <p class="contact-hint">Verificación de seguridad · reCAPTCHA activo</p>
     </div>
 
-    <button class="btn btn-gold is-locked" data-captcha-gated onclick="openRoncaccio()">
+    <button class="btn btn-gold" data-requires-captcha onclick="openRoncaccio()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
       Cotizar mi caja ahora
     </button>
@@ -1610,7 +1612,7 @@ section { padding: 110px 24px; }
     </div>
     <div class="footer-col">
       <h4>Contacto</h4>
-      <a href="#" data-wa-number="NTczMjA4MjA5MzY5" class="is-locked" data-captcha-gated rel="noopener noreferrer">+57 320 820 9369</a>
+      <a href="#" data-wa-number="NTczMjA4MjA5MzY5" data-requires-captcha rel="noopener noreferrer">+57 320 820 9369</a>
       <a href="https://instagram.com/halat.hernandez" target="_blank" rel="noopener noreferrer">@halat.hernandez</a>
       <p>Bogotá · Colombia</p>
     </div>
@@ -1621,11 +1623,11 @@ section { padding: 110px 24px; }
   </div>
 </footer>
 
-<a href="#" data-wa-number="NTczMjA4MjA5MzY5" class="wa-float is-locked" data-captcha-gated aria-label="Contactar por WhatsApp" rel="noopener noreferrer">
+<a href="#" data-wa-number="NTczMjA4MjA5MzY5" class="wa-float" data-requires-captcha aria-label="Contactar por WhatsApp" rel="noopener noreferrer">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<div class="ron-launcher is-locked" data-captcha-gated onclick="toggleRoncaccio()" role="button" tabindex="0" aria-label="Abrir asesor Roncaccio">
+<div class="ron-launcher" data-requires-captcha onclick="toggleRoncaccio()" role="button" tabindex="0" aria-label="Abrir asesor Roncaccio">
   <div class="pulse"></div>
   <span>R</span>
   <span class="badge" id="ronBadge">1</span>
@@ -1781,7 +1783,8 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 (function setupWhatsAppLinks() {
   document.querySelectorAll('[data-wa-number]').forEach(link => {
     link.addEventListener('click', (e) => {
-      if (link.classList.contains('is-locked')) return;
+      // Si el interceptor ya previno, no continuar
+      if (e.defaultPrevented) return;
       e.preventDefault();
       try {
         const number = atob(link.dataset.waNumber);
@@ -2469,7 +2472,6 @@ function renderWhatsAppButton() {
       className: 'wa',
       href: url,
       onClick: () => {
-        /* Reset automático 10s después */
         setTimeout(resetAfterWhatsApp, 10000);
       }
     },
@@ -2483,7 +2485,6 @@ function renderWhatsAppButton() {
   ]);
 }
 
-/* Limpia estado, mensajes y cierra el chat tras enviar a WhatsApp */
 function resetAfterWhatsApp() {
   clear();
   R.stage = 'welcome';
@@ -2618,15 +2619,9 @@ function resetOrder(confirmed) {
 
 /* ═══════════════════════════════════════════════════════════════
    ABRIR / CERRAR RONCACCIO
-   — Sólo accesible si captchaV2Verified === true
    ═══════════════════════════════════════════════════════════════ */
 async function openRoncaccio() {
   if (!checkHoneypot()) return;
-
-  if (!captchaV2Verified) {
-    showCaptchaHint('Resuelve la verificación de seguridad para continuar');
-    return;
-  }
 
   $win.classList.add('open');
   if ($badge) $badge.style.display = 'none';
@@ -2640,47 +2635,61 @@ function toggleRoncaccio() {
 function closeRoncaccio() { $win.classList.remove('open'); }
 
 /* ═══════════════════════════════════════════════════════════════
-   reCAPTCHA v2 — Guardián único del sitio
+   reCAPTCHA v2 — Verificación bajo demanda
+   Los botones están SIEMPRE activos. Al click sin verificar:
+   → scroll al checkbox + toast + guardar acción pendiente.
+   Al resolver captcha → se ejecuta la acción pendiente.
    ═══════════════════════════════════════════════════════════════ */
+
+let pendingElement = null;
+let skipCaptchaInterceptor = false;
 
 function isLocalEnvironment() {
   const h = window.location.hostname;
   return window.location.protocol === 'file:' || h === 'localhost' || h === '127.0.0.1';
 }
 
-function lockGatedButtons() {
-  captchaV2Verified = false;
-  document.querySelectorAll('[data-captcha-gated]').forEach(el => el.classList.add('is-locked'));
-}
-
-function unlockGatedButtons() {
-  captchaV2Verified = true;
-  document.querySelectorAll('[data-captcha-gated]').forEach(el => el.classList.remove('is-locked'));
-}
-
 async function onCaptchaSuccess(token) {
   if (!token) return;
 
+  let ok = false;
+
   if (isLocalEnvironment()) {
-    unlockGatedButtons();
-    return;
+    ok = true;
+  } else {
+    try {
+      const response = await fetch('/api/verify-recaptcha', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+      const result = await response.json();
+      ok = !!(result && result.success);
+      if (!ok) console.warn('reCAPTCHA v2: verificación fallida en el servidor.');
+    } catch (err) {
+      console.warn('reCAPTCHA v2: no se pudo verificar con /api/verify-recaptcha.', err);
+      return;
+    }
   }
 
-  try {
-    const response = await fetch('/api/verify-recaptcha', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token })
-    });
-    const result = await response.json();
-    if (result && result.success) {
-      unlockGatedButtons();
-      try { sessionStorage.removeItem('recaptcha-v2-retry'); } catch(e) {}
-    } else {
-      console.warn('reCAPTCHA v2: verificación fallida en el servidor.');
-    }
-  } catch (err) {
-    console.warn('reCAPTCHA v2: no se pudo verificar con /api/verify-recaptcha.', err);
+  if (!ok) return;
+
+  captchaV2Verified = true;
+  try { sessionStorage.removeItem('recaptcha-v2-retry'); } catch(e) {}
+
+  // Quitar pulso visual del captcha
+  const widget = document.querySelector('.g-recaptcha');
+  if (widget) widget.classList.remove('attention');
+
+  // Ejecutar acción pendiente
+  if (pendingElement) {
+    const el = pendingElement;
+    pendingElement = null;
+    setTimeout(() => {
+      skipCaptchaInterceptor = true;
+      try { el.click(); } catch(e) { console.warn(e); }
+      skipCaptchaInterceptor = false;
+    }, 350);
   }
 }
 
@@ -2689,22 +2698,28 @@ function onCaptchaError() {
 }
 
 function onCaptchaExpired() {
-  lockGatedButtons();
-  console.warn('reCAPTCHA v2: token expirado. Vuelve a verificar.');
+  captchaV2Verified = false;
+  console.warn('reCAPTCHA v2: token expirado. Se pedirá verificar de nuevo.');
 }
 
 window.onCaptchaSuccess = onCaptchaSuccess;
 window.onCaptchaError = onCaptchaError;
 window.onCaptchaExpired = onCaptchaExpired;
 
-/* Toast + scroll a #contacto cuando el usuario clickea algo bloqueado */
-function showCaptchaHint(message) {
-  const el = document.getElementById('contacto');
-  if (el) {
-    const top = el.getBoundingClientRect().top + window.pageYOffset - 70;
-    window.scrollTo({ top, behavior: 'smooth' });
-  }
+/* Scroll al checkbox + pulso visual */
+function focusCaptcha() {
+  const widget = document.querySelector('.g-recaptcha');
+  if (!widget) return;
+  const top = widget.getBoundingClientRect().top + window.pageYOffset - 120;
+  window.scrollTo({ top, behavior: 'smooth' });
+  widget.classList.remove('attention');
+  void widget.offsetWidth;
+  widget.classList.add('attention');
+  setTimeout(() => widget.classList.remove('attention'), 4000);
+}
 
+/* Toast de guía */
+function showCaptchaHint(message) {
   let toast = document.getElementById('captchaToast');
   if (!toast) {
     toast = document.createElement('div');
@@ -2712,24 +2727,31 @@ function showCaptchaHint(message) {
     toast.className = 'captcha-toast';
     document.body.appendChild(toast);
   }
-  toast.textContent = message || 'Resuelve la verificación de seguridad para continuar';
+  toast.textContent = message || 'Verifica que no eres un robot para continuar';
   void toast.offsetWidth;
   toast.classList.add('visible');
-
   clearTimeout(window._captchaToastTimer);
   window._captchaToastTimer = setTimeout(() => {
     toast.classList.remove('visible');
-  }, 3500);
+  }, 4000);
 }
 
-/* Interceptor global: cualquier click en elemento bloqueado → hint */
+/* Interceptor global: captura clicks en elementos que requieren captcha */
 document.addEventListener('click', (e) => {
-  const locked = e.target.closest('.is-locked[data-captcha-gated]');
-  if (locked) {
-    e.preventDefault();
-    e.stopPropagation();
-    showCaptchaHint();
-  }
+  if (skipCaptchaInterceptor) return;
+
+  const trigger = e.target.closest('[data-requires-captcha]');
+  if (!trigger) return;
+
+  if (captchaV2Verified) return; // ya verificado: deja pasar el click natural
+
+  // No verificado: bloquear y guardar acción pendiente
+  e.preventDefault();
+  e.stopImmediatePropagation();
+
+  pendingElement = trigger;
+  focusCaptcha();
+  showCaptchaHint('Verifica que no eres un robot para continuar');
 }, true);
 
 /* Watchdog — recarga si el widget no renderiza en 10s (máx. 2 intentos) */
