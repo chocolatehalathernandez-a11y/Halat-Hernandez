@@ -3,15 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- MEJORA 1A — Title SEO -->
-<title>Bombones de Autora Premium en Bogotá | Halat Hernández</title>
-
-<!-- MEJORA 1B — Meta description -->
-<meta name="description" content="Bombones de autora hechos a mano en Bogotá. Cacao fino, sabores únicos y presentación de lujo. Cotiza tu caja personalizada por WhatsApp hoy.">
-
-<!-- MEJORA 1C — Keywords ampliadas -->
-<meta name="keywords" content="bombones de autora, chocolatería premium Bogotá, bombones artesanales, regalos de lujo, chocolates personalizados, ferias de chocolate, cajas de bombones personalizadas, chocolate fino colombiano, regalos empresariales chocolate, bombones para eventos, chocolate de autora Bogotá, regalos gourmet Bogotá, bombones premium Colombia">
+<title>Halat Hernández | Bombones de Autor</title>
+<meta name="description" content="Bombones de autor hechos a mano. Sabores únicos, presentación de lujo. Envíos a domicilio en Bogotá y participación en ferias. Cotiza por WhatsApp.">
+<meta name="keywords" content="bombones de autor, chocolatería premium Bogotá, bombones artesanales, regalos de lujo, chocolates personalizados, ferias de chocolate">
 
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -24,98 +18,14 @@
 <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
 <link rel="manifest" href="favicon_io/site.webmanifest">
 
-<!-- MEJORA 1D — Open Graph completado -->
-<meta property="og:title" content="Halat Hernández | Bombones de Autora">
+<meta property="og:title" content="Halat Hernández | Bombones de Autor">
 <meta property="og:description" content="Pequeñas joyas de chocolate que celebran el placer, la textura y el aroma.">
 <meta property="og:image" content="images/logo-principal.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://halat-hernandez.com/">
-<meta property="og:locale" content="es_CO">
-<meta property="og:site_name" content="Halat Hernández">
-
-<!-- MEJORA 1E — Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Halat Hernández | Bombones de Autora Premium">
-<meta name="twitter:description" content="Pequeñas joyas de chocolate hechas a mano en Bogotá. Cotiza tu caja personalizada por WhatsApp.">
-<meta name="twitter:image" content="images/logo-principal.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- MEJORA 1F — JSON-LD estructurado -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Halat Hernández",
-  "description": "Chocolatería de autora especializada en bombones artesanales premium hechos a mano en Bogotá.",
-  "image": "https://halat-hernandez.com/images/logo-principal.png",
-  "url": "https://halat-hernandez.com/",
-  "telephone": "+573208209369",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Bogotá",
-    "addressCountry": "CO"
-  },
-  "sameAs": ["https://instagram.com/halat.hernandez"],
-  "priceRange": "$$"
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Bombones de Autora Halat Hernández",
-  "description": "Bombones artesanales premium hechos a mano con sabores como maracuyá, uva, almendra, frutos rojos, maní con sal marina y Baileys. Presentaciones Petit Coffret, Coffret Signature y Grand Coffret.",
-  "image": "https://halat-hernandez.com/images/imagen-bombones-2.png",
-  "brand": { "@type": "Brand", "name": "Halat Hernández" },
-  "category": "Chocolates artesanales",
-  "url": "https://halat-hernandez.com/"
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "¿Hacen envíos a domicilio en Bogotá?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí, realizamos envíos a domicilio en Bogotá con pedido mínimo de 2 Petit Coffret o 1 Coffret Signature. La preparación requiere mínimo 24 horas de anticipación."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Puedo personalizar los sabores de mi caja de bombones?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí, puedes elegir los sabores según la presentación. La personalización tiene un costo adicional por pieza."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Con cuánta anticipación debo pedir mis bombones?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Todos los pedidos requieren mínimo 24 horas de anticipación. Las entregas urgentes tienen costo adicional."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Atienden pedidos para empresas y eventos?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí, ofrecemos cajas personalizadas para empresas, eventos y ferias, con opciones de etiquetas y mensajes corporativos."
-      }
-    }
-  ]
-}
-</script>
 
 <style>
 :root {
@@ -409,27 +319,33 @@ section { padding: 110px 24px; }
 @keyframes ronPulse { 0%,100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.3); opacity: 0; } }
 .ron-launcher .badge { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; border-radius: 50%; background: var(--wa-green); color: #fff; font-family: var(--sans); font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid var(--navy-950); }
 
+/* ═══════════════════════════════════════════════════════════════
+   RONCACCIO — REDISEÑO SOFISTICADO
+   ═══════════════════════════════════════════════════════════════ */
 .ron-window {
-  position: fixed;
-  top: 0; bottom: 0; left: 0;
-  z-index: 300;
-  width: 100%; max-width: 440px;
-  height: 100vh;
+  position: fixed; bottom: 11rem; z-index: 300;
+  left: 50%; transform: translateX(-50%); right: auto;
+  width: 100%; max-width: 460px;
+  height: 780px; max-height: calc(100vh - 13rem);
   background: linear-gradient(180deg, var(--navy-900) 0%, var(--navy-950) 100%);
-  border-right: 1px solid rgba(201, 169, 97, 0.35);
-  border-radius: 0 14px 14px 0;
+  border: 1px solid rgba(201, 169, 97, 0.35);
+  border-radius: 14px;
   display: none; flex-direction: column; overflow: hidden;
-  box-shadow: 40px 0 100px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(201, 169, 97, 0.05), inset -1px 0 0 rgba(245, 239, 224, 0.05);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(201, 169, 97, 0.05),
+    inset 0 1px 0 rgba(245, 239, 224, 0.08);
 }
-.ron-window.open { display: flex; animation: ronOpen 0.45s cubic-bezier(0.25, 0.1, 0.25, 1); }
+.ron-window.open { display: flex; animation: ronOpen 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); }
 @keyframes ronOpen {
-  from { opacity: 0; transform: translateX(-40px); }
-  to { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; transform: translateX(-50%) translateY(30px) scale(0.96); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 }
 
+/* Header con gradiente sutil */
 .ron-header {
   display: flex; align-items: center; gap: 14px;
-  padding: 22px 22px 18px;
+  padding: 18px 20px 16px;
   background: linear-gradient(180deg, rgba(201, 169, 97, 0.12), rgba(201, 169, 97, 0.02) 60%, transparent);
   border-bottom: 1px solid rgba(201, 169, 97, 0.18);
   flex-shrink: 0;
@@ -479,6 +395,7 @@ section { padding: 110px 24px; }
 }
 .ron-close:hover { color: var(--gold-500); background: rgba(201, 169, 97, 0.08); }
 
+/* Barra de progreso */
 .ron-progress-bar {
   height: 2px;
   background: rgba(201, 169, 97, 0.08);
@@ -500,8 +417,9 @@ section { padding: 110px 24px; }
   100% { background-position: 200% 50%; }
 }
 
+/* Mensajes */
 .ron-messages {
-  flex: 1; overflow-y: auto; padding: 26px 22px;
+  flex: 1; overflow-y: auto; padding: 22px 18px;
   display: flex; flex-direction: column; gap: 14px;
   min-height: 0;
   scrollbar-width: thin;
@@ -555,6 +473,7 @@ section { padding: 110px 24px; }
 }
 .msg.notice strong { color: var(--gold-300); }
 
+/* Mensaje de bienvenida grande */
 .msg.welcome-hero {
   align-self: stretch;
   max-width: 100%;
@@ -589,6 +508,7 @@ section { padding: 110px 24px; }
   font-weight: 300;
 }
 
+/* Chips informativos */
 .welcome-chips {
   display: flex; flex-wrap: wrap; gap: 6px;
   justify-content: center;
@@ -605,6 +525,7 @@ section { padding: 110px 24px; }
   font-weight: 400;
 }
 
+/* Typing */
 .msg.typing {
   display: flex; gap: 5px; padding: 14px 18px;
   align-self: flex-start;
@@ -625,6 +546,7 @@ section { padding: 110px 24px; }
   30% { opacity: 1; transform: translateY(-4px); }
 }
 
+/* Quick actions - área de botones */
 .ron-quick {
   display: flex; flex-direction: column; gap: 8px;
   padding: 14px 18px 16px;
@@ -634,6 +556,7 @@ section { padding: 110px 24px; }
 }
 .ron-quick:empty { display: none; padding: 0; }
 
+/* Botones rápidos ricos */
 .quick-btn {
   display: flex;
   align-items: center;
@@ -718,6 +641,7 @@ section { padding: 110px 24px; }
   transform: translateX(4px);
 }
 
+/* Botón primario (destacado) */
 .quick-btn.primary {
   background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
   color: var(--navy-900);
@@ -750,6 +674,7 @@ section { padding: 110px 24px; }
   color: var(--navy-900);
 }
 
+/* Botón WhatsApp */
 .quick-btn.wa {
   background: linear-gradient(135deg, var(--wa-green), var(--wa-green-dark));
   color: #fff;
@@ -773,6 +698,7 @@ section { padding: 110px 24px; }
 }
 .quick-btn.wa:hover .qb-arrow { color: #fff; }
 
+/* Botón ghost (secundario) */
 .quick-btn.ghost {
   background: transparent;
   border-color: rgba(245, 239, 224, 0.12);
@@ -792,12 +718,13 @@ section { padding: 110px 24px; }
   color: rgba(245, 239, 224, 0.85);
 }
 
+/* Panel de sabores */
 .ron-flavor-panel {
   display: none; flex-direction: column;
   border-top: 1px solid rgba(201, 169, 97, 0.28);
   background: linear-gradient(180deg, var(--navy-950), #030710);
   flex-shrink: 0;
-  max-height: 62%;
+  max-height: 55%;
 }
 .ron-flavor-panel.active { display: flex; }
 
@@ -921,6 +848,7 @@ section { padding: 110px 24px; }
 }
 .fp-actions .quick-btn { flex: 1; min-width: 0; }
 
+/* Input */
 .ron-input {
   display: flex; gap: 8px;
   padding: 14px 16px;
@@ -960,6 +888,7 @@ section { padding: 110px 24px; }
 }
 .ron-input .send svg { width: 18px; height: 18px; }
 
+/* Tarjetas de resumen */
 .summary-block {
   align-self: stretch;
   max-width: 100%;
@@ -1009,6 +938,7 @@ section { padding: 110px 24px; }
   max-width: 60%;
 }
 
+/* Celebración de éxito */
 .success-banner {
   align-self: stretch;
   max-width: 100%;
@@ -1043,6 +973,7 @@ section { padding: 110px 24px; }
   color: rgba(245, 239, 224, 0.55);
 }
 
+/* Mobile menu */
 .mobile-menu {
   display: none; position: fixed; inset: 0;
   background: rgba(10, 22, 40, 0.98); z-index: 99;
@@ -1059,37 +990,6 @@ section { padding: 110px 24px; }
 [data-theme="cacao"] {
   --navy-950: #0F0805; --navy-900: #1A0E07; --navy-800: #2A1810;
   --navy-700: #3D2317; --navy-600: #4A2C1A; --navy-500: #5A3620;
-}
-
-/* MEJORA 2C — Bloqueo de botones hasta resolver captcha */
-.is-locked {
-  opacity: 0.35;
-  pointer-events: none;
-  cursor: not-allowed;
-  filter: grayscale(0.6);
-}
-
-/* MEJORA 2B — Hint de seguridad bajo el captcha */
-.contact-hint {
-  font-size: 0.68rem;
-  color: rgba(245, 239, 224, 0.4);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin-top: 0.75rem;
-  text-align: center;
-}
-
-/* MEJORA 2B — Contenedor del captcha en el CTA final */
-.captcha-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1rem 0 1.75rem;
-}
-
-/* MEJORA 2E — Responsive del widget */
-@media (max-width: 480px) {
-  .g-recaptcha { transform: scale(0.85); transform-origin: center; }
 }
 
 @media (max-width: 960px) {
@@ -1139,12 +1039,11 @@ section { padding: 110px 24px; }
   <input type="text" id="ronHoneypot" name="website" tabindex="-1" autocomplete="off" value="">
 </div>
 
-<!-- MEJORA 1G — aria-label en <nav> -->
-<nav class="nav" id="nav" aria-label="Navegación principal">
+<nav class="nav" id="nav">
   <div class="nav-inner">
-    <button class="nav-brand" onclick="toggleTheme()" title="Cambiar tema" aria-label="Halat Hernández — cambiar tema">
-      <img class="nav-logo-a" src="images/loco-choco-1.png" alt="Halat Hernández — logotipo tema chocolate">
-      <img class="nav-logo-b" src="images/loco-dorado-1.png" alt="Halat Hernández — logotipo tema dorado">
+    <button class="nav-brand" onclick="toggleTheme()" title="Cambiar tema" aria-label="Halat Hernández">
+      <img class="nav-logo-a" src="images/loco-choco-1.png" alt="Halat Hernández">
+      <img class="nav-logo-b" src="images/loco-dorado-1.png" alt="Halat Hernández">
     </button>
     <ul class="nav-links">
       <li><a onclick="goTo('maison')">La Maison</a></li>
@@ -1154,11 +1053,11 @@ section { padding: 110px 24px; }
       <li><a onclick="goTo('empresas')">Empresas</a></li>
       <li><a onclick="goTo('contacto')">Contacto</a></li>
     </ul>
-    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú">☰</button>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menú">☰</button>
   </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu" aria-label="Menú móvil">
+<div class="mobile-menu" id="mobileMenu">
   <a onclick="goTo('maison')">La Maison</a>
   <a onclick="goTo('proceso')">Proceso</a>
   <a onclick="goTo('sabores')">Sabores</a>
@@ -1167,11 +1066,11 @@ section { padding: 110px 24px; }
   <a onclick="goTo('contacto')">Contacto</a>
 </div>
 
-<section class="hero" aria-label="Portada Halat Hernández">
+<section class="hero">
   <div class="hero-content">
     <div class="hero-logo-swap">
-      <img class="logo-a" src="images/loco-choco-1.png" alt="Halat Hernández — Bombones de Autora (tema chocolate)">
-      <img class="logo-b" src="images/loco-dorado-1.png" alt="Halat Hernández — Bombones de Autora (tema dorado)">
+      <img class="logo-a" src="images/loco-choco-1.png" alt="Halat Hernández — Bombones de Autor">
+      <img class="logo-b" src="images/loco-dorado-1.png" alt="Halat Hernández — Bombones de Autor">
     </div>
     <h1 class="hero-title">
       Donde el cacao<br>
@@ -1188,12 +1087,12 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
-<section id="maison" class="bg-navy" aria-label="La Maison">
+<section id="maison" class="bg-navy">
   <div class="container">
     <div class="maison">
       <div class="reveal">
         <div class="maison-visual visual-wrap">
-          <img class="visual-img" src="images/imagen-bombones-3.png" alt="Bombones artesanales de autora Halat Hernández en Bogotá" loading="lazy" onerror="this.style.display='none';">
+          <img class="visual-img" src="images/imagen-bombones-3.png" alt="La Maison Halat Hernández" onerror="this.style.display='none';">
           <div class="visual-fallback"><span class="sigil">HH</span></div>
         </div>
       </div>
@@ -1204,7 +1103,7 @@ section { padding: 110px 24px; }
           En Halat Hernández, cada bombón nace del encuentro entre el cacao más fino y la creatividad de nuestros maestros chocolateros. Elaboramos pequeñas joyas de sabor que celebran el placer, la textura y el aroma.
         </p>
         <p class="section-text">
-          Nuestra chocolatería de autora combina técnica, ingredientes nobles y una estética refinada. Cada creación se termina a mano para que la experiencia empiece antes del primer bocado.
+          Nuestra chocolatería de autor combina técnica, ingredientes nobles y una estética refinada. Cada creación se termina a mano para que la experiencia empiece antes del primer bocado.
         </p>
         <p class="maison-quote">Una pieza, un gesto, una pausa: el lujo de disfrutar sin prisa.</p>
       </div>
@@ -1212,7 +1111,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
-<section id="proceso" class="bg-navy-alt" aria-label="Proceso artesanal">
+<section id="proceso" class="bg-navy-alt">
   <div class="container">
     <div class="reveal" style="text-align:center;">
       <p class="section-label">Proceso artesanal</p>
@@ -1228,9 +1127,9 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
-<section class="gallery-section" aria-label="Galería de bombones">
+<section class="gallery-section">
   <div class="gallery-single">
-    <img src="images/imagen-bombones-2.png" alt="Bombones de colores vivos con sabores frutales de Halat Hernández" loading="lazy" onerror="this.style.display='none';">
+    <img src="images/imagen-bombones-2.png" alt="Color que se saborea — Halat Hernández" onerror="this.style.display='none';">
     <div class="gallery-caption">
       <div class="num">02</div>
       <div class="title">Color que se saborea</div>
@@ -1238,7 +1137,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
-<section id="sabores" class="bg-navy" aria-label="Colección de sabores">
+<section id="sabores" class="bg-navy">
   <div class="container">
     <div class="reveal" style="text-align:center;">
       <p class="section-label">Colección de sabores</p>
@@ -1248,7 +1147,7 @@ section { padding: 110px 24px; }
 
     <div class="sabores-grid">
       <div class="sabor-card reveal">
-        <div class="sabor-img"><img src="images/maracuya.jpeg" alt="Bombón artesanal de maracuyá Halat Hernández" loading="lazy" onerror="this.style.display='none';"></div>
+        <div class="sabor-img"><img src="images/maracuya.jpeg" alt="Maracuyá" onerror="this.style.display='none';"></div>
         <div class="sabor-body">
           <h3>Maracuyá</h3>
           <p class="desc">Intenso y tropical. La acidez del maracuyá envuelta en una ganache sedosa que despierta los sentidos.</p>
@@ -1260,7 +1159,7 @@ section { padding: 110px 24px; }
       </div>
 
       <div class="sabor-card reveal">
-        <div class="sabor-img"><img src="images/uva.jpeg" alt="Bombón artesanal de uva Halat Hernández" loading="lazy" onerror="this.style.display='none';"></div>
+        <div class="sabor-img"><img src="images/uva.jpeg" alt="Uva" onerror="this.style.display='none';"></div>
         <div class="sabor-body">
           <h3>Uva</h3>
           <p class="desc">Dulzor natural y notas florales. La uva se transforma en un relleno jugoso y delicado.</p>
@@ -1272,7 +1171,7 @@ section { padding: 110px 24px; }
       </div>
 
       <div class="sabor-card reveal">
-        <div class="sabor-img"><img src="images/almendra.jpeg" alt="Bombón artesanal de almendra Halat Hernández" loading="lazy" onerror="this.style.display='none';"></div>
+        <div class="sabor-img"><img src="images/almendra.jpeg" alt="Almendra" onerror="this.style.display='none';"></div>
         <div class="sabor-body">
           <h3>Almendra</h3>
           <p class="desc">Praliné de almendra tostada, textura suave y aroma cálido. Un clásico que reconforta.</p>
@@ -1284,7 +1183,7 @@ section { padding: 110px 24px; }
       </div>
 
       <div class="sabor-card reveal">
-        <div class="sabor-img"><img src="images/frutos-rojos.jpeg" alt="Bombón artesanal de frutos rojos Halat Hernández" loading="lazy" onerror="this.style.display='none';"></div>
+        <div class="sabor-img"><img src="images/frutos-rojos.jpeg" alt="Frutos rojos" onerror="this.style.display='none';"></div>
         <div class="sabor-body">
           <h3>Frutos rojos</h3>
           <p class="desc">Vibrante, ácido y silvestre. Frambuesa, fresa y mora en una sinfonía de color y sabor.</p>
@@ -1296,7 +1195,7 @@ section { padding: 110px 24px; }
       </div>
 
       <div class="sabor-card reveal">
-        <div class="sabor-img"><img src="images/mani-con-sal.jpeg" alt="Bombón artesanal de maní con sal marina Halat Hernández" loading="lazy" onerror="this.style.display='none';"></div>
+        <div class="sabor-img"><img src="images/mani-con-sal.jpeg" alt="Maní con sal marina" onerror="this.style.display='none';"></div>
         <div class="sabor-body">
           <h3>Maní con sal marina</h3>
           <p class="desc">Contraste perfecto: praliné de maní cremoso con un toque de sal marina que realza el dulzor. Final que pide otro bocado.</p>
@@ -1308,7 +1207,7 @@ section { padding: 110px 24px; }
       </div>
 
       <div class="sabor-card reveal">
-        <div class="sabor-img"><img src="images/baileys.jpeg" alt="Bombón artesanal de Baileys Halat Hernández" loading="lazy" onerror="this.style.display='none';"></div>
+        <div class="sabor-img"><img src="images/baileys.jpeg" alt="Baileys" onerror="this.style.display='none';"></div>
         <div class="sabor-body">
           <h3>Baileys</h3>
           <p class="desc">Cremoso y sedoso. Notas de café, cacao y un toque de whisky irlandés que envuelven el paladar.</p>
@@ -1326,7 +1225,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
-<section id="presentaciones" class="bg-marble" aria-label="Presentaciones premium">
+<section id="presentaciones" class="bg-marble">
   <div class="container">
     <div class="reveal" style="text-align:center;">
       <p class="section-label">Presentaciones Premium</p>
@@ -1337,7 +1236,7 @@ section { padding: 110px 24px; }
     <div class="presentaciones-grid">
       <div class="pres-card reveal" onclick="openRoncaccio()">
         <div class="pres-visual visual-wrap">
-          <img class="visual-img" src="images/presentacion-4.png" alt="Petit Coffret — caja de 4 bombones Halat Hernández" loading="lazy" onerror="this.style.display='none';">
+          <img class="visual-img" src="images/presentacion-4.png" alt="Petit Coffret" onerror="this.style.display='none';">
           <div class="visual-fallback"><span class="pres-symbol">I</span></div>
           <span class="pres-size">8.5 × 8.5 cm</span>
         </div>
@@ -1352,7 +1251,7 @@ section { padding: 110px 24px; }
 
       <div class="pres-card reveal" onclick="openRoncaccio()">
         <div class="pres-visual visual-wrap">
-          <img class="visual-img" src="images/presentacion-12.png" alt="Coffret Signature — caja de 12 bombones Halat Hernández" loading="lazy" onerror="this.style.display='none';">
+          <img class="visual-img" src="images/presentacion-12.png" alt="Coffret Signature" onerror="this.style.display='none';">
           <div class="visual-fallback"><span class="pres-symbol">II</span></div>
           <span class="pres-size">12.5 × 16.5 cm</span>
         </div>
@@ -1367,7 +1266,7 @@ section { padding: 110px 24px; }
 
       <div class="pres-card reveal" onclick="openRoncaccio()">
         <div class="pres-visual visual-wrap">
-          <img class="visual-img" src="images/presentacion-24.png" alt="Grand Coffret — caja de 24 bombones Halat Hernández" loading="lazy" onerror="this.style.display='none';">
+          <img class="visual-img" src="images/presentacion-24.png" alt="Grand Coffret" onerror="this.style.display='none';">
           <div class="visual-fallback"><span class="pres-symbol">III</span></div>
           <span class="pres-size">aprox. 24 × 28 cm</span>
         </div>
@@ -1383,12 +1282,12 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
-<section class="bg-navy" aria-label="Bombón Signature">
+<section class="bg-navy">
   <div class="container">
     <div class="signature-wrap">
       <div class="reveal">
         <div class="signature-visual visual-wrap">
-          <img class="visual-img" src="images/imagen-4-y-4-bombones.png" alt="Bombón Signature de maní con sal marina Halat Hernández" loading="lazy" onerror="this.style.display='none';">
+          <img class="visual-img" src="images/imagen-4-y-4-bombones.png" alt="Signature Maní con sal marina" onerror="this.style.display='none';">
           <div class="visual-fallback"><span class="sigil">SIGNATURE</span></div>
         </div>
       </div>
@@ -1408,7 +1307,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
-<section id="empresas" class="bg-navy-alt" aria-label="Pedidos para empresas y eventos">
+<section id="empresas" class="bg-navy-alt">
   <div class="container">
     <div class="b2b-grid">
       <div class="reveal">
@@ -1424,7 +1323,7 @@ section { padding: 110px 24px; }
       </div>
       <div class="reveal">
         <div class="b2b-visual visual-wrap">
-          <img class="visual-img" src="images/presentacion-4.png" alt="Cajas personalizadas para empresas Halat Hernández" loading="lazy" onerror="this.style.display='none';">
+          <img class="visual-img" src="images/presentacion-4.png" alt="Empresas Halat Hernández" onerror="this.style.display='none';">
           <div class="visual-fallback"><span class="sigil">B2B</span></div>
         </div>
       </div>
@@ -1432,7 +1331,7 @@ section { padding: 110px 24px; }
   </div>
 </section>
 
-<section class="bg-navy" aria-label="Momentos de disfrute">
+<section class="bg-navy">
   <div class="container">
     <div class="reveal" style="text-align:center;">
       <p class="section-label">Momentos de disfrute</p>
@@ -1442,42 +1341,28 @@ section { padding: 110px 24px; }
       <div class="maridaje-card reveal"><div class="icon-lg">☕</div><h3>Café de especialidad</h3><p>El tostado del café abraza el cacao y prolonga sus notas profundas.</p></div>
       <div class="maridaje-card reveal"><div class="icon-lg">🍵</div><h3>Té negro</h3><p>Un maridaje elegante para sabores frutales, florales y especiados.</p></div>
       <div class="maridaje-card reveal"><div class="icon-lg">🥂</div><h3>Vino dulce o cava</h3><p>Burbujas y dulzor para acompañar una celebración sin prisa.</p></div>
-      <div class="maridaje-card reveal"><div class="icon-lg">🏨</div><h3>Bienvenida en hoteles</h3><p>Una cortesía de autora que convierte la llegada en recuerdo.</p></div>
+      <div class="maridaje-card reveal"><div class="icon-lg">🏨</div><h3>Bienvenida en hoteles</h3><p>Una cortesía de autor que convierte la llegada en recuerdo.</p></div>
     </div>
   </div>
 </section>
 
-<section id="contacto" class="final-cta" aria-label="Solicita tu caja personalizada">
+<section id="contacto" class="final-cta">
   <div class="inner reveal">
     <p class="section-label">Solicita tu caja personalizada</p>
     <h2>Descubre el placer<br><span class="gold-text" style="font-style: italic;">de lo hecho a mano</span></h2>
     <p>Cada caja guarda una pausa, una emoción y un sabor para recordar. Elige tu colección y hagamos de cada detalle una experiencia.</p>
-
-    <!-- MEJORA 2B — Widget reCAPTCHA v2 -->
-    <div class="captcha-wrap">
-      <div class="g-recaptcha"
-           data-sitekey="6LelJOctAAAAAAYqhqhKC-w4jC-DvwqiOtPxGfDA"
-           data-callback="onCaptchaSuccess"
-           data-error-callback="onCaptchaError"
-           data-expired-callback="onCaptchaExpired"
-           data-theme="dark"></div>
-      <p class="contact-hint">Verificación de seguridad · reCAPTCHA activo</p>
-    </div>
-
-    <!-- MEJORA 2C — Botón gated -->
-    <button class="btn btn-gold is-locked" data-captcha-gated onclick="openRoncaccio()">
+    <button class="btn btn-gold" onclick="openRoncaccio()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
       Cotizar mi caja ahora
     </button>
   </div>
 </section>
 
-<!-- MEJORA 1G — aria-label en <footer> -->
-<footer class="footer" aria-label="Pie de página Halat Hernández">
+<footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <img src="images/logo-solo-removebg.png" alt="Halat Hernández — chocolatería de autora" loading="lazy" onerror="this.style.display='none';">
-      <p>Bombones de autora hechos a mano. Cacao fino, frutas naturales, frutos secos y sales marinas seleccionados con rigor.</p>
+      <img src="images/logo-solo-removebg.png" alt="Halat Hernández" onerror="this.style.display='none';">
+      <p>Bombones de autor hechos a mano. Cacao fino, frutas naturales, frutos secos y sales marinas seleccionados con rigor.</p>
     </div>
     <div class="footer-col">
       <h4>Explorar</h4>
@@ -1488,24 +1373,22 @@ section { padding: 110px 24px; }
     </div>
     <div class="footer-col">
       <h4>Contacto</h4>
-      <!-- MEJORA 2C — Enlace WhatsApp gated -->
-      <a href="#" data-wa-number="NTczMjA4MjA5MzY5" class="is-locked" data-captcha-gated rel="noopener noreferrer">+57 320 820 9369</a>
-      <a href="https://instagram.com/halat.hernandez" target="_blank" rel="noopener noreferrer">@halat.hernandez</a>
+      <a href="#" data-wa-number="NTczMjA4MjA5MzY5" rel="noopener">+57 320 820 9369</a>
+      <a href="https://instagram.com/halat.hernandez" target="_blank" rel="noopener">@halat.hernandez</a>
       <p>Bogotá · Colombia</p>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Halat Hernández · Chocolates de Autora</span>
+    <span>© 2026 Halat Hernández · Chocolates de Autor</span>
     <span style="font-style: italic;">Hecho a mano. Hecho para ti.</span>
   </div>
 </footer>
 
-<!-- MEJORA 2C — Botón flotante WhatsApp gated -->
-<a href="#" data-wa-number="NTczMjA4MjA5MzY5" class="wa-float is-locked" data-captcha-gated aria-label="Contactar por WhatsApp" rel="noopener noreferrer">
+<a href="#" data-wa-number="NTczMjA4MjA5MzY5" class="wa-float" aria-label="Contactar por WhatsApp" rel="noopener">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<div class="ron-launcher" onclick="toggleRoncaccio()" role="button" tabindex="0" aria-label="Abrir asesor Roncaccio">
+<div class="ron-launcher" onclick="toggleRoncaccio()" role="button" aria-label="Abrir asesor Roncaccio">
   <div class="pulse"></div>
   <span>R</span>
   <span class="badge" id="ronBadge">1</span>
@@ -1547,8 +1430,8 @@ section { padding: 110px 24px; }
   <div class="ron-quick" id="ronQuick"></div>
 
   <div class="ron-input hidden" id="ronInputWrap">
-    <input type="text" id="ronInput" placeholder="Escribe tu respuesta..." autocomplete="off" maxlength="200" aria-label="Mensaje para Roncaccio">
-    <button class="send" onclick="sendRonc()" aria-label="Enviar mensaje">
+    <input type="text" id="ronInput" placeholder="Escribe tu respuesta..." autocomplete="off" maxlength="200">
+    <button class="send" onclick="sendRonc()" aria-label="Enviar">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
     </button>
   </div>
@@ -1583,6 +1466,7 @@ const FLAVORS = [
   { id: 'baileys',      name: 'Baileys',               short: 'Baileys' }
 ];
 
+/* Mapa de progreso: qué % de la barra mostrar según la etapa */
 const STAGE_PROGRESS = {
   'welcome':        5,
   'order-type':     15,
@@ -1730,6 +1614,9 @@ const $win = $('ronWindow'), $badge = $('ronBadge');
 const $input = $('ronInput'), $inputWrap = $('ronInputWrap');
 const $flavorPanel = $('ronFlavorPanel');
 
+/* ═══════════════════════════════════════════════════════════════
+   UI HELPERS
+   ═══════════════════════════════════════════════════════════════ */
 function updateProgress(stage) {
   const pct = STAGE_PROGRESS[stage] || 5;
   const $fill = $('ronProgressFill');
@@ -1756,12 +1643,15 @@ function botSay(html, delay, extraClass) {
   setTimeout(() => { hideTyping(); addMsg(html, 'bot', extraClass); }, delay || 450);
 }
 
+/* Renderiza botones rápidos enriquecidos con iconos y subtítulos */
 function renderQuick(buttons) {
   $quick.innerHTML = '';
   buttons.forEach(b => {
     const el = document.createElement(b.href ? 'a' : 'button');
     el.className = 'quick-btn' + (b.className ? ' ' + b.className : '');
+    
     if (b.icon || b.sub) {
+      // Botón enriquecido con icono + contenido + flecha
       el.innerHTML = `
         ${b.icon ? `<span class="qb-icon">${b.icon}</span>` : ''}
         <span class="qb-content">
@@ -1773,6 +1663,7 @@ function renderQuick(buttons) {
     } else {
       el.textContent = b.label;
     }
+    
     if (b.href) { el.href = b.href; el.target = '_blank'; el.rel = 'noopener noreferrer'; }
     else { el.onclick = b.onClick; }
     $quick.appendChild(el);
@@ -1839,6 +1730,7 @@ function startWelcomeFlow() {
     return;
   }
 
+  // Bienvenida enriquecida
   setTimeout(() => {
     const welcomeHTML = `
       <div class="welcome-hero">
@@ -1855,8 +1747,20 @@ function startWelcomeFlow() {
     addMsg(welcomeHTML, 'bot');
     setTimeout(() => {
       renderQuick([
-        { label: 'Comenzar mi pedido', sub: 'Te guío paso a paso', icon: '✦', className: 'primary', onClick: () => promptOrderType() },
-        { label: 'Ver presentaciones', sub: 'Colecciones disponibles', icon: '◈', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
+        { 
+          label: 'Comenzar mi pedido', 
+          sub: 'Te guío paso a paso',
+          icon: '✦', 
+          className: 'primary', 
+          onClick: () => promptOrderType() 
+        },
+        { 
+          label: 'Ver presentaciones', 
+          sub: 'Colecciones disponibles',
+          icon: '◈', 
+          className: 'ghost', 
+          onClick: () => { closeRoncaccio(); goTo('presentaciones'); } 
+        }
       ]);
     }, 900);
   }, 400);
@@ -1869,8 +1773,20 @@ function promptOrderType() {
   botSay('Primero, ¿cómo prefieres recibirlo?', 400);
   setTimeout(() => {
     renderQuick([
-      { label: 'Envío a domicilio', sub: 'Bogotá y alrededores', icon: '🛵', className: 'primary', onClick: () => setOrderType('domicilio') },
-      { label: 'Entrega en feria', sub: 'Coordinamos con el evento', icon: '🎪', className: 'primary', onClick: () => setOrderType('feria') }
+      { 
+        label: 'Envío a domicilio', 
+        sub: 'Bogotá y alrededores',
+        icon: '🛵', 
+        className: 'primary', 
+        onClick: () => setOrderType('domicilio') 
+      },
+      { 
+        label: 'Entrega en feria', 
+        sub: 'Coordinamos con el evento',
+        icon: '🎪', 
+        className: 'primary', 
+        onClick: () => setOrderType('feria') 
+      }
     ]);
   }, 600);
 }
@@ -1910,10 +1826,34 @@ function promptBoxSelect() {
   botSay('¿Qué caja te gustaría agregar?', 400);
   setTimeout(() => {
     renderQuick([
-      { label: 'Petit Coffret', sub: '4 bombones · 1 sabor', icon: '◆', className: 'primary', onClick: () => selectBox('petit') },
-      { label: 'Coffret Signature', sub: '12 bombones · hasta 4 sabores', icon: '◆◆', className: 'primary', onClick: () => selectBox('coffret') },
-      { label: 'Grand Coffret', sub: '24 bombones · hasta 6 sabores', icon: '◆◆◆', className: 'primary', onClick: () => selectBox('grand') },
-      { label: 'Ver todas las presentaciones', sub: 'Detalles y precios', icon: '→', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
+      { 
+        label: 'Petit Coffret', 
+        sub: '4 bombones · 1 sabor',
+        icon: '◆', 
+        className: 'primary', 
+        onClick: () => selectBox('petit') 
+      },
+      { 
+        label: 'Coffret Signature', 
+        sub: '12 bombones · hasta 4 sabores',
+        icon: '◆◆', 
+        className: 'primary', 
+        onClick: () => selectBox('coffret') 
+      },
+      { 
+        label: 'Grand Coffret', 
+        sub: '24 bombones · hasta 6 sabores',
+        icon: '◆◆◆', 
+        className: 'primary', 
+        onClick: () => selectBox('grand') 
+      },
+      { 
+        label: 'Ver todas las presentaciones', 
+        sub: 'Detalles y precios',
+        icon: '→', 
+        className: 'ghost', 
+        onClick: () => { closeRoncaccio(); goTo('presentaciones'); } 
+      }
     ]);
   }, 600);
 }
@@ -1932,11 +1872,26 @@ function promptFlavorMode() {
   R.stage = 'flavor-mode';
   save();
   updateProgress('flavor-mode');
-  botSay(`Para tu <strong>${BOX_TYPES[R.boxes[R.currentIndex].type].name}</strong>, ¿cómo prefieres los sabores?`, 400);
+  botSay(
+    `Para tu <strong>${BOX_TYPES[R.boxes[R.currentIndex].type].name}</strong>, ¿cómo prefieres los sabores?`,
+    400
+  );
   setTimeout(() => {
     renderQuick([
-      { label: 'Sorpresa de la casa', sub: 'Selección curada por nosotros · Sin costo', icon: '✦', className: 'primary', onClick: () => setFlavorMode('sorpresa') },
-      { label: 'Elegir mis sabores', sub: 'Tú decides cada perfil · Costo adicional', icon: '✎', className: 'primary', onClick: () => setFlavorMode('personalizado') }
+      { 
+        label: 'Sorpresa de la casa', 
+        sub: 'Selección curada por nosotros · Sin costo',
+        icon: '✦', 
+        className: 'primary', 
+        onClick: () => setFlavorMode('sorpresa') 
+      },
+      { 
+        label: 'Elegir mis sabores', 
+        sub: 'Tú decides cada perfil · Costo adicional',
+        icon: '✎', 
+        className: 'primary', 
+        onClick: () => setFlavorMode('personalizado') 
+      }
     ]);
   }, 700);
 }
@@ -1960,7 +1915,7 @@ function setFlavorMode(mode) {
     });
     save();
     botSay(
-      `<strong>✦ Selección de autora</strong><br><br>` +
+      `<strong>✦ Selección de autor</strong><br><br>` +
       `Nuestros maestros han elegido estos sabores para ti:<br><br>` +
       `${flavorsPicked.map(f => `· ${f.name}`).join('<br>')}<br><br>` +
       `Surtido equilibrado.`,
@@ -2135,16 +2090,36 @@ function cancelCurrentBox() {
 function promptNextAction() {
   const minCheck = checkDomicilioMinimum();
   const btns = [];
-  btns.push({ label: 'Agregar otra caja', sub: 'Aún puedes sumar más piezas', icon: '+', className: 'primary', onClick: () => { R.currentIndex = -1; promptBoxSelect(); } });
+  btns.push({ 
+    label: 'Agregar otra caja', 
+    sub: 'Aún puedes sumar más piezas',
+    icon: '+', 
+    className: 'primary', 
+    onClick: () => { R.currentIndex = -1; promptBoxSelect(); } 
+  });
 
   if (!minCheck.ok) {
-    btns.push({ label: 'Necesitas más cajas', sub: 'Toca para ver el mínimo', icon: '⚠', className: 'ghost', onClick: () => { botSay(minCheck.msg, 300, 'notice'); } });
+    btns.push({ 
+      label: 'Necesitas más cajas', 
+      sub: 'Toca para ver el mínimo',
+      icon: '⚠', 
+      className: 'ghost', 
+      onClick: () => {
+        botSay(minCheck.msg, 300, 'notice');
+      }
+    });
   } else {
-    btns.push({ label: 'Continuar con mis datos', sub: 'Siguiente paso', icon: '→', className: 'primary', onClick: () => {
-      const check = checkDomicilioMinimum();
-      if (!check.ok) { botSay(check.msg, 300, 'notice'); return; }
-      askSpecialRequest();
-    }});
+    btns.push({ 
+      label: 'Continuar con mis datos', 
+      sub: 'Siguiente paso',
+      icon: '→', 
+      className: 'primary', 
+      onClick: () => {
+        const check = checkDomicilioMinimum();
+        if (!check.ok) { botSay(check.msg, 300, 'notice'); return; }
+        askSpecialRequest();
+      }
+    });
   }
   renderQuick(btns);
 }
@@ -2167,12 +2142,18 @@ function askSpecialRequest() {
   );
   setTimeout(() => {
     renderQuick([
-      { label: 'Sin solicitud especial', sub: 'Continuar sin agregar nota', icon: '→', className: 'ghost', onClick: () => {
-        R.contact.special = '';
-        showInput(false);
-        save();
-        startContact();
-      }}
+      { 
+        label: 'Sin solicitud especial', 
+        sub: 'Continuar sin agregar nota',
+        icon: '→', 
+        className: 'ghost', 
+        onClick: () => {
+          R.contact.special = '';
+          showInput(false);
+          save();
+          startContact();
+        }
+      }
     ]);
   }, 700);
 }
@@ -2225,33 +2206,61 @@ function saveContactField(value) {
   setTimeout(() => askContactField(), 500);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   RESUMEN VISUAL CON TARJETAS
+   ═══════════════════════════════════════════════════════════════ */
 function showSummary() {
   R.stage = 'summary';
   save();
   updateProgress('summary');
 
+  // Banner de tipo de pedido
   const tipoLabel = R.orderType === 'feria' ? '🎪 Entrega en feria' : '🛵 Envío a domicilio';
-  const tipoCard = `
+  let tipoCard = `
     <div class="summary-block">
-      <div class="sb-header"><span class="sb-title">Tipo de pedido</span></div>
-      <div class="sb-row"><span class="sb-label">Modalidad</span><span class="sb-value">${tipoLabel}</span></div>
+      <div class="sb-header">
+        <span class="sb-title">Tipo de pedido</span>
+      </div>
+      <div class="sb-row">
+        <span class="sb-label">Modalidad</span>
+        <span class="sb-value">${tipoLabel}</span>
+      </div>
       ${R.orderType === 'feria' ? `
-        <div class="sb-row"><span class="sb-label">Nota</span><span class="sb-value" style="font-size:0.72rem;color:rgba(245,239,224,0.6);font-weight:300;">Limitado a asistencia a ferias. Se validará por WhatsApp.</span></div>
+        <div class="sb-row">
+          <span class="sb-label">Nota</span>
+          <span class="sb-value" style="font-size:0.72rem;color:rgba(245,239,224,0.6);font-weight:300;">Limitado a asistencia a ferias. Se validará por WhatsApp.</span>
+        </div>
       ` : ''}
     </div>
   `;
   addMsg(tipoCard, 'bot');
 
+  // Tarjeta por cada caja
   R.boxes.forEach((box, i) => {
     const bt = BOX_TYPES[box.type];
     const flavorRows = FLAVORS
       .filter(f => (box.flavors[f.id] || 0) > 0)
-      .map(f => `<div class="sb-row"><span class="sb-label">${f.short}</span><span class="sb-value">× ${box.flavors[f.id]}</span></div>`).join('');
+      .map(f => `
+        <div class="sb-row">
+          <span class="sb-label">${f.short}</span>
+          <span class="sb-value">× ${box.flavors[f.id]}</span>
+        </div>
+      `).join('');
+    
     const card = `
       <div class="summary-block">
-        <div class="sb-header"><span class="sb-title">Caja ${i + 1}</span><span class="sb-badge">${box.flavorMode === 'sorpresa' ? 'Sorpresa' : 'Personalizada'}</span></div>
-        <div class="sb-row"><span class="sb-label">Colección</span><span class="sb-value">${bt.name}</span></div>
-        <div class="sb-row"><span class="sb-label">Unidades</span><span class="sb-value">${bt.units} bombones</span></div>
+        <div class="sb-header">
+          <span class="sb-title">Caja ${i + 1}</span>
+          <span class="sb-badge">${box.flavorMode === 'sorpresa' ? 'Sorpresa' : 'Personalizada'}</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-label">Colección</span>
+          <span class="sb-value">${bt.name}</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-label">Unidades</span>
+          <span class="sb-value">${bt.units} bombones</span>
+        </div>
         ${flavorRows}
         ${box.flavorMode === 'personalizado' ? `
           <div class="sb-row" style="border-top:1px solid rgba(201,169,97,0.15);margin-top:6px;padding-top:8px;">
@@ -2264,10 +2273,13 @@ function showSummary() {
     addMsg(card, 'bot');
   });
 
+  // Tarjeta de solicitud especial si existe
   if (R.contact.special) {
     const specialCard = `
       <div class="summary-block">
-        <div class="sb-header"><span class="sb-title">Solicitud especial</span></div>
+        <div class="sb-header">
+          <span class="sb-title">Solicitud especial</span>
+        </div>
         <div style="font-size:0.82rem;color:rgba(245,239,224,0.7);font-weight:300;font-style:italic;line-height:1.55;">
           "${escapeHtml(R.contact.special)}"
         </div>
@@ -2276,27 +2288,57 @@ function showSummary() {
     addMsg(specialCard, 'bot');
   }
 
+  // Tarjeta de contacto
   let contactRows = `
-    <div class="sb-row"><span class="sb-label">📛 Nombre</span><span class="sb-value">${escapeHtml(R.contact.nombre)}</span></div>
-    <div class="sb-row"><span class="sb-label">📱 WhatsApp</span><span class="sb-value">${formatPhone(R.contact.telefono)}</span></div>
+    <div class="sb-row">
+      <span class="sb-label">📛 Nombre</span>
+      <span class="sb-value">${escapeHtml(R.contact.nombre)}</span>
+    </div>
+    <div class="sb-row">
+      <span class="sb-label">📱 WhatsApp</span>
+      <span class="sb-value">${formatPhone(R.contact.telefono)}</span>
+    </div>
   `;
   if (R.orderType === 'domicilio') {
     contactRows += `
-      <div class="sb-row"><span class="sb-label">📍 Ciudad</span><span class="sb-value">${escapeHtml(R.contact.ciudad)}</span></div>
-      <div class="sb-row"><span class="sb-label">🏠 Dirección</span><span class="sb-value">${escapeHtml(R.contact.direccion)}</span></div>
+      <div class="sb-row">
+        <span class="sb-label">📍 Ciudad</span>
+        <span class="sb-value">${escapeHtml(R.contact.ciudad)}</span>
+      </div>
+      <div class="sb-row">
+        <span class="sb-label">🏠 Dirección</span>
+        <span class="sb-value">${escapeHtml(R.contact.direccion)}</span>
+      </div>
     `;
   }
   if (R.orderType === 'feria') {
-    contactRows += `<div class="sb-row"><span class="sb-label">🎪 Feria</span><span class="sb-value">${escapeHtml(R.contact.feria)}</span></div>`;
+    contactRows += `
+      <div class="sb-row">
+        <span class="sb-label">🎪 Feria</span>
+        <span class="sb-value">${escapeHtml(R.contact.feria)}</span>
+      </div>
+    `;
   }
-  contactRows += `<div class="sb-row"><span class="sb-label">📅 Fecha</span><span class="sb-value">${escapeHtml(R.contact.fecha)}</span></div>`;
+  contactRows += `
+    <div class="sb-row">
+      <span class="sb-label">📅 Fecha</span>
+      <span class="sb-value">${escapeHtml(R.contact.fecha)}</span>
+    </div>
+  `;
   if (R.contact.ocasion && !/^sin ocasión$/i.test(R.contact.ocasion)) {
-    contactRows += `<div class="sb-row"><span class="sb-label">🎉 Ocasión</span><span class="sb-value">${escapeHtml(R.contact.ocasion)}</span></div>`;
+    contactRows += `
+      <div class="sb-row">
+        <span class="sb-label">🎉 Ocasión</span>
+        <span class="sb-value">${escapeHtml(R.contact.ocasion)}</span>
+      </div>
+    `;
   }
 
   const contactCard = `
     <div class="summary-block">
-      <div class="sb-header"><span class="sb-title">Datos de contacto</span></div>
+      <div class="sb-header">
+        <span class="sb-title">Datos de contacto</span>
+      </div>
       ${contactRows}
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(201,169,97,0.15);font-size:0.7rem;color:rgba(245,239,224,0.45);font-weight:300;line-height:1.5;">
         Tus datos serán tratados con confidencialidad según nuestra política de privacidad.
@@ -2305,10 +2347,15 @@ function showSummary() {
   `;
   addMsg(contactCard, 'bot');
 
+  // Recordatorio 24h
   setTimeout(() => {
-    botSay('<strong>📦 Recordatorio:</strong> preparación con mínimo <strong>24 horas de anticipación</strong>. Entregas urgentes tienen costo adicional.', 500, 'notice');
+    botSay(
+      '<strong>📦 Recordatorio:</strong> preparación con mínimo <strong>24 horas de anticipación</strong>. Entregas urgentes tienen costo adicional.',
+      500, 'notice'
+    );
   }, 1400);
 
+  // Botones de acción final
   setTimeout(() => {
     botSay('¿Envío tu pedido al equipo por WhatsApp?', 500);
     setTimeout(() => renderWhatsAppButton(), 700);
@@ -2318,8 +2365,20 @@ function showSummary() {
 function renderWhatsAppButton() {
   const url = buildWhatsAppUrl();
   renderQuick([
-    { label: 'Enviar por WhatsApp', sub: 'Coordina con un asesor humano', icon: '✓', className: 'wa', href: url },
-    { label: 'Editar respuestas', sub: 'Ajustar cajas o datos', icon: '✎', className: 'ghost', onClick: openEditMenu }
+    { 
+      label: 'Enviar por WhatsApp', 
+      sub: 'Coordina con un asesor humano',
+      icon: '✓', 
+      className: 'wa', 
+      href: url 
+    },
+    { 
+      label: 'Editar respuestas', 
+      sub: 'Ajustar cajas o datos',
+      icon: '✎', 
+      className: 'ghost', 
+      onClick: openEditMenu 
+    }
   ]);
 }
 
@@ -2333,7 +2392,9 @@ function buildWhatsAppUrl() {
     body += `Modo de sabores: ${box.flavorMode === 'sorpresa' ? 'Sorpresa de la casa' : 'Personalizado (+costo adicional)'}\n`;
     FLAVORS
       .filter(f => (box.flavors[f.id] || 0) > 0)
-      .forEach(f => { body += `  - ${box.flavors[f.id]} × ${f.short}\n`; });
+      .forEach(f => {
+        body += `  - ${box.flavors[f.id]} × ${f.short}\n`;
+      });
     body += `\n`;
   });
 
@@ -2374,10 +2435,28 @@ function openEditMenu() {
   setTimeout(() => {
     const opts = [];
     if (R.boxes.length > 0) {
-      opts.push({ label: 'Editar última caja', sub: 'Cambiar sabores o unidades', icon: '✎', className: 'primary', onClick: editLastBox });
+      opts.push({ 
+        label: 'Editar última caja', 
+        sub: 'Cambiar sabores o unidades',
+        icon: '✎', 
+        className: 'primary', 
+        onClick: editLastBox 
+      });
     }
-    opts.push({ label: 'Editar mis datos', sub: 'Nombre, dirección o fecha', icon: '✎', className: 'primary', onClick: editContact });
-    opts.push({ label: 'Empezar de cero', sub: 'Reiniciar cotización', icon: '↺', className: 'ghost', onClick: () => resetOrder(true) });
+    opts.push({ 
+      label: 'Editar mis datos', 
+      sub: 'Nombre, dirección o fecha',
+      icon: '✎', 
+      className: 'primary', 
+      onClick: editContact 
+    });
+    opts.push({ 
+      label: 'Empezar de cero', 
+      sub: 'Reiniciar cotización',
+      icon: '↺', 
+      className: 'ghost', 
+      onClick: () => resetOrder(true) 
+    });
     renderQuick(opts);
   }, 600);
 }
@@ -2479,78 +2558,6 @@ window.addEventListener('load', () => {
     if (ok) console.log('✓ Verificación humana lista');
   });
 });
-
-/* ═══════════════════════════════════════════════════════════════
-   MEJORA 2D — reCAPTCHA v2 · Gating + verificación
-   ═══════════════════════════════════════════════════════════════ */
-const RECAPTCHA_V2_SITE_KEY = '6LelJOctAAAAAAYqhqhKC-w4jC-DvwqiOtPxGfDA';
-
-function isLocalEnvironment() {
-  const h = window.location.hostname;
-  return window.location.protocol === 'file:' || h === 'localhost' || h === '127.0.0.1';
-}
-
-function lockGatedButtons() {
-  document.querySelectorAll('[data-captcha-gated]').forEach(el => el.classList.add('is-locked'));
-}
-function unlockGatedButtons() {
-  document.querySelectorAll('[data-captcha-gated]').forEach(el => el.classList.remove('is-locked'));
-}
-
-async function onCaptchaSuccess(token) {
-  if (!token) return;
-  if (isLocalEnvironment()) {
-    unlockGatedButtons();
-    return;
-  }
-  try {
-    const response = await fetch('/api/verify-recaptcha', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token })
-    });
-    const result = await response.json();
-    if (result && result.success) {
-      unlockGatedButtons();
-      try { sessionStorage.removeItem('recaptcha-v2-retry'); } catch(e) {}
-    } else {
-      console.warn('reCAPTCHA v2: verificación fallida en el servidor.');
-    }
-  } catch (err) {
-    console.warn('reCAPTCHA v2: no se pudo verificar con /api/verify-recaptcha.', err);
-  }
-}
-
-function onCaptchaError() {
-  console.error('reCAPTCHA v2: error al cargar el widget.');
-}
-function onCaptchaExpired() {
-  lockGatedButtons();
-  console.warn('reCAPTCHA v2: token expirado, vuelve a verificarte.');
-}
-
-window.onCaptchaSuccess = onCaptchaSuccess;
-window.onCaptchaError = onCaptchaError;
-window.onCaptchaExpired = onCaptchaExpired;
-
-/* Watchdog — recarga si el widget no renderiza en 10s (máx. 2 intentos) */
-(function recaptchaWatchdog() {
-  if (isLocalEnvironment()) return;
-  setTimeout(() => {
-    const widget = document.querySelector('.g-recaptcha');
-    if (!widget) return;
-    if (widget.querySelector('iframe')) return;
-    let retries = 0;
-    try { retries = parseInt(sessionStorage.getItem('recaptcha-v2-retry') || '0', 10) || 0; } catch(e) {}
-    if (retries >= 2) {
-      try { sessionStorage.removeItem('recaptcha-v2-retry'); } catch(e) {}
-      console.error('reCAPTCHA v2: no se pudo cargar tras 2 intentos.');
-      return;
-    }
-    try { sessionStorage.setItem('recaptcha-v2-retry', String(retries + 1)); } catch(e) {}
-    location.reload();
-  }, 10000);
-})();
 </script>
 
 </body>
