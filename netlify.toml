@@ -1,25 +1,11 @@
-# ═══════════════════════════════════════════════════════════════
-#  Netlify Functions
-# ═══════════════════════════════════════════════════════════════
 [functions]
   directory = "netlify/functions"
 
-# ═══════════════════════════════════════════════════════════════
-#  Redirects — expone las funciones en /api/*
-# ═══════════════════════════════════════════════════════════════
 [[redirects]]
   from = "/api/verify-recaptcha"
   to = "/.netlify/functions/verify-recaptcha"
   status = 200
 
-[[redirects]]
-  from = "/api/verify-captcha"
-  to = "/.netlify/functions/verify-captcha"
-  status = 200
-
-# ═══════════════════════════════════════════════════════════════
-#  Cabeceras de seguridad (sin cambios)
-# ═══════════════════════════════════════════════════════════════
 [[headers]]
   for = "/*"
   [headers.values]

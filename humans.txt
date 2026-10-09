@@ -1,0 +1,10 @@
+/* TEAM */
+Autora: Halat Hernández
+Contacto: +57 320 820 9369
+Instagram: @halat.hernandez
+Ubicación: Bogotá, Colombia
+
+/* SITE */
+Última actualización: 2026-10-09
+Idioma: Español (Colombia)
+Stack: HTML5, CSS3, JavaScript vanilla, Netlify Functions
