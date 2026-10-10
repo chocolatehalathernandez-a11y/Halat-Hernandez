@@ -1335,15 +1335,33 @@ section { padding: 110px 24px; }
   .wa-float svg { width: 22px; height: 22px; }
   .ron-launcher { bottom: 6rem; left: calc(50% + 6px); right: auto; width: 50px; height: 50px; font-size: 1.15rem; }
   .ron-window {
-    top: 0; bottom: 0; left: 0; right: 0;
+    top: 0;
+    left: 0; right: 0;
     width: 100%;
     max-width: 100%;
     height: 100vh;
     height: 100dvh;
+    bottom: auto; /* ← CAMBIO: no usar bottom */
     border-radius: 0;
     border-right: none;
     transform: none;
+    will-change: height, transform; /* ← performance */
+    }
+
+/* NUEVO: cuando el teclado está abierto, permitimos que el chat
+se contraiga y el input siempre visible */
+  .ron-window.keyboard-open {
+    height: auto;
+    bottom: 0;
   }
+
+/* NUEVO: el input siempre por encima del teclado */
+  .ron-window.keyboard-open .ron-input {
+    position: sticky;
+    bottom: 0;
+    }
+    /* ... resto del media query igual ... */
+    }
   @keyframes ronOpen {
     from { opacity: 0; transform: translateY(24px) scale(0.98); }
     to { opacity: 1; transform: translateY(0) scale(1); }
@@ -2006,9 +2024,19 @@ function showInput(show, placeholder) {
     if (placeholder) $input.placeholder = placeholder;
     setTimeout(() => {
       try { $input.focus({ preventScroll: true }); } catch(e) { $input.focus(); }
-      if ($inputWrap.scrollIntoView) {
-        $inputWrap.scrollIntoView({ behavior: 'smooth', block: 'end' });
-      }
+
+      // NUEVO: asegurar que el input y el último mensaje queden visibles
+      // Se hace en dos tiempos para esperar a que el teclado termine de abrirse
+      setTimeout(() => {
+        try {
+          $msgs.scrollTo({
+            top: $msgs.scrollHeight,
+            behavior: 'smooth'
+          });
+        } catch (e) {
+          $msgs.scrollTop = $msgs.scrollHeight;
+        }
+      }, 100);
     }, 120);
   }
 }
@@ -3240,6 +3268,94 @@ window.addEventListener('beforeunload', () => {
     } catch(e) {}
   }
 });
+/* ═══════════════════════════════════════════════════════════════
+   MEJORA — Gestión del teclado virtual en móvil
+   Fix: el input y el último mensaje siempre visibles al escribir
+   ═══════════════════════════════════════════════════════════════ */
+(function setupMobileKeyboard() {
+  if (!window.visualViewport) return;
+
+  const vv = window.visualViewport;
+  let lastKeyboardHeight = 0;
+  let rafId = null;
+
+  const scrollToBottom = (smooth = false) => {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      try {
+        $msgs.scrollTo({
+          top: $msgs.scrollHeight,
+          behavior: smooth ? 'smooth' : 'auto'
+        });
+      } catch (e) {
+        $msgs.scrollTop = $msgs.scrollHeight;
+      }
+    });
+  };
+
+  const adjustForKeyboard = () => {
+    // Solo si Roncaccio está abierto
+    if (!$win.classList.contains('open')) {
+      $win.classList.remove('keyboard-open');
+      $win.style.height = '';
+      $win.style.transform = '';
+      lastKeyboardHeight = 0;
+      return;
+    }
+
+    // Altura del teclado = diferencia entre viewport "grande" y "pequeño"
+    const windowHeight = window.innerHeight;
+    const viewportHeight = vv.height;
+    const keyboardHeight = Math.max(0, windowHeight - viewportHeight - vv.offsetTop);
+
+    // Umbral: si el "teclado" mide más de 100px, asumimos que está abierto
+    const keyboardOpen = keyboardHeight > 100;
+
+    if (keyboardOpen) {
+      if (!lastKeyboardHeight || Math.abs(keyboardHeight - lastKeyboardHeight) > 20) {
+        // Ajustar la ventana del chat para que el input quede encima del teclado
+        $win.classList.add('keyboard-open');
+        $win.style.height = `${viewportHeight}px`;
+        $win.style.transform = `translateY(${vv.offsetTop}px)`;
+        lastKeyboardHeight = keyboardHeight;
+
+        // Scroll al final para ver el input y el último mensaje
+        scrollToBottom(true);
+      }
+    } else {
+      // Teclado cerrado: restaurar
+      if (lastKeyboardHeight !== 0) {
+        $win.classList.remove('keyboard-open');
+        $win.style.height = '';
+        $win.style.transform = '';
+        lastKeyboardHeight = 0;
+        scrollToBottom(false);
+      }
+    }
+  };
+
+  vv.addEventListener('resize', adjustForKeyboard);
+  vv.addEventListener('scroll', adjustForKeyboard);
+
+  // Al enfocar el input: scroll al final
+  if ($input) {
+    $input.addEventListener('focus', () => {
+      setTimeout(() => scrollToBottom(true), 250);
+    });
+  }
+
+  // Al escribir: asegurar que el input siempre visible
+  if ($input) {
+    $input.addEventListener('input', () => {
+      // Solo forzamos si el usuario está escribiendo
+      const rect = $inputWrap.getBoundingClientRect();
+      const vvBottom = vv.height + vv.offsetTop;
+      if (rect.bottom > vvBottom - 10) {
+        scrollToBottom(false);
+      }
+    });
+  }
+})();
 </script>
 
 </body>
