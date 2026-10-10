@@ -1,11 +1,25 @@
+# ═══════════════════════════════════════════════════════════════
+#  Functions
+# ═══════════════════════════════════════════════════════════════
 [functions]
   directory = "netlify/functions"
 
+# ═══════════════════════════════════════════════════════════════
+#  Redirects — expone las funciones en /api/*
+# ═══════════════════════════════════════════════════════════════
 [[redirects]]
   from = "/api/verify-recaptcha"
   to = "/.netlify/functions/verify-recaptcha"
   status = 200
 
+[[redirects]]
+  from = "/api/instagram-webhook"          # ← NUEVO
+  to = "/.netlify/functions/instagram-webhook"  # ← NUEVO
+  status = 200                              # ← NUEVO
+
+# ═══════════════════════════════════════════════════════════════
+#  Headers de seguridad
+# ═══════════════════════════════════════════════════════════════
 [[headers]]
   for = "/*"
   [headers.values]
