@@ -6,13 +6,12 @@
 const { createClient } = require('@supabase/supabase-js');
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY; const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 let supabaseClient = null;
 function getSupabase() {
   if (supabaseClient) return supabaseClient;
-  supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY, {
     auth: { persistSession: false, autoRefreshToken: false }
   });
   return supabaseClient;
@@ -37,7 +36,7 @@ exports.handler = async (event) => {
 
     let query = db
       .from('participaciones')
-      .select('id, coupon_code, discount_percent, instagram_user_id, media_id, created_at, expires_at, redeemed, redeemed_at, comment_text')
+      .select('id, coupon_code, discount_percent, instagram_user_id, media_id, created_at, expires_at, redeemed, redeemed_at, comment_text, validation_count, last_validated_at, is_flagged, flag_reason, order_total, discount_applied_value')
       .order('created_at', { ascending: false })
       .limit(200);
 

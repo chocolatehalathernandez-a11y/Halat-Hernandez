@@ -2,5 +2,8 @@
   "name": "halat-hernandez-landing",
   "version": "1.0.0",
   "private": true,
-  "description": "Halat Hernandez landing page"
+  "description": "Halat Hernandez landing page",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.3"
+  }
 }
