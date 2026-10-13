@@ -170,11 +170,30 @@ async function checkUserIsFollower(userId) {
 let supabaseClient = null;
 function getSupabase() {
   if (supabaseClient) return supabaseClient;
+
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     throw new Error('Faltan SUPABASE_URL o SUPABASE_KEY');
   }
+
+  /* ─── DEBUG: log de config ─── */
+  console.log('[DEBUG-SUPABASE] Config:', {
+    url: SUPABASE_URL,
+    url_length: SUPABASE_URL.length,
+    url_ends_with_slash: SUPABASE_URL.endsWith('/'),
+    url_has_rest: SUPABASE_URL.includes('/rest'),
+    key_length: SUPABASE_KEY.length,
+    key_start: SUPABASE_KEY.substring(0, 20),
+    key_has_spaces: /\s/.test(SUPABASE_KEY)
+  });
+
   supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY, {
-    auth: { persistSession: false, autoRefreshToken: false }
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      fetch: (url, options) => {
+        console.log('[DEBUG-SUPABASE] Fetch URL:', url);
+        return fetch(url, options);
+      }
+    }
   });
   return supabaseClient;
 }
