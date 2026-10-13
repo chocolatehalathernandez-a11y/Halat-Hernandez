@@ -1938,7 +1938,8 @@ const R = {
   boxes: [],
   currentIndex: -1,
   contact: { nombre: '', telefono: '', ciudad: '', direccion: '', fecha: '', ocasion: '', special: '', feria: '' },
-  contactStep: 0
+  contactStep: 0,
+  coupon: null   // ← NUEVO
 };
 
 const CONTACT_FIELDS_DOMICILIO = [
@@ -2374,10 +2375,10 @@ function startWelcomeFlow() {
       `, 'bot');
       setTimeout(() => {
         renderQuick([
-          { label: 'Repetir mi última caja', sub: lastOrder.totalBoxes + ' caja' + (lastOrder.totalBoxes > 1 ? 's' : ''), icon: '↺', className: 'primary', onClick: () => repeatLastOrder(lastOrder) },
-          { label: 'Crear algo nuevo', sub: 'Nueva selección', icon: '✦', className: 'primary', onClick: () => promptOrderType() },
+          { label: 'Comenzar mi pedido', sub: 'Te guío paso a paso', icon: '✦', className: 'primary', onClick: () => promptOrderType() },
+          { label: 'Aplicar mi cupón', sub: 'Ganado en Instagram', icon: '🎁', className: 'primary', onClick: () => askCouponCode() },
           { label: 'Ver presentaciones', sub: 'Colecciones disponibles', icon: '◈', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
-        ]);
+          ]);
       }, 900);
     }, 400);
     return;
@@ -2882,7 +2883,18 @@ function showSummary() {
     botSay('¿Envío tu pedido al equipo por WhatsApp?', 500);
     setTimeout(() => renderWhatsAppButton(), 700);
   }, 2400);
-}
+if (R.coupon) {
+  const couponCard = `
+    <div class="coupon-banner">
+      <span class="cb-icon">🎁</span>
+      <div class="cb-title">Cupón aplicado</div>
+      <div class="cb-code">${escapeHtml(R.coupon.code)}</div>
+      <div class="cb-desc">${R.coupon.discount}% de descuento sobre el total</div>
+      <div class="cb-expire">Válido ${R.coupon.daysRemaining} días · Redimir por WhatsApp</div>
+    </div>
+  `;
+  addMsg(couponCard, 'bot');
+}}
 
 /* ═══════════════════════════════════════════════════════════════
    MEJORA — handleWhatsAppSend con confetti + sonido + historial + cupón
@@ -2923,7 +2935,7 @@ function handleWhatsAppSend() {
 }
 
 function renderWhatsAppButton() {
-  const url = buildWhatsAppUrl();
+  const url = ;
   renderQuick([
     {
       label: 'Enviar por WhatsApp',
@@ -2975,8 +2987,11 @@ function buildWhatsAppUrl() {
     body += `\n`;
   });
 
-  if (R.contact.special) {
-    body += `*Solicitud especial:* ${R.contact.special}\n\n`;
+  if (R.coupon) {
+  body += `\n*🎁 CUPÓN APLICADO:* ${R.coupon.code}\n`;
+  body += `*Descuento:* ${R.coupon.discount}% sobre el total (no incluye domicilio)\n`;
+  body += `*Redimir:* Al confirmar pago por WhatsApp\n`;
+  body += `*Nota:* Cupón no acumulable · Una sola transacción\n\n`;
   }
 
   /* MEJORA: aplicar cupón activo si existe */
@@ -3054,9 +3069,22 @@ function sendRonc() {
   const v = $input.value.trim();
   if (!v) return;
   if (!checkRateLimit()) return;
+
+  /* Permitir "saltar" en cualquier input */
+  if (/^(saltar|skip|no)$/i.test(v) && R.stage === 'coupon-code') {
+    addMsg(escapeHtml(v), 'user');
+    $input.value = '';
+    $quick.innerHTML = '';
+    showInput(false);
+    R.coupon = null;
+    promptOrderType();
+    return;
+  }
+
   addMsg(escapeHtml(v), 'user');
   $input.value = '';
   $quick.innerHTML = '';
+  if (R.stage === 'coupon-code') { handleCouponCode(v); return; }
   if (R.stage === 'special') { saveSpecial(v); return; }
   if (R.stage === 'contact') { saveContactField(v); return; }
 }
@@ -3096,7 +3124,138 @@ function toggleRoncaccio() {
   else openRoncaccio();
 }
 function closeRoncaccio() { $win.classList.remove('open'); }
+/* ═══════════════════════════════════════════════════════════════
+   CUPONES — Validación en Roncaccio
+   ═══════════════════════════════════════════════════════════════ */
 
+function askCouponCode() {
+  R.stage = 'coupon-code';
+  save();
+  function askCouponCode() {
+  R.stage = 'coupon-code';
+  save();
+
+  /* Si ya tiene un cupón, avisar */
+  if (R.coupon && R.coupon.code) {
+    botSay(
+      `<strong>⚠️ Ya tienes un cupón aplicado</strong><br><br>` +
+      `Actual: <code class="coupon-code">${escapeHtml(R.coupon.code)}</code> (${R.coupon.discount}%)<br><br>` +
+      `Si ingresas otro, reemplazará el actual.<br>` +
+      `<em>Los cupones no son acumulables.</em>`,
+      400, 'notice'
+    );
+  }
+
+  showInput(true, 'Ej: PROMO12XABC123M9Q3');
+  botSay(
+    '<strong>🎁 Aplicar cupón</strong><br><br>' +
+    'Comparte el código que recibiste por Instagram y lo valido al instante.',
+    400
+  );
+  setTimeout(() => {
+    renderQuick([
+      { label: 'No tengo cupón', sub: 'Continuar sin descuento', icon: '→', className: 'ghost', onClick: () => {
+        showInput(false);
+        R.coupon = null;
+        promptOrderType();
+      }}
+    ]);
+  }, 700);
+}
+  showInput(true, 'Ej: PROMO12XABC123');
+  botSay(
+    '<strong>🎁 Aplicar cupón</strong><br><br>' +
+    'Comparte el código que recibiste por Instagram y lo valido al instante.',
+    400
+  );
+  setTimeout(() => {
+    renderQuick([
+      { label: 'No tengo cupón', sub: 'Continuar sin descuento', icon: '→', className: 'ghost', onClick: () => {
+        showInput(false);
+        R.coupon = null;
+        promptOrderType();
+      }}
+    ]);
+  }, 700);
+}
+
+async function handleCouponCode(rawCode) {
+  const code = String(rawCode || '').trim().toUpperCase();
+  if (code.length < 6) {
+    botSay('⚠️ El código parece incompleto. Revísalo y vuelve a intentarlo.', 350);
+    return;
+  }
+
+  showInput(false);
+  addMsg(escapeHtml(code), 'user');
+  botSay('Validando tu cupón... ⏳', 300);
+
+  try {
+    const res = await fetch('/api/validate-coupon', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ coupon_code: code })
+    });
+    const data = await res.json();
+
+    if (data.valid) {
+      /* Si ya tenía un cupón aplicado, avisar que será reemplazado */
+      const hadPrevious = R.coupon && R.coupon.code && R.coupon.code !== data.coupon_code;
+
+      R.coupon = {
+        code: data.coupon_code,
+        discount: data.discount_percent,
+        daysRemaining: data.days_remaining
+      };
+      save();
+
+      let msg = '';
+      if (hadPrevious) {
+        msg = `<strong>✓ Cupón actualizado</strong><br><br>` +
+              `El cupón anterior (<code class="coupon-code">${escapeHtml(R.coupon.code)}</code>) fue reemplazado.<br><br>` +
+              `Nuevo cupón: <code class="coupon-code">${escapeHtml(data.coupon_code)}</code><br>` +
+              `Descuento: <strong>${data.discount_percent}%</strong><br>` +
+              `Válido por ${data.days_remaining} días más.<br><br>` +
+              `<em>Recuerda: los cupones no son acumulables. Solo se aplica uno por transacción.</em> 🍫`;
+      } else {
+        msg = `<strong>✓ ¡Cupón validado!</strong><br><br>` +
+              `Código: <code class="coupon-code">${escapeHtml(data.coupon_code)}</code><br>` +
+              `Descuento: <strong>${data.discount_percent}%</strong><br>` +
+              `Válido por ${data.days_remaining} días más.<br><br>` +
+              `Se aplicará al total de tu compra al confirmar por WhatsApp.<br><br>` +
+              `<em>Recuerda: los cupones no son acumulables. Solo se aplica uno por transacción.</em> 🍫`;
+      }
+
+      botSay(msg, 500);
+      setTimeout(() => promptOrderType(), hadPrevious ? 2200 : 1800);
+      return;
+    }
+
+    const reasons = {
+      not_found: '❌ No encontramos ese código. Verifica que esté bien escrito (suele empezar con <strong>PROMO</strong>).',
+      already_redeemed: '⚠️ Este cupón <strong>ya fue redimido</strong>. Cada cupón es válido una sola vez.',
+      expired: '⏰ Este cupón <strong>expiró</strong>. Los cupones son válidos por 7 días.',
+      server_error: '⚠️ Hubo un problema al validar. Intenta de nuevo en un momento.'
+    };
+    botSay(reasons[data.reason] || reasons.server_error, 500, 'notice');
+
+    setTimeout(() => {
+      showInput(true, 'Intenta de nuevo o escribe "saltar"');
+      renderQuick([
+        { label: 'No tengo cupón', sub: 'Continuar sin descuento', icon: '→', className: 'ghost', onClick: () => {
+          showInput(false);
+          R.coupon = null;
+          promptOrderType();
+        }}
+      ]);
+    }, 1200);
+
+  } catch (err) {
+    console.error('Error validando cupón:', err);
+    botSay('⚠️ No pude conectar. Intenta de nuevo.', 400, 'notice');
+    setTimeout(() => showInput(true, 'Ingresa tu cupón'), 800);
+  }
+}
 /* ═══════════════════════════════════════════════════════════════
    reCAPTCHA v2 — Verificación bajo demanda
    ═══════════════════════════════════════════════════════════════ */
