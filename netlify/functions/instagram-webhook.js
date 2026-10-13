@@ -305,7 +305,15 @@ exports.handler = async (event) => {
 
     if (selectError) {
       console.error('Supabase select error:', selectError);
-      return jsonResponse(500, { error: 'Database read error' });
+      return jsonResponse(500, {
+        error: 'Database read error',
+        debug: {
+          message: selectError?.message || null,
+          code: selectError?.code || null,
+          details: selectError?.details || null,
+          hint: selectError?.hint || null
+        }
+      });
     }
 
     if (existing) {
