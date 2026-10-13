@@ -145,10 +145,10 @@ function extractCommentData(body) {
 }
 
 async function getLatestMediaId() {
-  if (!META_PAGE_ACCESS_TOKEN || !IG_BUSINESS_ACCOUNT_ID) return null;
+  if (!INSTAGRAM_ACCESS_TOKEN || !IG_BUSINESS_ACCOUNT_ID) return null;
 
   try {
-    const url = `https://graph.facebook.com/v21.0/${IG_BUSINESS_ACCOUNT_ID}/media?fields=id,timestamp&limit=1&access_token=${META_PAGE_ACCESS_TOKEN}`;
+    const url = `https://graph.facebook.com/v21.0/${IG_BUSINESS_ACCOUNT_ID}/media?fields=id,timestamp&limit=1&access_token=${INSTAGRAM_ACCESS_TOKEN}`;
     const res = await fetch(url);
     const data = await res.json();
     if (data && Array.isArray(data.data) && data.data.length > 0) {
