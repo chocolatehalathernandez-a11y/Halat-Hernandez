@@ -1,9 +1,17 @@
+# Temporales de debug (no subir)
+debug.json
+ig.json
+page.json
+token.json
+
+# Backups
+*.bak
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Entorno
 .env
 .env.local
 node_modules/
-.DS_Store
-*.log
-netlify/functions/*.local.js
-*.bak
-node_modules/
-.env
