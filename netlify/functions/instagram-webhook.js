@@ -12,7 +12,13 @@
    ═══════════════════════════════════════════════════════════════ */
 
 const { createClient } = require('@supabase/supabase-js');
-
+/* ─── DEBUG: versión del SDK ─── */
+try {
+  const pkg = require('@supabase/supabase-js/package.json');
+  console.log('[DEBUG-SDK] @supabase/supabase-js version:', pkg.version);
+} catch (e) {
+  console.log('[DEBUG-SDK] No se pudo leer la versión:', e.message);
+}
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY; const IG_VERIFY_TOKEN = process.env.IG_VERIFY_TOKEN;
 const INSTAGRAM_ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN || '';
