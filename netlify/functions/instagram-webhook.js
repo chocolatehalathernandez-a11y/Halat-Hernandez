@@ -336,18 +336,27 @@ exports.handler = async (event) => {
 
     const { error: insertError } = await db
       .from('participaciones')
+    console.log('[DEBUG] Intentando insert:', {
+      instagram_user_id: instagramUserId,
+      media_id: mediaId,
+      discount_percent: discount,
+      coupon_code: couponCode,
+      has_token: !!INSTAGRAM_ACCESS_TOKEN,
+      has_supabase_url: !!SUPABASE_URL,
+      has_supabase_key: !!SUPABASE_KEY
+    });
       .insert({
-        instagram_user_id: instagramUserId,
-        media_id: mediaId,
-        discount_percent: discount,
-        coupon_code: couponCode,
-        comment_text: commentText,
-        matched_keyword: flavorCheck.keyword,
-        comment_count: 1,
-        user_is_follower: isFollower,
-        redeemed: false,
-        expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
-      });
+      instagram_user_id: instagramUserId,
+      media_id: mediaId,
+      discount_percent: discount,
+      coupon_code: couponCode,
+      comment_text: commentText,
+      matched_keyword: flavorCheck.keyword,
+      comment_count: 1,
+      user_is_follower: isFollower,
+      redeemed: false,
+      expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+    });
 
     if (insertError) {
       if (insertError.code === '23505') {
@@ -374,14 +383,23 @@ exports.handler = async (event) => {
 
   } catch (error) {
     console.error('Webhook unexpected error:', error);
-    return jsonResponse(500, { error: 'Internal server error' });
+    return jsonResponse(500, {
+      error: 'Internal server error',
+      debug: {
+        name: error?.name || 'Error',
+        message: error?.message || 'Sin mensaje',
+        code: error?.code || null,
+        details: error?.details || null,
+        hint: error?.hint || null,
+        stack_preview: (error?.stack || '').split('\n').slice(0, 4).join(' | ')
+      }
+    });
   }
-};
 
-function jsonResponse(statusCode, payload) {
-  return {
-    statusCode,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  };
-}
+  function jsonResponse(statusCode, payload) {
+    return {
+      statusCode,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    };
+  }
