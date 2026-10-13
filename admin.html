@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Cupones Halat Hernández</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0A1628; color: #F5EFE0; line-height: 1.5; padding: 24px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 1.5rem; margin-bottom: 4px; }
+.subtitle { color: rgba(245,239,224,.5); font-size: 0.85rem; margin-bottom: 24px; }
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.kpi { background: #0F2038; border: 1px solid rgba(201,169,97,.2); border-radius: 8px; padding: 16px; }
+.kpi-label { font-size: 0.7rem; color: rgba(245,239,224,.5); text-transform: uppercase; letter-spacing: .1em; }
+.kpi-value { font-size: 1.8rem; font-weight: 700; color: #C9A961; margin-top: 4px; }
+.controls { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.controls input, .controls select, .controls button {
+  padding: 10px 16px; border-radius: 6px; border: 1px solid rgba(201,169,97,.3);
+  background: #0F2038; color: #F5EFE0; font-size: 0.9rem;
+}
+.controls button { background: #C9A961; color: #0A1628; font-weight: 600; cursor: pointer; border: none; }
+.controls button:hover { background: #D4B876; }
+table { width: 100%; border-collapse: collapse; background: #0F2038; border-radius: 8px; overflow: hidden; }
+th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid rgba(201,169,97,.1); font-size: 0.85rem; }
+th { background: rgba(201,169,97,.1); color: #C9A961; text-transform: uppercase; font-size: 0.7rem; letter-spacing: .1em; }
+tr:hover { background: rgba(201,169,97,.05); }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; }
+.badge.pending { background: rgba(245,158,11,.2); color: #F59E0B; }
+.badge.redeemed { background: rgba(34,197,94,.2); color: #22C55E; }
+.discount { color: #C9A961; font-weight: 700; font-size: 1rem; }
+.coupon-code { font-family: 'Courier New', monospace; font-weight: 700; color: #E8D5A3; }
+.action-btn { padding: 6px 12px; border-radius: 4px; border: none; cursor: pointer; font-size: 0.75rem; font-weight: 600; }
+.action-btn.redeem { background: #22C55E; color: #fff; }
+.action-btn.unredeem { background: rgba(245,239,224,.15); color: #F5EFE0; }
+.action-btn:hover { opacity: 0.85; }
+.login { max-width: 400px; margin: 100px auto; text-align: center; }
+.login input { width: 100%; padding: 14px 18px; font-size: 1rem; margin-bottom: 12px; border-radius: 8px; border: 1px solid rgba(201,169,97,.3); background: #0F2038; color: #F5EFE0; }
+.login button { width: 100%; padding: 14px; background: #C9A961; color: #0A1628; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; }
+.hidden { display: none !important; }
+@media (max-width: 768px) {
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+  table { font-size: 0.75rem; }
+  th, td { padding: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div id="loginView" class="login">
+  <h1>🍫 Admin · Cupones</h1>
+  <p class="subtitle" style="margin-bottom:24px;">Ingresa la contraseña de administrador</p>
+  <input type="password" id="passInput" placeholder="Contraseña" autofocus>
+  <button onclick="login()">Ingresar</button>
+</div>
+
+<div id="mainView" class="container hidden">
+  <h1>🍫 Admin · Cupones</h1>
+  <p class="subtitle">Panel de control de cupones Instagram · Halat Hernández</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-label">Total emitidos</div><div class="kpi-value" id="kpiTotal">—</div></div>
+    <div class="kpi"><div class="kpi-label">Pendientes</div><div class="kpi-value" id="kpiPending">—</div></div>
+    <div class="kpi"><div class="kpi-label">Redimidos</div><div class="kpi-value" id="kpiRedeemed">—</div></div>
+    <div class="kpi"><div class="kpi-label">% promedio</div><div class="kpi-value" id="kpiAvg">—</div></div>
+  </div>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Buscar código..." oninput="debouncedLoad()">
+    <select id="filterSelect" onchange="load()">
+      <option value="all">Todos</option>
+      <option value="pending">Pendientes</option>
+      <option value="redeemed">Redimidos</option>
+    </select>
+    <button onclick="load()">🔄 Actualizar</button>
+    <button onclick="logout()" style="background:#0F2038;color:#F5EFE0;border:1px solid rgba(201,169,97,.3);">Salir</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>%</th>
+        <th>Usuario IG</th>
+        <th>Emitido</th>
+        <th>Expira</th>
+        <th>Estado</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <tr><td colspan="7" style="text-align:center;padding:24px;color:rgba(245,239,224,.4);">Cargando...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+let PASSWORD = sessionStorage.getItem('halat_admin_pass') || '';
+let debounceTimer = null;
+
+function debouncedLoad() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(load, 300);
+}
+
+function login() {
+  const pass = document.getElementById('passInput').value.trim();
+  if (!pass) return;
+  PASSWORD = pass;
+  sessionStorage.setItem('halat_admin_pass', pass);
+  showMain();
+  load();
+}
+
+function logout() {
+  PASSWORD = '';
+  sessionStorage.removeItem('halat_admin_pass');
+  document.getElementById('mainView').classList.add('hidden');
+  document.getElementById('loginView').classList.remove('hidden');
+  document.getElementById('passInput').value = '';
+}
+
+function showMain() {
+  document.getElementById('loginView').classList.add('hidden');
+  document.getElementById('mainView').classList.remove('hidden');
+}
+
+async function load() {
+  const filter = document.getElementById('filterSelect').value;
+  const search = document.getElementById('searchInput').value.trim();
+  const url = '/api/admin-coupons?filter=' + filter + '&search=' + encodeURIComponent(search);
+
+  try {
+    const res = await fetch(url, {
+      headers: { 'X-Admin-Password': PASSWORD }
+    });
+    if (res.status === 401) {
+      logout();
+      alert('Contraseña incorrecta');
+      return;
+    }
+    const data = await res.json();
+    renderKPIs(data.kpis);
+    renderTable(data.coupons);
+  } catch (err) {
+    console.error(err);
+    alert('Error cargando datos');
+  }
+}
+
+function renderKPIs(kpis) {
+  document.getElementById('kpiTotal').textContent = kpis.total;
+  document.getElementById('kpiPending').textContent = kpis.pending;
+  document.getElementById('kpiRedeemed').textContent = kpis.redeemed;
+  document.getElementById('kpiAvg').textContent = kpis.avgDiscount + '%';
+}
+
+function renderTable(coupons) {
+  const tbody = document.getElementById('tableBody');
+  if (!coupons.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px;color:rgba(245,239,224,.4);">Sin cupones</td></tr>';
+    return;
+  }
+  tbody.innerHTML = coupons.map(c => {
+    const date = new Date(c.created_at).toLocaleString('es-CO', { dateStyle: 'short', timeStyle: 'short' });
+    const expiresDate = c.expires_at
+      ? new Date(c.expires_at).toLocaleString('es-CO', { dateStyle: 'short' })
+      : '—';
+
+    const isExpiringSoon = c.expires_at && !c.redeemed &&
+      (new Date(c.expires_at).getTime() - Date.now()) < 2 * 86400000;
+
+    const expiresCell = isExpiringSoon
+      ? '<td style="color:#F59E0B;font-weight:600;">⚠ ' + expiresDate + '</td>'
+      : '<td>' + expiresDate + '</td>';
+
+    const statusBadge = c.redeemed
+      ? '<span class="badge redeemed">✓ Redimido</span>'
+      : '<span class="badge pending">⏳ Pendiente</span>';
+    const actionBtn = c.redeemed
+      ? '<button class="action-btn unredeem" onclick="changeStatus(\'' + c.coupon_code + '\', \'unredeem\')">Revertir</button>'
+      : '<button class="action-btn redeem" onclick="changeStatus(\'' + c.coupon_code + '\', \'redeem\')">Marcar redimido</button>';
+    return '<tr>' +
+      '<td class="coupon-code">' + c.coupon_code + '</td>' +
+      '<td class="discount">' + c.discount_percent + '%</td>' +
+      '<td>' + (c.instagram_user_id || '—') + '</td>' +
+      '<td>' + date + '</td>' +
+      expiresCell +
+      '<td>' + statusBadge + '</td>' +
+      '<td>' + actionBtn + '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+async function changeStatus(code, action) {
+  const msg = action === 'redeem'
+    ? '¿Marcar el cupón ' + code + ' como redimido?'
+    : '¿Revertir el cupón ' + code + ' a pendiente?';
+  if (!confirm(msg)) return;
+
+  try {
+    const res = await fetch('/api/admin-coupons', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Admin-Password': PASSWORD
+      },
+      body: JSON.stringify({ coupon_code: code, action })
+    });
+    const data = await res.json();
+    if (data.success) {
+      load();
+    } else {
+      alert('Error: ' + (data.error || 'desconocido'));
+    }
+  } catch (err) {
+    alert('Error de conexión');
+  }
+}
+
+if (PASSWORD) {
+  showMain();
+  load();
+}
+</script>
+
+</body>
+</html>
