@@ -15,7 +15,7 @@ const { createClient } = require('@supabase/supabase-js');
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY; const IG_VERIFY_TOKEN = process.env.IG_VERIFY_TOKEN;
-const META_PAGE_ACCESS_TOKEN = process.env.META_PAGE_ACCESS_TOKEN || '';
+const INSTAGRAM_ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN || '';
 const IG_BUSINESS_ACCOUNT_ID = process.env.IG_BUSINESS_ACCOUNT_ID || '';
 const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER || '+573208209369';
 
@@ -198,29 +198,38 @@ function buildCouponMessage(couponCode, discount) {
 async function sendInstagramDM(instagramUserId, couponCode, discount, commentText) {
   const messageText = buildCouponMessage(couponCode, discount);
 
-  /* TODO: Descomentar cuando tengas permiso de Meta:
+  if (!INSTAGRAM_ACCESS_TOKEN) {
+    console.warn('[DM] INSTAGRAM_ACCESS_TOKEN no configurado — saltando envío');
+    return null;
+  }
+
   try {
-    const url = `https://graph.facebook.com/v21.0/me/messages?access_token=${META_PAGE_ACCESS_TOKEN}`;
+    const url = `https://graph.facebook.com/v21.0/me/messages?access_token=${INSTAGRAM_ACCESS_TOKEN}`;
     const payload = {
       recipient: { id: instagramUserId },
       message: { text: messageText }
     };
+
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+
     const data = await res.json();
-    if (!res.ok) console.error('Meta API error:', data);
+
+    if (!res.ok) {
+      console.error('Meta API error:', data);
+      return null;
+    }
+
+    console.log(`✓ DM enviado a ${instagramUserId}`);
     return data;
+
   } catch (err) {
     console.error('Error enviando DM:', err);
     return null;
   }
-  */
-
-  console.log(`[TODO DM] → ${instagramUserId}\n${messageText}`);
-  return { wouldSend: messageText };
 }
 
 /* ═══════════════════════════════════════════════════════════════
