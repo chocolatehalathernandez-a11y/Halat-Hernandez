@@ -877,39 +877,34 @@ section { padding: 110px 24px; }
   border-top: 1px solid rgba(201, 169, 97, 0.28);
   background: linear-gradient(180deg, var(--navy-950), #030710);
   flex-shrink: 0;
-  max-height: 50vh;
+  max-height: 62vh; /* ← Aumentado de 50vh a 62vh */
   overflow: hidden;
 }
 .ron-flavor-panel.active { display: flex; }
 
 .fp-header {
-  padding: 14px 18px;
+  padding: 12px 16px;
   background: linear-gradient(180deg, rgba(201, 169, 97, 0.14), rgba(201, 169, 97, 0.04));
   border-bottom: 1px solid rgba(201, 169, 97, 0.2);
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
 }
 .fp-header-left .fp-name {
-  font-family: var(--serif); font-size: 1.1rem;
-  color: var(--cream-100); font-weight: 500;
-  margin-bottom: 3px;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--cream-100);
+  font-weight: 600;
+  margin-bottom: 2px;
 }
 .fp-header-left .fp-sub {
-  font-size: 0.68rem; color: rgba(245, 239, 224, 0.45);
-  letter-spacing: 0.15em; text-transform: uppercase;
+  font-size: 0.65rem;
+  color: rgba(245, 239, 224, 0.4);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
-.fp-header-right { display: flex; gap: 16px; }
-.fp-header-right .stat { text-align: right; }
-.fp-header-right .stat .v {
-  font-family: var(--display); font-size: 1.1rem;
-  color: var(--gold-400); font-weight: 600; display: block;
-  letter-spacing: 0.05em;
-}
-.fp-header-right .stat .l {
-  font-size: 0.58rem; color: rgba(245, 239, 224, 0.35);
-  letter-spacing: 0.18em; text-transform: uppercase;
-}
-.fp-header-right .stat.warn .v { color: var(--error); }
 
 .fp-progress {
   height: 3px; background: rgba(201, 169, 97, 0.12); flex-shrink: 0;
@@ -923,13 +918,17 @@ section { padding: 110px 24px; }
 .fp-progress.full span { background: linear-gradient(90deg, #22c55e, #16a34a); }
 
 .fp-flavors {
-  flex: 1; overflow-y: auto;
-  padding: 12px 14px; min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 14px 14px;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 169, 97, 0.4) transparent;
 }
-.fp-flavors::-webkit-scrollbar { width: 8px; }
+.fp-flavors::-webkit-scrollbar { width: 6px; }
 .fp-flavors::-webkit-scrollbar-track { background: transparent; }
 .fp-flavors::-webkit-scrollbar-thumb {
-  background: rgba(201, 169, 97, 0.4); border-radius: 4px;
+  background: rgba(201, 169, 97, 0.4); border-radius: 3px;
 }
 
 .flavor-row {
@@ -942,33 +941,131 @@ section { padding: 110px 24px; }
   transition: all var(--transition);
   border-radius: 10px;
 }
+.flavor-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, rgba(245, 239, 224, 0.03), rgba(245, 239, 224, 0.01));
+  border: 1px solid rgba(201, 169, 97, 0.15);
+  margin-bottom: 6px;
+  transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+  border-radius: 10px;
+  position: relative;
+  min-height: 52px;
+}
 .flavor-row:last-child { margin-bottom: 0; }
-.flavor-row.active {
-  border-color: rgba(201, 169, 97, 0.55);
-  background: linear-gradient(135deg, rgba(201, 169, 97, 0.12), rgba(201, 169, 97, 0.04));
-  box-shadow: 0 4px 12px rgba(201, 169, 97, 0.15);
-}
-.flavor-row .fl-name {
-  font-family: var(--serif); font-size: 1rem;
-  color: var(--cream-100); font-weight: 500;
-  margin-bottom: 2px;
-}
-.flavor-row .fl-meta {
-  font-size: 0.7rem; color: rgba(245, 239, 224, 0.45);
-  letter-spacing: 0.05em; min-height: 0.85rem;
-}
-.flavor-row.active .fl-meta { color: var(--gold-400); }
 
-.flavor-controls { display: flex; align-items: center; gap: 10px; }
-.fl-btn {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: transparent;
-  border: 1.5px solid rgba(201, 169, 97, 0.5);
+.flavor-row.active {
+  border-color: rgba(201, 169, 97, 0.65);
+  background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(201, 169, 97, 0.05));
+  box-shadow: 0 3px 12px rgba(201, 169, 97, 0.2);
+}
+
+/* Indicador lateral dorado cuando está activo */
+.flavor-row.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--gold-400), var(--gold-600));
+}
+
+.flavor-row .fl-name {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  color: rgba(245, 239, 224, 0.55);
+  font-weight: 400;
+  margin-bottom: 2px;
+  letter-spacing: 0.01em;
+  transition: all 0.25s;
+}
+.flavor-row.active .fl-name {
+  color: var(--cream-100);
+  font-weight: 600;
+}
+
+.flavor-row .fl-meta {
+  font-size: 0.65rem;
+  color: rgba(245, 239, 224, 0.35);
+  letter-spacing: 0.05em;
+  min-height: 0.8rem;
+  transition: all 0.25s;
+}
+.flavor-row.active .fl-meta {
   color: var(--gold-400);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.15rem; font-weight: 400;
-  transition: all var(--transition);
-  padding: 0; line-height: 1; flex-shrink: 0;
+  font-weight: 500;
+}
+
+.flavor-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(10, 22, 40, 0.4);
+  border-radius: 24px;
+  padding: 3px;
+  border: 1px solid rgba(201, 169, 97, 0.15);
+}
+.flavor-row.active .flavor-controls {
+  border-color: rgba(201, 169, 97, 0.4);
+  background: rgba(10, 22, 40, 0.6);
+}
+
+.fl-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: rgba(245, 239, 224, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 300;
+  transition: all 0.2s ease;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.fl-btn:hover:not(:disabled) {
+  background: rgba(201, 169, 97, 0.2);
+  color: var(--gold-300);
+}
+.fl-btn:active:not(:disabled) {
+  transform: scale(0.9);
+}
+.fl-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+.fl-btn.plus {
+  background: rgba(201, 169, 97, 0.12);
+  color: var(--gold-400);
+}
+.fl-btn.plus:hover:not(:disabled) {
+  background: rgba(201, 169, 97, 0.3);
+  color: var(--gold-200);
+}
+
+.fl-count {
+  min-width: 28px;
+  text-align: center;
+  font-family: var(--display);
+  font-weight: 700;
+  color: rgba(245, 239, 224, 0.5);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: all 0.25s;
+}
+.flavor-row.active .fl-count {
+  color: var(--gold-400);
+  font-size: 1.05rem;
 }
 .fl-btn:hover:not(:disabled) {
   background: rgba(201, 169, 97, 0.18);
@@ -994,13 +1091,19 @@ section { padding: 110px 24px; }
 }
 
 .fp-actions {
-  padding: 14px 16px;
+  padding: 12px 14px;
   border-top: 1px solid rgba(201, 169, 97, 0.2);
   background: var(--navy-950);
-  display: flex; gap: 8px; flex-wrap: wrap;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
   flex-shrink: 0;
 }
-.fp-actions .quick-btn { flex: 1; min-width: 0; }
+.fp-actions .quick-btn {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+}
 
 .ron-input {
   display: flex;
@@ -1794,15 +1897,17 @@ se contraiga y el input siempre visible */
     </button>
   </div>
 </div>
-
 <script>
+/* ═══════════════════════════════════════════════════════════════
+   CONFIGURACIÓN
+   ═══════════════════════════════════════════════════════════════ */
 const WA_NUMBER_B64 = 'NTczMjA4MjA5MzY5';
 
 const CONFIG = {
   whatsapp: atob(WA_NUMBER_B64),
   brandName: 'Halat Hernández',
   botName: 'Roncaccio',
-  storageKey: 'halat-roncaccio-v2'
+  storageKey: 'halat-roncaccio-v3'
 };
 
 const BOX_TYPES = {
@@ -1820,27 +1925,49 @@ const FLAVORS = [
   { id: 'baileys',      name: 'Baileys',               short: 'Baileys' }
 ];
 
+/* Palabras clave para desbloquear regalo sorpresa (1-5%) */
+const GIFT_KEYWORDS = [
+  'vino', 'botella', 'flores', 'ramo', 'bouquet', 'arreglo',
+  'espumoso', 'champagne', 'champana', 'champan', 'cava',
+  'rosas', 'girasoles', 'tulipanes', 'orquideas', 'lirios',
+  'detalle especial', 'regalo especial', 'sorpresa', 'aniversario',
+  'san valentin', 'amor', 'pareja', 'romantico', 'romantica'
+];
+
 const STAGE_PROGRESS = {
-  'welcome':        5,
-  'order-type':     15,
-  'box-select':     30,
-  'flavor-mode':    45,
-  'flavor-select':  55,
-  'special':        65,
-  'contact':        80,
-  'summary':        95,
-  'done':           100
+  'welcome':       5,
+  'order-type':    20,
+  'box-select':    40,
+  'flavor-mode':   55,
+  'flavor-select': 65,
+  'coupon-code':   70,
+  'contact':       85,
+  'summary':       95,
+  'done':          100
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   MEJORA — Claves de almacenamiento para historial y cupones
-   ═══════════════════════════════════════════════════════════════ */
 const HISTORY_KEY = 'halat-order-history';
 const COUPON_KEY = 'halat-active-coupon';
 const ABANDONED_KEY = 'halat-abandoned';
 
 let captchaV2Verified = false;
 
+/* ═══════════════════════════════════════════════════════════════
+   MODO TEST — Auto-verificar captcha en localhost
+   ═══════════════════════════════════════════════════════════════ */
+(function autoVerifyLocal() {
+  const h = window.location.hostname;
+  const isLocal = window.location.protocol === 'file:' || h === 'localhost' || h === '127.0.0.1';
+  if (isLocal) {
+    captchaV2Verified = true;
+    console.log('🧪 MODO TEST: captcha auto-verificado en localhost');
+    console.log('   Los [data-requires-captcha] no bloquearán clicks.');
+  }
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   SEGURIDAD
+   ═══════════════════════════════════════════════════════════════ */
 function checkHoneypot() {
   const hp = document.getElementById('ronHoneypot');
   if (hp && hp.value.trim() !== '') return false;
@@ -1853,7 +1980,7 @@ const MAX_MESSAGES_PER_WINDOW = 25;
 
 function checkRateLimit() {
   if (rateLimitCount >= MAX_MESSAGES_PER_WINDOW) {
-    botSay('Has enviado demasiados mensajes seguidos. Espera un momento por favor.', 300);
+    botSay('Demasiados mensajes. Espera un momento.', 300);
     return false;
   }
   rateLimitCount++;
@@ -1861,6 +1988,9 @@ function checkRateLimit() {
   return true;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   TEMA
+   ═══════════════════════════════════════════════════════════════ */
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   try { localStorage.setItem('halat-theme', theme); } catch (e) {}
@@ -1875,6 +2005,9 @@ function toggleTheme() {
   applyTheme(saved);
 })();
 
+/* ═══════════════════════════════════════════════════════════════
+   NAVEGACIÓN
+   ═══════════════════════════════════════════════════════════════ */
 function goTo(id) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -1904,6 +2037,9 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   });
 })();
 
+/* ═══════════════════════════════════════════════════════════════
+   HELPERS DE LIMPIEZA
+   ═══════════════════════════════════════════════════════════════ */
 function cleanName(text) {
   return String(text).trim().replace(/\s+/g, ' ')
     .split(' ').map(w => w.length > 0 ? w.charAt(0).toUpperCase() + w.slice(1).toLowerCase() : '').join(' ');
@@ -1931,7 +2067,19 @@ function escapeHtml(str) {
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[m]));
 }
+function normalizeText(text) {
+  return String(text || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
+/* ═══════════════════════════════════════════════════════════════
+   ESTADO
+   ═══════════════════════════════════════════════════════════════ */
 const R = {
   stage: 'welcome',
   orderType: '',
@@ -1939,24 +2087,27 @@ const R = {
   currentIndex: -1,
   contact: { nombre: '', telefono: '', ciudad: '', direccion: '', fecha: '', ocasion: '', special: '', feria: '' },
   contactStep: 0,
-  coupon: null   // ← NUEVO
+  coupon: null,
+  specialGift: null
 };
 
 const CONTACT_FIELDS_DOMICILIO = [
-  { key: 'nombre',    label: 'Nombre completo',     prompt: '¿Cuál es tu <strong>nombre completo</strong>?',            clean: cleanName,   validate: v => v.length >= 3 || 'Por favor escribe al menos tu nombre y apellido.' },
-  { key: 'telefono',  label: 'Teléfono / WhatsApp', prompt: '¿Tu <strong>número de WhatsApp</strong>? (10 dígitos)',    clean: cleanPhone,  validate: v => isValidPhone(v) || 'Escribe un número de celular colombiano válido (10 dígitos, empieza en 3).' },
-  { key: 'ciudad',    label: 'Ciudad',              prompt: '¿En qué <strong>ciudad</strong> estás?',                  clean: cleanCity,   validate: v => v.length >= 3 || 'Escribe una ciudad válida.' },
-  { key: 'direccion', label: 'Dirección de envío',  prompt: '¿Cuál es tu <strong>dirección de envío</strong>?',          clean: cleanAddress,validate: v => v.length >= 6 || 'Necesito una dirección más específica para la entrega.' },
-  { key: 'fecha',     label: 'Fecha requerida',     prompt: '¿Para qué <strong>fecha</strong> la necesitas?<br><small style="color:rgba(245,239,224,0.5);font-size:0.75rem;">Recuerda: mínimo 24h de anticipación.</small>', clean: v => String(v).trim(), validate: () => true },
-  { key: 'ocasion',   label: 'Ocasión (opcional)',  prompt: '¿Cuál es la <strong>ocasión</strong>? (o escribe "sin ocasión")', clean: cleanOccasion, validate: () => true }
+  { key: 'nombre',    label: 'Nombre completo',     prompt: '¿Tu <strong>nombre completo</strong>?',       clean: cleanName,   validate: v => v.length >= 3 || 'Escribe nombre y apellido.' },
+  { key: 'telefono',  label: 'WhatsApp',            prompt: '¿Tu <strong>WhatsApp</strong>? (10 dígitos)', clean: cleanPhone,  validate: v => isValidPhone(v) || 'Celular válido (10 dígitos, empieza en 3).' },
+  { key: 'ciudad',    label: 'Ciudad',              prompt: '¿En qué <strong>ciudad</strong> estás?',       clean: cleanCity,   validate: v => v.length >= 3 || 'Ciudad válida.' },
+  { key: 'direccion', label: 'Dirección',           prompt: '¿Tu <strong>dirección de envío</strong>?',     clean: cleanAddress,validate: v => v.length >= 6 || 'Dirección más específica.' },
+  { key: 'fecha',     label: 'Fecha',               prompt: '¿Para qué <strong>fecha</strong> la necesitas?<br><small style="color:rgba(245,239,224,0.5);font-size:0.75rem;">Mínimo 24h.</small>', clean: v => String(v).trim(), validate: () => true },
+  { key: 'ocasion',   label: 'Ocasión',             prompt: '¿La <strong>ocasión</strong>? (o "sin ocasión")', clean: cleanOccasion, validate: () => true },
+  { key: 'special',   label: 'Solicitud especial',  prompt: '¿Algo especial?<br><small style="color:rgba(245,239,224,0.5);font-size:0.75rem;">Vino, flores, arreglos, tarjeta... o "no".</small>', clean: v => String(v).trim().substring(0, 300), validate: () => true }
 ];
 
 const CONTACT_FIELDS_FERIA = [
-  { key: 'nombre',    label: 'Nombre completo',     prompt: '¿Cuál es tu <strong>nombre completo</strong>?',            clean: cleanName,   validate: v => v.length >= 3 || 'Por favor escribe al menos tu nombre y apellido.' },
-  { key: 'telefono',  label: 'Teléfono / WhatsApp', prompt: '¿Tu <strong>número de WhatsApp</strong>? (10 dígitos)',    clean: cleanPhone,  validate: v => isValidPhone(v) || 'Escribe un número de celular colombiano válido (10 dígitos, empieza en 3).' },
-  { key: 'feria',     label: 'Feria / Evento',      prompt: '¿En qué <strong>feria o evento</strong> vas a participar? (nombre o ciudad)', clean: cleanName, validate: v => v.length >= 3 || 'Escribe el nombre de la feria o evento.' },
-  { key: 'fecha',     label: 'Fecha del evento',    prompt: '¿Para qué <strong>fecha</strong> del evento las necesitas?', clean: v => String(v).trim(), validate: () => true },
-  { key: 'ocasion',   label: 'Ocasión (opcional)',  prompt: '¿Cuál es la <strong>ocasión</strong>? (o escribe "sin ocasión")', clean: cleanOccasion, validate: () => true }
+  { key: 'nombre',    label: 'Nombre completo',     prompt: '¿Tu <strong>nombre completo</strong>?',       clean: cleanName,   validate: v => v.length >= 3 || 'Escribe nombre y apellido.' },
+  { key: 'telefono',  label: 'WhatsApp',            prompt: '¿Tu <strong>WhatsApp</strong>? (10 dígitos)', clean: cleanPhone,  validate: v => isValidPhone(v) || 'Celular válido (10 dígitos, empieza en 3).' },
+  { key: 'feria',     label: 'Feria',               prompt: '¿En qué <strong>feria o evento</strong> participas?', clean: cleanName, validate: v => v.length >= 3 || 'Nombre de la feria.' },
+  { key: 'fecha',     label: 'Fecha',               prompt: '¿Para qué <strong>fecha</strong> del evento?', clean: v => String(v).trim(), validate: () => true },
+  { key: 'ocasion',   label: 'Ocasión',             prompt: '¿La <strong>ocasión</strong>? (o "sin ocasión")', clean: cleanOccasion, validate: () => true },
+  { key: 'special',   label: 'Solicitud especial',  prompt: '¿Algo especial?<br><small style="color:rgba(245,239,224,0.5);font-size:0.75rem;">Vino, flores, arreglos... o "no".</small>', clean: v => String(v).trim().substring(0, 300), validate: () => true }
 ];
 
 const $ = (id) => document.getElementById(id);
@@ -1965,6 +2116,9 @@ const $win = $('ronWindow'), $badge = $('ronBadge');
 const $input = $('ronInput'), $inputWrap = $('ronInputWrap');
 const $flavorPanel = $('ronFlavorPanel');
 
+/* ═══════════════════════════════════════════════════════════════
+   UI HELPERS
+   ═══════════════════════════════════════════════════════════════ */
 function updateProgress(stage) {
   const pct = STAGE_PROGRESS[stage] || 5;
   const $fill = $('ronProgressFill');
@@ -1976,9 +2130,7 @@ function addMsg(html, sender='bot', extraClass='') {
   d.className = 'msg ' + sender + (extraClass ? ' ' + extraClass : '');
   d.innerHTML = html;
   $msgs.appendChild(d);
-  requestAnimationFrame(() => {
-    $msgs.scrollTop = $msgs.scrollHeight;
-  });
+  requestAnimationFrame(() => { $msgs.scrollTop = $msgs.scrollHeight; });
 }
 function showTyping() {
   if (document.getElementById('ronTyping')) return;
@@ -1986,14 +2138,12 @@ function showTyping() {
   t.className = 'msg typing'; t.id = 'ronTyping';
   t.innerHTML = '<span></span><span></span><span></span>';
   $msgs.appendChild(t);
-  requestAnimationFrame(() => {
-    $msgs.scrollTop = $msgs.scrollHeight;
-  });
+  requestAnimationFrame(() => { $msgs.scrollTop = $msgs.scrollHeight; });
 }
 function hideTyping() { const t = $('ronTyping'); if (t) t.remove(); }
 function botSay(html, delay, extraClass) {
   showTyping();
-  setTimeout(() => { hideTyping(); addMsg(html, 'bot', extraClass); }, delay || 450);
+  setTimeout(() => { hideTyping(); addMsg(html, 'bot', extraClass); }, delay || 400);
 }
 
 function renderQuick(buttons) {
@@ -2025,15 +2175,9 @@ function showInput(show, placeholder) {
     if (placeholder) $input.placeholder = placeholder;
     setTimeout(() => {
       try { $input.focus({ preventScroll: true }); } catch(e) { $input.focus(); }
-
-      // NUEVO: asegurar que el input y el último mensaje queden visibles
-      // Se hace en dos tiempos para esperar a que el teclado termine de abrirse
       setTimeout(() => {
         try {
-          $msgs.scrollTo({
-            top: $msgs.scrollHeight,
-            behavior: 'smooth'
-          });
+          $msgs.scrollTo({ top: $msgs.scrollHeight, behavior: 'smooth' });
         } catch (e) {
           $msgs.scrollTop = $msgs.scrollHeight;
         }
@@ -2042,6 +2186,9 @@ function showInput(show, placeholder) {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   PERSISTENCIA
+   ═══════════════════════════════════════════════════════════════ */
 function save() {
   try {
     const toSave = { ...R, savedAt: Date.now() };
@@ -2067,12 +2214,12 @@ function checkDomicilioMinimum() {
   if (petits >= 2) return { ok: true };
   return {
     ok: false,
-    msg: 'Para envíos a domicilio el pedido mínimo es <strong>2 Petit Coffret</strong> o <strong>1 Coffret Signature (12)</strong> en adelante.'
+    msg: 'Para envíos el mínimo es <strong>2 Petit Coffret</strong> o <strong>1 Coffret Signature</strong>.'
   };
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MEJORA — Utilidades de saludo por hora
+   UTILIDADES
    ═══════════════════════════════════════════════════════════════ */
 function getGreeting() {
   const h = new Date().getHours();
@@ -2082,20 +2229,42 @@ function getGreeting() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MEJORA — Confetti + Sonido de celebración
+   REGALO SORPRESA
+   ═══════════════════════════════════════════════════════════════ */
+function detectGiftKeyword(text) {
+  const normalized = normalizeText(text);
+  if (!normalized || normalized.length < 3) return null;
+
+  for (const kw of GIFT_KEYWORDS) {
+    const normKw = normalizeText(kw);
+    const escaped = normKw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(^|\\s)${escaped}(\\s|$)`, 'i');
+    if (regex.test(normalized)) {
+      return kw;
+    }
+  }
+  return null;
+}
+
+function generateGiftDiscount() {
+  return Math.floor(Math.random() * 5) + 1; // 1-5
+}
+
+function generateGiftCode(discount) {
+  const randomPart = Math.random().toString(36).substring(2, 7).toUpperCase();
+  const timePart = Date.now().toString(36).slice(-3).toUpperCase();
+  return `GIFT${discount}X${randomPart}${timePart}`;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CONFETTI + SONIDO
    ═══════════════════════════════════════════════════════════════ */
 function celebrate() {
   let container = document.getElementById('confettiContainer');
   if (!container) {
     container = document.createElement('div');
     container.id = 'confettiContainer';
-    container.style.cssText = `
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-      overflow: hidden;
-    `;
+    container.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;';
     document.body.appendChild(container);
   }
 
@@ -2134,9 +2303,7 @@ function celebrate() {
     container.appendChild(piece);
   }
 
-  setTimeout(() => {
-    if (container) container.innerHTML = '';
-  }, 5500);
+  setTimeout(() => { if (container) container.innerHTML = ''; }, 5500);
 }
 
 function playSuccessSound() {
@@ -2144,15 +2311,12 @@ function playSuccessSound() {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
     const ctx = new AC();
-
-    // Melodía ascendente do-mi-sol-do (do mayor)
     const notes = [
-      { freq: 523.25, time: 0 },      // C5
-      { freq: 659.25, time: 0.12 },   // E5
-      { freq: 783.99, time: 0.24 },   // G5
-      { freq: 1046.50, time: 0.36 }   // C6
+      { freq: 523.25, time: 0 },
+      { freq: 659.25, time: 0.12 },
+      { freq: 783.99, time: 0.24 },
+      { freq: 1046.50, time: 0.36 }
     ];
-
     notes.forEach(({ freq, time }) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -2167,7 +2331,6 @@ function playSuccessSound() {
       osc.start(t);
       osc.stop(t + 0.45);
     });
-
     setTimeout(() => { try { ctx.close(); } catch(e) {} }, 1800);
   } catch (e) {
     console.warn('Audio no disponible:', e);
@@ -2175,7 +2338,7 @@ function playSuccessSound() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MEJORA — Historial de pedidos
+   HISTORIAL DE PEDIDOS
    ═══════════════════════════════════════════════════════════════ */
 function saveOrderToHistory() {
   try {
@@ -2216,7 +2379,7 @@ function getOrderHistory() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MEJORA — Sistema de cupones de retorno
+   CUPONES DE RETORNO
    ═══════════════════════════════════════════════════════════════ */
 function generateCoupon(orderSuffix) {
   const suffix = orderSuffix || Math.random().toString(36).substring(2, 6).toUpperCase();
@@ -2226,7 +2389,7 @@ function generateCoupon(orderSuffix) {
   const couponData = {
     code: couponCode,
     createdAt: Date.now(),
-    expiresAt: Date.now() + (30 * 24 * 60 * 60 * 1000), // 30 días
+    expiresAt: Date.now() + (30 * 24 * 60 * 60 * 1000),
     used: false,
     benefit: 'Tarjeta personalizada + empaque especial sin costo'
   };
@@ -2266,148 +2429,6 @@ function markCouponUsed() {
   } catch (e) {}
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   MEJORA — Flujo de retención con contexto
-   ═══════════════════════════════════════════════════════════════ */
-function resumeFlow(stage) {
-  if (stage === 'summary') showSummary();
-  else if (stage === 'contact') askContactField();
-  else if (stage === 'flavor-select' && R.currentIndex >= 0) {
-    botSay('Continúa con los sabores de tu caja. 🍫', 300);
-    setTimeout(openFlavorPanel, 600);
-  }
-  else if (stage === 'flavor-mode' && R.currentIndex >= 0) promptFlavorMode();
-  else if (stage === 'special') askSpecialRequest();
-  else if (stage === 'box-select') promptBoxSelect();
-  else promptOrderType();
-}
-
-function repeatLastOrder(lastOrder) {
-  R.orderType = lastOrder.orderType || 'domicilio';
-  R.boxes = lastOrder.boxes.map(b => ({
-    type: b.type,
-    flavors: { ...b.flavors },
-    flavorMode: b.flavorMode || 'sorpresa'
-  }));
-  R.currentIndex = R.boxes.length - 1;
-  save();
-
-  addMsg('Repetir mi última caja', 'user');
-  botSay(
-    `<strong>¡Perfecto!</strong> Cargué tu selección anterior: <strong>${lastOrder.totalBoxes} caja${lastOrder.totalBoxes > 1 ? 's' : ''}</strong>.<br><br>` +
-    `Solo necesito confirmar tus datos de entrega.`,
-    500
-  );
-  setTimeout(() => startContact(), 1400);
-}
-
-let started = false;
-
-function startWelcomeFlow() {
-  if (started) return;
-  started = true;
-
-  updateProgress('welcome');
-
-  /* ─── MEJORA: contexto de retención ─── */
-  const saved = load();
-  const savedAt = saved && saved.savedAt ? saved.savedAt : 0;
-  const hoursSinceSave = savedAt ? (Date.now() - savedAt) / 3600000 : Infinity;
-  const activeCoupon = getActiveCoupon();
-  const history = getOrderHistory();
-  const lastOrder = history.length > 0 ? history[history.length - 1] : null;
-  const daysSinceLast = lastOrder ? (Date.now() - lastOrder.date) / 86400000 : Infinity;
-
-  // Prioridad 1: Carrito abandonado reciente (< 48h) — Retomar
-  if (saved && saved.stage && saved.stage !== 'welcome' && saved.stage !== 'summary' && hoursSinceSave < 48 && R.boxes.length === 0) {
-    Object.assign(R, saved);
-    setTimeout(() => {
-      if (hoursSinceSave < 1) {
-        botSay('¡Justo a tiempo! 🍫 Retomo tu caja donde la dejaste.', 400);
-      } else if (hoursSinceSave < 24) {
-        botSay('Qué bueno verte de nuevo. ✨ Tu caja sigue aquí.', 400);
-      } else {
-        botSay('Han pasado unas horas, pero tu selección sigue guardada. ¿Retomamos? 🎁', 400);
-      }
-      updateProgress(R.stage);
-      setTimeout(() => resumeFlow(R.stage), 900);
-    }, 400);
-    return;
-  }
-
-  // Prioridad 2: Cupón activo pendiente
-  if (activeCoupon) {
-    setTimeout(() => {
-      const daysLeft = Math.ceil((activeCoupon.expiresAt - Date.now()) / 86400000);
-      addMsg(`
-        <div class="coupon-banner">
-          <span class="cb-icon">🎁</span>
-          <div class="cb-title">¡Tienes un regalo pendiente!</div>
-          <div class="cb-code" onclick="copyCoupon('${activeCoupon.code}')" title="Click para copiar">${activeCoupon.code}</div>
-          <div class="cb-desc">${activeCoupon.benefit}</div>
-          <div class="cb-expire">Válido por ${daysLeft} día${daysLeft !== 1 ? 's' : ''} · Click en el código para copiarlo</div>
-        </div>
-      `, 'bot');
-      setTimeout(() => {
-        renderQuick([
-          { label: 'Usar mi regalo ahora', sub: 'Aplicar en nuevo pedido', icon: '🎁', className: 'primary', onClick: () => promptOrderType() },
-          { label: 'Ver presentaciones', sub: 'Colecciones disponibles', icon: '◈', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
-        ]);
-      }, 900);
-    }, 400);
-    return;
-  }
-
-  // Prioridad 3: Cliente recurrente (> 7 días desde último pedido)
-  if (lastOrder && daysSinceLast > 7 && daysSinceLast < 90) {
-    setTimeout(() => {
-      const firstName = (lastOrder.contact.nombre || '').split(' ')[0] || '';
-      addMsg(`
-        <div class="welcome-hero">
-          <div class="wh-logo">R</div>
-          <div class="wh-title">¡Hola de nuevo${firstName ? ', ' + escapeHtml(firstName) : ''}! 👋</div>
-          <div class="wh-sub">Han pasado ${Math.floor(daysSinceLast)} días desde tu último pedido.<br>¿Repetimos o probamos algo nuevo?</div>
-          <div class="welcome-chips">
-            <span class="chip">✦ Mismos sabores</span>
-            <span class="chip">✦ Nueva creación</span>
-          </div>
-        </div>
-      `, 'bot');
-      setTimeout(() => {
-        renderQuick([
-          { label: 'Comenzar mi pedido', sub: 'Te guío paso a paso', icon: '✦', className: 'primary', onClick: () => promptOrderType() },
-          { label: 'Aplicar mi cupón', sub: 'Ganado en Instagram', icon: '🎁', className: 'primary', onClick: () => askCouponCode() },
-          { label: 'Ver presentaciones', sub: 'Colecciones disponibles', icon: '◈', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
-          ]);
-      }, 900);
-    }, 400);
-    return;
-  }
-
-  // Prioridad 4: Flujo normal con saludo por hora
-  setTimeout(() => {
-    const welcomeHTML = `
-      <div class="welcome-hero">
-        <div class="wh-logo">R</div>
-        <div class="wh-title">${getGreeting()} ✨</div>
-        <div class="wh-sub">Soy <strong>Roncaccio</strong>, tu asesor personal.<br>Te ayudaré a crear una pieza única en menos de 3 minutos.</div>
-        <div class="welcome-chips">
-          <span class="chip">✦ Personalización</span>
-          <span class="chip">✦ Envíos</span>
-          <span class="chip">✦ 24h anticipación</span>
-        </div>
-      </div>
-    `;
-    addMsg(welcomeHTML, 'bot');
-    setTimeout(() => {
-      renderQuick([
-        { label: 'Comenzar mi pedido', sub: 'Te guío paso a paso', icon: '✦', className: 'primary', onClick: () => promptOrderType() },
-        { label: 'Ver presentaciones', sub: 'Colecciones disponibles', icon: '◈', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
-      ]);
-    }, 900);
-  }, 400);
-}
-
 function copyCoupon(code) {
   try {
     if (navigator.clipboard) {
@@ -2424,17 +2445,239 @@ function copyCoupon(code) {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   FLUJO DE RETENCIÓN
+   ═══════════════════════════════════════════════════════════════ */
+function resumeFlow(stage) {
+  if (stage === 'summary') showSummary();
+  else if (stage === 'contact') askContactField();
+  else if (stage === 'flavor-select' && R.currentIndex >= 0) {
+    botSay('Continúa con los sabores de tu caja. 🍫', 300);
+    setTimeout(openFlavorPanel, 600);
+  }
+  else if (stage === 'flavor-mode' && R.currentIndex >= 0) promptFlavorMode();
+  else if (stage === 'box-select') promptBoxSelect();
+  else promptOrderType();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   START WELCOME FLOW
+   ═══════════════════════════════════════════════════════════════ */
+let started = false;
+
+function startWelcomeFlow() {
+  if (started) return;
+  started = true;
+
+  updateProgress('welcome');
+
+  const saved = load();
+  const savedAt = saved && saved.savedAt ? saved.savedAt : 0;
+  const hoursSinceSave = savedAt ? (Date.now() - savedAt) / 3600000 : Infinity;
+  const activeCoupon = getActiveCoupon();
+  const history = getOrderHistory();
+  const lastOrder = history.length > 0 ? history[history.length - 1] : null;
+  const daysSinceLast = lastOrder ? (Date.now() - lastOrder.date) / 86400000 : Infinity;
+
+  // Prioridad 1: Carrito abandonado
+  if (saved && saved.stage && saved.stage !== 'welcome' && saved.stage !== 'summary' && hoursSinceSave < 48 && R.boxes.length === 0) {
+    Object.assign(R, saved);
+    setTimeout(() => {
+      if (hoursSinceSave < 1) botSay('¡Justo a tiempo! 🍫 Retomo tu caja donde la dejaste.', 400);
+      else if (hoursSinceSave < 24) botSay('Qué bueno verte de nuevo. ✨ Tu caja sigue aquí.', 400);
+      else botSay('Han pasado horas pero guardé tu selección. ¿Retomamos? 🎁', 400);
+      updateProgress(R.stage);
+      setTimeout(() => resumeFlow(R.stage), 900);
+    }, 400);
+    return;
+  }
+
+  // Prioridad 2: Cupón activo pendiente
+  if (activeCoupon) {
+    setTimeout(() => {
+      const daysLeft = Math.ceil((activeCoupon.expiresAt - Date.now()) / 86400000);
+      addMsg(`
+        <div class="coupon-banner">
+          <span class="cb-icon">🎁</span>
+          <div class="cb-title">¡Tienes un regalo pendiente!</div>
+          <div class="cb-code" onclick="copyCoupon('${activeCoupon.code}')" title="Click para copiar">${activeCoupon.code}</div>
+          <div class="cb-desc">${activeCoupon.benefit}</div>
+          <div class="cb-expire">Válido por ${daysLeft} día${daysLeft !== 1 ? 's' : ''} · Click para copiar</div>
+        </div>
+      `, 'bot');
+      setTimeout(() => {
+        renderQuick([
+          { label: 'Usar mi regalo ahora', sub: 'Aplicar en nuevo pedido', icon: '🎁', className: 'primary', onClick: () => promptOrderType() },
+          { label: 'Ver presentaciones', sub: 'Colecciones disponibles', icon: '◈', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
+        ]);
+      }, 900);
+    }, 400);
+    return;
+  }
+
+  // Prioridad 3: Cliente recurrente
+  if (lastOrder && daysSinceLast > 7 && daysSinceLast < 90) {
+    setTimeout(() => {
+      const firstName = (lastOrder.contact.nombre || '').split(' ')[0] || '';
+      addMsg(`
+        <div class="welcome-hero">
+          <div class="wh-logo">R</div>
+          <div class="wh-title">¡Hola de nuevo${firstName ? ', ' + escapeHtml(firstName) : ''}! 👋</div>
+          <div class="wh-sub">Han pasado ${Math.floor(daysSinceLast)} días.<br>¿Repetimos o probamos algo nuevo?</div>
+          <div class="welcome-chips">
+            <span class="chip">✦ Mismos sabores</span>
+            <span class="chip">✦ Nueva creación</span>
+          </div>
+        </div>
+      `, 'bot');
+      setTimeout(() => {
+        renderQuick([
+          { label: 'Comenzar mi pedido', sub: 'Te guío paso a paso', icon: '✦', className: 'primary', onClick: () => promptOrderType() },
+          { label: 'Aplicar mi cupón', sub: 'Ganado en Instagram', icon: '🎁', className: 'primary', onClick: () => askCouponCode() },
+          { label: 'Ver presentaciones', sub: 'Colecciones disponibles', icon: '◈', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
+        ]);
+      }, 900);
+    }, 400);
+    return;
+  }
+
+  // Prioridad 4: Bienvenida normal
+  setTimeout(() => {
+    const welcomeHTML = `
+      <div class="welcome-hero">
+        <div class="wh-logo">R</div>
+        <div class="wh-title">${getGreeting()} ✨</div>
+        <div class="wh-sub">Soy <strong>Roncaccio</strong>. Te ayudo a crear tu caja en 2 minutos.</div>
+        <div class="welcome-chips">
+          <span class="chip">✦ Personaliza</span>
+          <span class="chip">✦ 24h anticipación</span>
+          <span class="chip">✦ Envíos Bogotá</span>
+        </div>
+      </div>
+    `;
+    addMsg(welcomeHTML, 'bot');
+    setTimeout(() => {
+      renderQuick([
+        { label: 'Comenzar mi pedido', sub: 'Te guío paso a paso', icon: '✦', className: 'primary', onClick: () => promptOrderType() },
+        { label: 'Tengo un cupón', sub: 'Ganado en Instagram', icon: '🎁', className: 'primary', onClick: () => askCouponCode() },
+        { label: 'Ver presentaciones', sub: 'Antes de decidir', icon: '◈', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
+      ]);
+    }, 800);
+  }, 400);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CUPÓN
+   ═══════════════════════════════════════════════════════════════ */
+function askCouponCode() {
+  R.stage = 'coupon-code';
+  save();
+
+  if (R.coupon && R.coupon.code) {
+    botSay(
+      `<strong>⚠️ Ya tienes un cupón aplicado</strong><br><br>` +
+      `Actual: <code class="coupon-code">${escapeHtml(R.coupon.code)}</code> (${R.coupon.discount}%)<br><br>` +
+      `Si pones otro, se reemplaza. <em>No son acumulables.</em>`,
+      350, 'notice'
+    );
+  } else {
+    botSay('<strong>🎁 Aplicar cupón</strong><br>Pega el código que recibiste por Instagram.', 350);
+  }
+
+  showInput(true, 'Ej: PROMO12XABC123M9Q3');
+  setTimeout(() => {
+    renderQuick([
+      { label: 'Sin cupón', sub: 'Continuar sin descuento', icon: '→', className: 'ghost', onClick: () => {
+        showInput(false);
+        R.coupon = null;
+        save();
+        promptOrderType();
+      }}
+    ]);
+  }, 600);
+}
+
+async function handleCouponCode(rawCode) {
+  const code = String(rawCode || '').trim().toUpperCase();
+  if (code.length < 6) {
+    botSay('⚠️ Código incompleto. Revísalo y vuelve a intentar.', 350);
+    return;
+  }
+
+  showInput(false);
+  addMsg(escapeHtml(code), 'user');
+  botSay('Validando... ⏳', 300);
+
+  try {
+    const res = await fetch('/api/validate-coupon', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ coupon_code: code })
+    });
+    const data = await res.json();
+
+    if (data.valid) {
+      const hadPrevious = R.coupon && R.coupon.code && R.coupon.code !== data.coupon_code;
+      R.coupon = {
+        code: data.coupon_code,
+        discount: data.discount_percent,
+        daysRemaining: data.days_remaining
+      };
+      save();
+
+      botSay(
+        `<strong>✓ Cupón ${hadPrevious ? 'actualizado' : 'validado'}</strong><br><br>` +
+        `Código: <code class="coupon-code">${escapeHtml(data.coupon_code)}</code><br>` +
+        `Descuento: <strong>${data.discount_percent}%</strong><br>` +
+        `Vigencia: ${data.days_remaining} día${data.days_remaining !== 1 ? 's' : ''}<br><br>` +
+        `<em>No acumulable · Solo en WhatsApp al confirmar pago.</em>`,
+        500
+      );
+      setTimeout(() => promptOrderType(), 1600);
+      return;
+    }
+
+    const reasons = {
+      not_found: '❌ Código no encontrado. Debe empezar con <strong>PROMO</strong>.',
+      already_redeemed: '⚠️ Este cupón <strong>ya fue redimido</strong>.',
+      expired: '⏰ Este cupón <strong>expiró</strong>. Válido 7 días.',
+      server_error: '⚠️ Error al validar. Intenta de nuevo.'
+    };
+    botSay(reasons[data.reason] || reasons.server_error, 500, 'notice');
+
+    setTimeout(() => {
+      showInput(true, 'Intenta de nuevo o escribe "saltar"');
+      renderQuick([
+        { label: 'Sin cupón', sub: 'Continuar sin descuento', icon: '→', className: 'ghost', onClick: () => {
+          showInput(false);
+          R.coupon = null;
+          save();
+          promptOrderType();
+        }}
+      ]);
+    }, 1000);
+
+  } catch (err) {
+    console.error('Error validando cupón:', err);
+    botSay('⚠️ No pude conectar. Intenta de nuevo.', 400, 'notice');
+    setTimeout(() => showInput(true, 'Ingresa tu cupón'), 800);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FLUJO PRINCIPAL
+   ═══════════════════════════════════════════════════════════════ */
 function promptOrderType() {
   R.stage = 'order-type';
   save();
   updateProgress('order-type');
-  botSay('Primero, ¿cómo prefieres recibirlo?', 400);
+  botSay('¿Cómo prefieres recibirlo?', 350);
   setTimeout(() => {
     renderQuick([
       { label: 'Envío a domicilio', sub: 'Bogotá y alrededores', icon: '🛵', className: 'primary', onClick: () => setOrderType('domicilio') },
       { label: 'Entrega en feria', sub: 'Coordinamos con el evento', icon: '🎪', className: 'primary', onClick: () => setOrderType('feria') }
     ]);
-  }, 600);
+  }, 500);
 }
 
 function setOrderType(type) {
@@ -2443,25 +2686,12 @@ function setOrderType(type) {
   addMsg(type === 'domicilio' ? 'Envío a domicilio' : 'Entrega en feria', 'user');
 
   if (type === 'domicilio') {
-    botSay(
-      '<strong>🛵 Envíos a domicilio:</strong><br><br>' +
-      '· Pedido mínimo: <strong>2 Petit Coffret</strong> o <strong>1 Coffret Signature (12)</strong> en adelante<br>' +
-      '· Preparación con mínimo <strong>24 horas de anticipación</strong><br>' +
-      '· Entregas urgentes tienen costo adicional',
-      600, 'notice'
-    );
+    botSay('Pedido mínimo: <strong>2 Petit</strong> o <strong>1 Signature</strong> · <strong>24h anticipación</strong>', 450, 'notice');
   } else {
-    botSay(
-      '<strong>🎪 Entrega en feria:</strong><br><br>' +
-      '· Sin pedido mínimo<br>' +
-      '· Preparación con mínimo <strong>24 horas de anticipación</strong><br>' +
-      '· Coordinamos entrega el día del evento<br><br>' +
-      '<strong>Importante:</strong> este tipo de pedido está <strong>limitado a la asistencia a ferias</strong>. Validaremos por WhatsApp la participación de Halat Hernández en la feria que nos indiques. Si no asistimos a esa feria, igual podemos cotizarte y ofrecerte una alternativa de entrega.',
-      600, 'notice'
-    );
+    botSay('Sin pedido mínimo · <strong>24h anticipación</strong> · Confirmamos feria por WhatsApp.', 450, 'notice');
   }
 
-  setTimeout(() => promptBoxSelect(), 1800);
+  setTimeout(() => promptBoxSelect(), 1200);
 }
 
 function promptBoxSelect() {
@@ -2469,15 +2699,14 @@ function promptBoxSelect() {
   R.stage = 'box-select';
   save();
   updateProgress('box-select');
-  botSay('¿Qué caja te gustaría agregar?', 400);
+  botSay('Elige el tamaño de tu caja:', 350);
   setTimeout(() => {
     renderQuick([
       { label: 'Petit Coffret', sub: '4 bombones · 1 sabor', icon: '◆', className: 'primary', onClick: () => selectBox('petit') },
       { label: 'Coffret Signature', sub: '12 bombones · hasta 4 sabores', icon: '◆◆', className: 'primary', onClick: () => selectBox('coffret') },
-      { label: 'Grand Coffret', sub: '24 bombones · hasta 6 sabores', icon: '◆◆◆', className: 'primary', onClick: () => selectBox('grand') },
-      { label: 'Ver todas las presentaciones', sub: 'Detalles y precios', icon: '→', className: 'ghost', onClick: () => { closeRoncaccio(); goTo('presentaciones'); } }
+      { label: 'Grand Coffret', sub: '24 bombones · hasta 6 sabores', icon: '◆◆◆', className: 'primary', onClick: () => selectBox('grand') }
     ]);
-  }, 600);
+  }, 500);
 }
 
 function selectBox(type) {
@@ -2487,20 +2716,20 @@ function selectBox(type) {
   R.currentIndex = R.boxes.length - 1;
   R.stage = 'flavor-mode';
   save();
-  setTimeout(() => promptFlavorMode(), 500);
+  setTimeout(() => promptFlavorMode(), 400);
 }
 
 function promptFlavorMode() {
   R.stage = 'flavor-mode';
   save();
   updateProgress('flavor-mode');
-  botSay(`Para tu <strong>${BOX_TYPES[R.boxes[R.currentIndex].type].name}</strong>, ¿cómo prefieres los sabores?`, 400);
+  botSay(`Para tu <strong>${BOX_TYPES[R.boxes[R.currentIndex].type].name}</strong>:`, 350);
   setTimeout(() => {
     renderQuick([
-      { label: 'Sorpresa de la casa', sub: 'Selección curada por nosotros · Sin costo', icon: '✦', className: 'primary', onClick: () => setFlavorMode('sorpresa') },
-      { label: 'Elegir mis sabores', sub: 'Tú decides cada perfil · Costo adicional', icon: '✎', className: 'primary', onClick: () => setFlavorMode('personalizado') }
+      { label: 'Sorpresa de la casa', sub: 'Selección curada · Sin costo', icon: '✦', className: 'primary', onClick: () => setFlavorMode('sorpresa') },
+      { label: 'Elegir mis sabores', sub: 'Tú decides · Costo adicional', icon: '✎', className: 'primary', onClick: () => setFlavorMode('personalizado') }
     ]);
-  }, 700);
+  }, 600);
 }
 
 function setFlavorMode(mode) {
@@ -2521,42 +2750,16 @@ function setFlavorMode(mode) {
       remaining -= qty;
     });
     save();
-    botSay(
-      `<strong>✦ Selección de autor</strong><br><br>` +
-      `Nuestros maestros han elegido estos sabores para ti:<br><br>` +
-      `${flavorsPicked.map(f => `· ${f.name}`).join('<br>')}<br><br>` +
-      `Surtido equilibrado.`,
-      500
-    );
-    setTimeout(() => confirmBoxAuto(), 1400);
+    botSay(`<strong>✦ Selección curada</strong><br>${flavorsPicked.map(f => '· ' + f.name).join('<br>')}`, 400);
+    setTimeout(() => promptNextAction(), 1100);
   } else {
     addMsg('Elegir mis sabores', 'user');
-    botSay(
-      '<strong>Costo adicional por personalización</strong><br><br>' +
-      `Elige hasta <strong>${BOX_TYPES[box.type].maxFlavors} sabores</strong> para tu ${BOX_TYPES[box.type].name}. Distribuye las unidades con los botones <strong>+ / −</strong>.`,
-      500, 'notice'
-    );
+    botSay(`Personaliza hasta <strong>${BOX_TYPES[box.type].maxFlavors} sabores</strong>. Distribuye con + / −`, 400, 'notice');
     R.stage = 'flavor-select';
     save();
     updateProgress('flavor-select');
-    setTimeout(() => openFlavorPanel(), 900);
+    setTimeout(() => openFlavorPanel(), 700);
   }
-}
-
-function confirmBoxAuto() {
-  const box = R.boxes[R.currentIndex];
-  const bt = BOX_TYPES[box.type];
-  const lines = FLAVORS
-    .filter(f => (box.flavors[f.id] || 0) > 0)
-    .map(f => `• ${box.flavors[f.id]} × ${f.short}`)
-    .join('<br>');
-  closeFlavorPanel();
-  const cajas = R.boxes.length;
-  const mensaje = cajas === 1
-    ? `¡Hermosa elección! 🍫 Tu <strong>${bt.name}</strong> quedó así:`
-    : `¡Vas increíble! Ese es tu ${cajas}º regalo perfecto 🎁`;
-  botSay(`${mensaje}<br>${lines}`, 400);
-  setTimeout(() => promptNextAction(), 900);
 }
 
 function openFlavorPanel() {
@@ -2619,8 +2822,8 @@ function renderFlavorPanel() {
     btnConfirm.innerHTML = `
       <span class="qb-icon">✓</span>
       <span class="qb-content">
-        <span class="qb-title">Confirmar esta caja</span>
-        <span class="qb-sub">Sabores listos para agregar</span>
+        <span class="qb-title">Confirmar caja</span>
+        <span class="qb-sub">Sabores listos</span>
       </span>
       <span class="qb-arrow">→</span>
     `;
@@ -2634,19 +2837,20 @@ function renderFlavorPanel() {
     hint.innerHTML = `
       <span class="qb-icon">⋯</span>
       <span class="qb-content">
-        <span class="qb-title">${total < bt.units ? `Faltan ${remaining} unidades` : `Excede por ${total - bt.units} unidades`}</span>
-        <span class="qb-sub">${total < bt.units ? 'Sigue agregando sabores' : 'Reduce algunas unidades'}</span>
+        <span class="qb-title">${total < bt.units ? `Faltan ${remaining} unidades` : `Excede por ${total - bt.units}`}</span>
+        <span class="qb-sub">${total < bt.units ? 'Sigue agregando' : 'Reduce unidades'}</span>
       </span>
     `;
     $actions.appendChild(hint);
   }
+
   const btnCancel = document.createElement('button');
   btnCancel.className = 'quick-btn ghost';
   btnCancel.innerHTML = `
     <span class="qb-icon">×</span>
     <span class="qb-content">
-      <span class="qb-title">Cancelar esta caja</span>
-      <span class="qb-sub">Volver a selección</span>
+      <span class="qb-title">Cancelar caja</span>
+      <span class="qb-sub">Volver</span>
     </span>
   `;
   btnCancel.onclick = cancelCurrentBox;
@@ -2663,7 +2867,7 @@ function flavorAdjust(flavorId, delta) {
   if (delta > 0) {
     if (total >= bt.units) return;
     if (current === 0 && distinct >= bt.maxFlavors) {
-      botSay(`Para esta caja puedes elegir hasta <strong>${bt.maxFlavors} sabores distintos</strong>.`, 300);
+      botSay(`Máximo <strong>${bt.maxFlavors} sabores</strong>.`, 250);
       return;
     }
     box.flavors[flavorId] = current + 1;
@@ -2684,13 +2888,9 @@ function confirmBox() {
     .map(f => `• ${box.flavors[f.id]} × ${f.short}`)
     .join('<br>');
   closeFlavorPanel();
-  addMsg('Confirmar esta caja', 'user');
-  const cajas = R.boxes.length;
-  const mensaje = cajas === 1
-    ? `¡Hermosa elección! 🍫 Tu <strong>${bt.name}</strong> quedó así:`
-    : `¡Vas increíble! Ese es tu ${cajas}º regalo perfecto 🎁`;
-  botSay(`${mensaje}<br>${lines}`, 400);
-  setTimeout(() => promptNextAction(), 900);
+  addMsg('Confirmar caja', 'user');
+  botSay(`<strong>${bt.name}</strong> lista 🍫<br>${lines}`, 350);
+  setTimeout(() => promptNextAction(), 800);
 }
 
 function cancelCurrentBox() {
@@ -2698,63 +2898,50 @@ function cancelCurrentBox() {
   R.currentIndex = -1;
   closeFlavorPanel();
   save();
-  botSay('Caja eliminada.', 300);
-  setTimeout(() => promptNextAction(), 700);
+  botSay('Caja eliminada.', 250);
+  setTimeout(() => promptNextAction(), 600);
 }
 
 function promptNextAction() {
   const minCheck = checkDomicilioMinimum();
   const btns = [];
-  btns.push({ label: 'Agregar otra caja', sub: 'Aún puedes sumar más piezas', icon: '+', className: 'primary', onClick: () => { R.currentIndex = -1; promptBoxSelect(); } });
+
+  btns.push({
+    label: 'Agregar otra caja',
+    sub: 'Suma más piezas',
+    icon: '+',
+    className: 'primary',
+    onClick: () => { R.currentIndex = -1; promptBoxSelect(); }
+  });
 
   if (!minCheck.ok) {
-    btns.push({ label: 'Necesitas más cajas', sub: 'Toca para ver el mínimo', icon: '⚠', className: 'ghost', onClick: () => { botSay(minCheck.msg, 300, 'notice'); } });
+    btns.push({
+      label: 'Necesitas más cajas',
+      sub: 'Ver mínimo',
+      icon: '⚠',
+      className: 'ghost',
+      onClick: () => { botSay(minCheck.msg, 300, 'notice'); }
+    });
   } else {
-    btns.push({ label: 'Continuar con mis datos', sub: 'Siguiente paso', icon: '→', className: 'primary', onClick: () => {
-      const check = checkDomicilioMinimum();
-      if (!check.ok) { botSay(check.msg, 300, 'notice'); return; }
-      askSpecialRequest();
-    }});
+    btns.push({
+      label: 'Continuar con mis datos',
+      sub: 'Últimos pasos',
+      icon: '→',
+      className: 'primary',
+      onClick: () => {
+        const check = checkDomicilioMinimum();
+        if (!check.ok) { botSay(check.msg, 300, 'notice'); return; }
+        startContact();
+      }
+    });
   }
+
   renderQuick(btns);
 }
 
-function askSpecialRequest() {
-  closeFlavorPanel();
-  R.stage = 'special';
-  save();
-  updateProgress('special');
-  showInput(true, 'Escribe tu solicitud (máx. 200 caracteres)...');
-  botSay(
-    '<strong>Solicitud especial</strong><br><br>' +
-    'Puedes pedir por ejemplo:<br>' +
-    '· Carta personalizada con tu mensaje<br>' +
-    '· Empaque especial<br>' +
-    '· Tarjeta con dedicatoria<br>' +
-    '· Instrucciones de entrega<br><br>' +
-    'Máximo 200 caracteres. Es opcional.',
-    450
-  );
-  setTimeout(() => {
-    renderQuick([
-      { label: 'Sin solicitud especial', sub: 'Continuar sin agregar nota', icon: '→', className: 'ghost', onClick: () => {
-        R.contact.special = '';
-        showInput(false);
-        save();
-        startContact();
-      }}
-    ]);
-  }, 700);
-}
-
-function saveSpecial(text) {
-  R.contact.special = String(text).trim().substring(0, 200);
-  save();
-  showInput(false);
-  botSay('Anotado. ✎', 250);
-  setTimeout(() => startContact(), 600);
-}
-
+/* ═══════════════════════════════════════════════════════════════
+   CONTACTO (con solicitud especial integrada)
+   ═══════════════════════════════════════════════════════════════ */
 function getContactFields() {
   return R.orderType === 'feria' ? CONTACT_FIELDS_FERIA : CONTACT_FIELDS_DOMICILIO;
 }
@@ -2764,8 +2951,8 @@ function startContact() {
   R.contactStep = 0;
   save();
   updateProgress('contact');
-  botSay('Perfecto. Solo faltan tus datos.', 400);
-  setTimeout(() => askContactField(), 800);
+  botSay('Perfecto. Solo faltan tus datos.', 350);
+  setTimeout(() => askContactField(), 700);
 }
 
 function askContactField() {
@@ -2773,7 +2960,7 @@ function askContactField() {
   if (R.contactStep >= fields.length) { showSummary(); return; }
   const field = fields[R.contactStep];
   showInput(true, field.label + '...');
-  botSay(field.prompt, 350);
+  botSay(field.prompt, 300);
 }
 
 function saveContactField(value) {
@@ -2783,18 +2970,48 @@ function saveContactField(value) {
   if (field.validate) {
     const res = field.validate(cleaned);
     if (res !== true) {
-      botSay(`⚠️ ${res}`, 300);
+      botSay(`⚠️ ${res}`, 250);
       showInput(true, field.label + '...');
       return;
     }
   }
   R.contact[field.key] = cleaned;
+
+  /* Detección automática del regalo sorpresa */
+  if (field.key === 'special' && cleaned && !/^no$/i.test(cleaned)) {
+    const giftKeyword = detectGiftKeyword(cleaned);
+    if (giftKeyword && !R.specialGift) {
+      const giftDiscount = generateGiftDiscount();
+      const giftCode = generateGiftCode(giftDiscount);
+      R.specialGift = {
+        code: giftCode,
+        discount: giftDiscount,
+        keyword: giftKeyword
+      };
+      save();
+
+      setTimeout(() => {
+        botSay(
+          `<strong>🎁 ¡Regalo sorpresa desbloqueado!</strong><br><br>` +
+          `Detectamos tu interés en <strong>${giftKeyword}</strong>.<br><br>` +
+          `Código: <code class="coupon-code">${giftCode}</code><br>` +
+          `Descuento adicional: <strong>${giftDiscount}%</strong><br><br>` +
+          `<em>Se suma a tu cupón · Válido 1 semana.</em>`,
+          400
+        );
+      }, 500);
+    }
+  }
+
   save();
   R.contactStep++;
   showInput(false);
   setTimeout(() => askContactField(), 500);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   RESUMEN
+   ═══════════════════════════════════════════════════════════════ */
 function showSummary() {
   R.stage = 'summary';
   save();
@@ -2805,9 +3022,6 @@ function showSummary() {
     <div class="summary-block">
       <div class="sb-header"><span class="sb-title">Tipo de pedido</span></div>
       <div class="sb-row"><span class="sb-label">Modalidad</span><span class="sb-value">${tipoLabel}</span></div>
-      ${R.orderType === 'feria' ? `
-        <div class="sb-row"><span class="sb-label">Nota</span><span class="sb-value" style="font-size:0.72rem;color:rgba(245,239,224,0.6);font-weight:300;">Limitado a asistencia a ferias. Se validará por WhatsApp.</span></div>
-      ` : ''}
     </div>
   `;
   addMsg(tipoCard, 'bot');
@@ -2834,7 +3048,36 @@ function showSummary() {
     addMsg(card, 'bot');
   });
 
-  if (R.contact.special) {
+  /* Cupón */
+  if (R.coupon) {
+    const couponCard = `
+      <div class="coupon-banner">
+        <span class="cb-icon">🎁</span>
+        <div class="cb-title">Cupón aplicado</div>
+        <div class="cb-code">${escapeHtml(R.coupon.code)}</div>
+        <div class="cb-desc">${R.coupon.discount}% de descuento sobre el total</div>
+        <div class="cb-expire">Vigente ${R.coupon.daysRemaining} días · No acumulable</div>
+      </div>
+    `;
+    addMsg(couponCard, 'bot');
+  }
+
+  /* Regalo sorpresa */
+  if (R.specialGift) {
+    const giftCard = `
+      <div class="coupon-banner" style="border-color:#22c55e;background:linear-gradient(135deg, rgba(34,197,94,0.12), rgba(34,197,94,0.03));">
+        <span class="cb-icon">✨</span>
+        <div class="cb-title">Regalo sorpresa desbloqueado</div>
+        <div class="cb-code" style="border-color:#22c55e;color:#86efac;">${escapeHtml(R.specialGift.code)}</div>
+        <div class="cb-desc">${R.specialGift.discount}% adicional por tu interés en <strong>${escapeHtml(R.specialGift.keyword)}</strong></div>
+        <div class="cb-expire">Se suma a tu cupón · Válido 1 semana</div>
+      </div>
+    `;
+    addMsg(giftCard, 'bot');
+  }
+
+  /* Solicitud especial */
+  if (R.contact.special && !/^no$/i.test(R.contact.special)) {
     const specialCard = `
       <div class="summary-block">
         <div class="sb-header"><span class="sb-title">Solicitud especial</span></div>
@@ -2846,6 +3089,7 @@ function showSummary() {
     addMsg(specialCard, 'bot');
   }
 
+  /* Contacto */
   let contactRows = `
     <div class="sb-row"><span class="sb-label">📛 Nombre</span><span class="sb-value">${escapeHtml(R.contact.nombre)}</span></div>
     <div class="sb-row"><span class="sb-label">📱 WhatsApp</span><span class="sb-value">${formatPhone(R.contact.telefono)}</span></div>
@@ -2868,53 +3112,54 @@ function showSummary() {
     <div class="summary-block">
       <div class="sb-header"><span class="sb-title">Datos de contacto</span></div>
       ${contactRows}
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(201,169,97,0.15);font-size:0.7rem;color:rgba(245,239,224,0.45);font-weight:300;line-height:1.5;">
-        Tus datos serán tratados con confidencialidad según nuestra política de privacidad.
-      </div>
     </div>
   `;
   addMsg(contactCard, 'bot');
 
   setTimeout(() => {
-    botSay('<strong>📦 Recordatorio:</strong> preparación con mínimo <strong>24 horas de anticipación</strong>. Entregas urgentes tienen costo adicional.', 500, 'notice');
-  }, 1400);
+    botSay('<strong>📦 Recuerda:</strong> mínimo <strong>24 horas de anticipación</strong>.', 400, 'notice');
+  }, 1200);
 
   setTimeout(() => {
-    botSay('¿Envío tu pedido al equipo por WhatsApp?', 500);
-    setTimeout(() => renderWhatsAppButton(), 700);
-  }, 2400);
-if (R.coupon) {
-  const couponCard = `
-    <div class="coupon-banner">
-      <span class="cb-icon">🎁</span>
-      <div class="cb-title">Cupón aplicado</div>
-      <div class="cb-code">${escapeHtml(R.coupon.code)}</div>
-      <div class="cb-desc">${R.coupon.discount}% de descuento sobre el total</div>
-      <div class="cb-expire">Válido ${R.coupon.daysRemaining} días · Redimir por WhatsApp</div>
-    </div>
-  `;
-  addMsg(couponCard, 'bot');
-}}
+    botSay('¿Envío tu pedido por WhatsApp?', 400);
+    setTimeout(() => renderWhatsAppButton(), 600);
+  }, 2100);
+}
 
 /* ═══════════════════════════════════════════════════════════════
-   MEJORA — handleWhatsAppSend con confetti + sonido + historial + cupón
+   WHATSAPP
    ═══════════════════════════════════════════════════════════════ */
+function renderWhatsAppButton() {
+  const url = buildWhatsAppUrl();
+  renderQuick([
+    {
+      label: 'Enviar por WhatsApp',
+      sub: 'Un asesor te atenderá',
+      icon: '✓',
+      className: 'wa',
+      href: url,
+      onClick: handleWhatsAppSend
+    },
+    {
+      label: 'Editar algo',
+      sub: 'Volver atrás',
+      icon: '✎',
+      className: 'ghost',
+      onClick: openEditMenu
+    }
+  ]);
+}
+
 function handleWhatsAppSend() {
-  // 1. Celebración visual y sonora
   celebrate();
   playSuccessSound();
 
-  // 2. Guardar pedido en historial
   const order = saveOrderToHistory();
-
-  // 3. Generar cupón para el próximo pedido
   const suffix = order ? order.id.slice(-4) : '0001';
   const coupon = generateCoupon(suffix);
 
-  // 4. Toast de éxito
   showCaptchaToast('✓ ¡Pedido enviado! Te contactaremos por WhatsApp 💬');
 
-  // 5. Mensaje cálido dentro del chat
   setTimeout(() => {
     const couponHTML = `
       <div class="coupon-banner">
@@ -2924,35 +3169,13 @@ function handleWhatsAppSend() {
         <div style="font-size:0.75rem;color:var(--gold-300);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px;">Regalo para tu próxima visita</div>
         <div class="cb-code" onclick="copyCoupon('${coupon.code}')" title="Click para copiar">${coupon.code}</div>
         <div class="cb-desc">${coupon.benefit}</div>
-        <div class="cb-expire">Válido 30 días · Click en el código para copiarlo</div>
+        <div class="cb-expire">Válido 30 días · Click para copiar</div>
       </div>
     `;
     addMsg(couponHTML, 'bot');
   }, 600);
 
-  // 6. Reset automático 10s después
   setTimeout(resetAfterWhatsApp, 10000);
-}
-
-function renderWhatsAppButton() {
-  const url = ;
-  renderQuick([
-    {
-      label: 'Enviar por WhatsApp',
-      sub: 'Coordina con un asesor humano',
-      icon: '✓',
-      className: 'wa',
-      href: url,
-      onClick: handleWhatsAppSend
-    },
-    {
-      label: 'Editar respuestas',
-      sub: 'Ajustar cajas o datos',
-      icon: '✎',
-      className: 'ghost',
-      onClick: openEditMenu
-    }
-  ]);
 }
 
 function resetAfterWhatsApp() {
@@ -2963,6 +3186,8 @@ function resetAfterWhatsApp() {
   R.currentIndex = -1;
   R.contact = { nombre: '', telefono: '', ciudad: '', direccion: '', fecha: '', ocasion: '', special: '', feria: '' };
   R.contactStep = 0;
+  R.coupon = null;
+  R.specialGift = null;
   $msgs.innerHTML = '';
   $quick.innerHTML = '';
   closeFlavorPanel();
@@ -2974,73 +3199,96 @@ function resetAfterWhatsApp() {
 }
 
 function buildWhatsAppUrl() {
-  let body = `Hola, quiero cotizar un pedido personalizado:\n\n`;
-  body += `*Tipo:* ${R.orderType === 'feria' ? 'Entrega en feria' : 'Envío a domicilio'}\n\n`;
+  const lines = [];
+
+  lines.push('Hola Halat Hernández 🍫 Quiero cotizar:');
+  lines.push('');
+  lines.push(`*📦 Tipo:* ${R.orderType === 'feria' ? 'Entrega en feria' : 'Envío a domicilio'}`);
+  lines.push('');
 
   R.boxes.forEach((box, i) => {
     const bt = BOX_TYPES[box.type];
-    body += `*Caja ${i + 1}:* ${bt.name} (${bt.units} bombones)\n`;
-    body += `Modo de sabores: ${box.flavorMode === 'sorpresa' ? 'Sorpresa de la casa' : 'Personalizado (+costo adicional)'}\n`;
+    lines.push(`*Caja ${i + 1}:* ${bt.name} (${bt.units} bombones)`);
+    lines.push(`_Modo:_ ${box.flavorMode === 'sorpresa' ? 'Sorpresa de la casa' : 'Personalizado (+costo)'}`);
     FLAVORS
       .filter(f => (box.flavors[f.id] || 0) > 0)
-      .forEach(f => { body += `  - ${box.flavors[f.id]} × ${f.short}\n`; });
-    body += `\n`;
+      .forEach(f => { lines.push(`  • ${box.flavors[f.id]} × ${f.short}`); });
+    lines.push('');
   });
 
   if (R.coupon) {
-  body += `\n*🎁 CUPÓN APLICADO:* ${R.coupon.code}\n`;
-  body += `*Descuento:* ${R.coupon.discount}% sobre el total (no incluye domicilio)\n`;
-  body += `*Redimir:* Al confirmar pago por WhatsApp\n`;
-  body += `*Nota:* Cupón no acumulable · Una sola transacción\n\n`;
+    lines.push(`*🎁 CUPÓN VALIDADO*`);
+    lines.push(`Código: ${R.coupon.code}`);
+    lines.push(`Descuento: ${R.coupon.discount}% sobre el total`);
+    lines.push(`Vigencia: ${R.coupon.daysRemaining} día${R.coupon.daysRemaining !== 1 ? 's' : ''}`);
+    lines.push(`_Validado automáticamente ✓_`);
+    lines.push('');
   }
 
-  /* MEJORA: aplicar cupón activo si existe */
-  const activeCoupon = getActiveCoupon();
-  if (activeCoupon) {
-    body += `*Cupón aplicado:* ${activeCoupon.code}\n`;
-    body += `Beneficio: ${activeCoupon.benefit}\n\n`;
-    markCouponUsed();
+  if (R.specialGift) {
+    lines.push(`*✨ REGALO SORPRESA*`);
+    lines.push(`Código: ${R.specialGift.code}`);
+    lines.push(`Descuento adicional: ${R.specialGift.discount}%`);
+    lines.push(`_Interés detectado:_ ${R.specialGift.keyword}`);
+    lines.push('');
   }
 
-  body += `*Datos de contacto:*\n`;
-  body += `- Nombre: ${R.contact.nombre}\n`;
-  body += `- Teléfono: ${formatPhone(R.contact.telefono)}\n`;
+  if (R.coupon || R.specialGift) {
+    const totalDiscount = (R.coupon ? R.coupon.discount : 0) + (R.specialGift ? R.specialGift.discount : 0);
+    lines.push(`*💰 Descuento total:* ${totalDiscount}%`);
+    lines.push(`_No incluye domicilio · No acumulable con otros cupones_`);
+    lines.push('');
+  }
+
+  if (R.contact.special && !/^no$/i.test(R.contact.special)) {
+    lines.push(`*📝 Solicitud especial:*`);
+    lines.push(R.contact.special);
+    lines.push('');
+  }
+
+  lines.push('*👤 Datos de contacto:*');
+  lines.push(`Nombre: ${R.contact.nombre}`);
+  lines.push(`WhatsApp: ${formatPhone(R.contact.telefono)}`);
   if (R.orderType === 'domicilio') {
-    body += `- Ciudad: ${R.contact.ciudad}\n`;
-    body += `- Dirección: ${R.contact.direccion}\n`;
+    lines.push(`Ciudad: ${R.contact.ciudad}`);
+    lines.push(`Dirección: ${R.contact.direccion}`);
   }
   if (R.orderType === 'feria') {
-    body += `- Feria / Evento: ${R.contact.feria}\n`;
+    lines.push(`Feria: ${R.contact.feria}`);
   }
-  body += `- Fecha requerida: ${R.contact.fecha}\n`;
+  lines.push(`Fecha: ${R.contact.fecha}`);
   if (R.contact.ocasion && !/^sin ocasión$/i.test(R.contact.ocasion)) {
-    body += `- Ocasión: ${R.contact.ocasion}\n`;
+    lines.push(`Ocasión: ${R.contact.ocasion}`);
   }
 
-  if (R.orderType === 'feria') {
-    body += `\n*Nota feria:* Entiendo que este pedido está limitado a la asistencia a ferias y que se validará la participación de Halat Hernández en la feria indicada por WhatsApp.\n`;
-  }
-  body += `\n*Nota:* Preparación con mínimo 24h de anticipación. Entregas urgentes tienen costo adicional.\n`;
-  if (R.boxes.some(b => b.flavorMode === 'personalizado')) {
-    body += `*Nota 2:* La personalización de sabores tiene costo adicional por pieza.\n`;
-  }
-  body += `\nEntiendo que el precio final depende de los detalles y que una asesora me contactará por WhatsApp.`;
+  lines.push('');
+  lines.push('*📋 Políticas:*');
+  lines.push('• Preparación mínima 24h');
+  lines.push('• Cupones válidos 1 semana');
+  lines.push('• Exclusivo seguidores Instagram');
+  lines.push('• Cupones no acumulables');
+  lines.push('');
+  lines.push('Entiendo que el precio final se confirma por este medio.');
 
+  const body = lines.join('\n');
   return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(body)}`;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   EDIT MENU
+   ═══════════════════════════════════════════════════════════════ */
 function openEditMenu() {
   closeFlavorPanel();
-  botSay('¿Qué te gustaría editar?', 350);
+  botSay('¿Qué quieres editar?', 300);
   setTimeout(() => {
     const opts = [];
     if (R.boxes.length > 0) {
-      opts.push({ label: 'Editar última caja', sub: 'Cambiar sabores o unidades', icon: '✎', className: 'primary', onClick: editLastBox });
+      opts.push({ label: 'Última caja', sub: 'Cambiar sabores', icon: '✎', className: 'primary', onClick: editLastBox });
     }
-    opts.push({ label: 'Editar mis datos', sub: 'Nombre, dirección o fecha', icon: '✎', className: 'primary', onClick: editContact });
-    opts.push({ label: 'Empezar de cero', sub: 'Reiniciar cotización', icon: '↺', className: 'ghost', onClick: () => resetOrder(true) });
+    opts.push({ label: 'Mis datos', sub: 'Nombre, dirección', icon: '✎', className: 'primary', onClick: editContact });
+    opts.push({ label: 'Empezar de cero', sub: 'Reiniciar', icon: '↺', className: 'ghost', onClick: () => resetOrder(true) });
     renderQuick(opts);
-  }, 600);
+  }, 500);
 }
 
 function editLastBox() {
@@ -3053,30 +3301,28 @@ function editLastBox() {
 function editContact() {
   R.stage = 'contact';
   R.contactStep = 0;
-  R.contact.nombre = '';
-  R.contact.telefono = '';
-  R.contact.ciudad = '';
-  R.contact.direccion = '';
-  R.contact.fecha = '';
-  R.contact.ocasion = '';
-  R.contact.feria = '';
+  R.contact = { nombre: '', telefono: '', ciudad: '', direccion: '', fecha: '', ocasion: '', special: '', feria: '' };
+  R.specialGift = null;
   save();
-  botSay('Actualicemos tus datos.', 400);
-  setTimeout(() => askContactField(), 700);
+  botSay('Actualicemos tus datos.', 350);
+  setTimeout(() => askContactField(), 600);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ENVÍO DE TEXTO
+   ═══════════════════════════════════════════════════════════════ */
 function sendRonc() {
   const v = $input.value.trim();
   if (!v) return;
   if (!checkRateLimit()) return;
 
-  /* Permitir "saltar" en cualquier input */
   if (/^(saltar|skip|no)$/i.test(v) && R.stage === 'coupon-code') {
     addMsg(escapeHtml(v), 'user');
     $input.value = '';
     $quick.innerHTML = '';
     showInput(false);
     R.coupon = null;
+    save();
     promptOrderType();
     return;
   }
@@ -3085,7 +3331,6 @@ function sendRonc() {
   $input.value = '';
   $quick.innerHTML = '';
   if (R.stage === 'coupon-code') { handleCouponCode(v); return; }
-  if (R.stage === 'special') { saveSpecial(v); return; }
   if (R.stage === 'contact') { saveContactField(v); return; }
 }
 
@@ -3102,18 +3347,22 @@ function resetOrder(confirmed) {
   R.currentIndex = -1;
   R.contact = { nombre: '', telefono: '', ciudad: '', direccion: '', fecha: '', ocasion: '', special: '', feria: '' };
   R.contactStep = 0;
+  R.coupon = null;
+  R.specialGift = null;
   $msgs.innerHTML = '';
   $quick.innerHTML = '';
   closeFlavorPanel();
   showInput(false);
   updateProgress('welcome');
-  botSay('Empezamos de nuevo. 🌟', 300);
-  setTimeout(() => promptOrderType(), 700);
+  botSay('Empezamos de nuevo 🌟', 250);
+  setTimeout(() => promptOrderType(), 600);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ABRIR / CERRAR
+   ═══════════════════════════════════════════════════════════════ */
 async function openRoncaccio() {
   if (!checkHoneypot()) return;
-
   $win.classList.add('open');
   if ($badge) $badge.style.display = 'none';
   startWelcomeFlow();
@@ -3124,142 +3373,10 @@ function toggleRoncaccio() {
   else openRoncaccio();
 }
 function closeRoncaccio() { $win.classList.remove('open'); }
+
 /* ═══════════════════════════════════════════════════════════════
-   CUPONES — Validación en Roncaccio
+   reCAPTCHA v2
    ═══════════════════════════════════════════════════════════════ */
-
-function askCouponCode() {
-  R.stage = 'coupon-code';
-  save();
-  function askCouponCode() {
-  R.stage = 'coupon-code';
-  save();
-
-  /* Si ya tiene un cupón, avisar */
-  if (R.coupon && R.coupon.code) {
-    botSay(
-      `<strong>⚠️ Ya tienes un cupón aplicado</strong><br><br>` +
-      `Actual: <code class="coupon-code">${escapeHtml(R.coupon.code)}</code> (${R.coupon.discount}%)<br><br>` +
-      `Si ingresas otro, reemplazará el actual.<br>` +
-      `<em>Los cupones no son acumulables.</em>`,
-      400, 'notice'
-    );
-  }
-
-  showInput(true, 'Ej: PROMO12XABC123M9Q3');
-  botSay(
-    '<strong>🎁 Aplicar cupón</strong><br><br>' +
-    'Comparte el código que recibiste por Instagram y lo valido al instante.',
-    400
-  );
-  setTimeout(() => {
-    renderQuick([
-      { label: 'No tengo cupón', sub: 'Continuar sin descuento', icon: '→', className: 'ghost', onClick: () => {
-        showInput(false);
-        R.coupon = null;
-        promptOrderType();
-      }}
-    ]);
-  }, 700);
-}
-  showInput(true, 'Ej: PROMO12XABC123');
-  botSay(
-    '<strong>🎁 Aplicar cupón</strong><br><br>' +
-    'Comparte el código que recibiste por Instagram y lo valido al instante.',
-    400
-  );
-  setTimeout(() => {
-    renderQuick([
-      { label: 'No tengo cupón', sub: 'Continuar sin descuento', icon: '→', className: 'ghost', onClick: () => {
-        showInput(false);
-        R.coupon = null;
-        promptOrderType();
-      }}
-    ]);
-  }, 700);
-}
-
-async function handleCouponCode(rawCode) {
-  const code = String(rawCode || '').trim().toUpperCase();
-  if (code.length < 6) {
-    botSay('⚠️ El código parece incompleto. Revísalo y vuelve a intentarlo.', 350);
-    return;
-  }
-
-  showInput(false);
-  addMsg(escapeHtml(code), 'user');
-  botSay('Validando tu cupón... ⏳', 300);
-
-  try {
-    const res = await fetch('/api/validate-coupon', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ coupon_code: code })
-    });
-    const data = await res.json();
-
-    if (data.valid) {
-      /* Si ya tenía un cupón aplicado, avisar que será reemplazado */
-      const hadPrevious = R.coupon && R.coupon.code && R.coupon.code !== data.coupon_code;
-
-      R.coupon = {
-        code: data.coupon_code,
-        discount: data.discount_percent,
-        daysRemaining: data.days_remaining
-      };
-      save();
-
-      let msg = '';
-      if (hadPrevious) {
-        msg = `<strong>✓ Cupón actualizado</strong><br><br>` +
-              `El cupón anterior (<code class="coupon-code">${escapeHtml(R.coupon.code)}</code>) fue reemplazado.<br><br>` +
-              `Nuevo cupón: <code class="coupon-code">${escapeHtml(data.coupon_code)}</code><br>` +
-              `Descuento: <strong>${data.discount_percent}%</strong><br>` +
-              `Válido por ${data.days_remaining} días más.<br><br>` +
-              `<em>Recuerda: los cupones no son acumulables. Solo se aplica uno por transacción.</em> 🍫`;
-      } else {
-        msg = `<strong>✓ ¡Cupón validado!</strong><br><br>` +
-              `Código: <code class="coupon-code">${escapeHtml(data.coupon_code)}</code><br>` +
-              `Descuento: <strong>${data.discount_percent}%</strong><br>` +
-              `Válido por ${data.days_remaining} días más.<br><br>` +
-              `Se aplicará al total de tu compra al confirmar por WhatsApp.<br><br>` +
-              `<em>Recuerda: los cupones no son acumulables. Solo se aplica uno por transacción.</em> 🍫`;
-      }
-
-      botSay(msg, 500);
-      setTimeout(() => promptOrderType(), hadPrevious ? 2200 : 1800);
-      return;
-    }
-
-    const reasons = {
-      not_found: '❌ No encontramos ese código. Verifica que esté bien escrito (suele empezar con <strong>PROMO</strong>).',
-      already_redeemed: '⚠️ Este cupón <strong>ya fue redimido</strong>. Cada cupón es válido una sola vez.',
-      expired: '⏰ Este cupón <strong>expiró</strong>. Los cupones son válidos por 7 días.',
-      server_error: '⚠️ Hubo un problema al validar. Intenta de nuevo en un momento.'
-    };
-    botSay(reasons[data.reason] || reasons.server_error, 500, 'notice');
-
-    setTimeout(() => {
-      showInput(true, 'Intenta de nuevo o escribe "saltar"');
-      renderQuick([
-        { label: 'No tengo cupón', sub: 'Continuar sin descuento', icon: '→', className: 'ghost', onClick: () => {
-          showInput(false);
-          R.coupon = null;
-          promptOrderType();
-        }}
-      ]);
-    }, 1200);
-
-  } catch (err) {
-    console.error('Error validando cupón:', err);
-    botSay('⚠️ No pude conectar. Intenta de nuevo.', 400, 'notice');
-    setTimeout(() => showInput(true, 'Ingresa tu cupón'), 800);
-  }
-}
-/* ═══════════════════════════════════════════════════════════════
-   reCAPTCHA v2 — Verificación bajo demanda
-   ═══════════════════════════════════════════════════════════════ */
-
 let pendingElement = null;
 let skipCaptchaInterceptor = false;
 let isVerifying = false;
@@ -3275,7 +3392,6 @@ async function onCaptchaSuccess(token) {
   isVerifying = true;
 
   let ok = false;
-
   if (isLocalEnvironment()) {
     ok = true;
   } else {
@@ -3287,21 +3403,19 @@ async function onCaptchaSuccess(token) {
       });
       const result = await response.json();
       ok = !!(result && result.success);
-      if (!ok) console.warn('reCAPTCHA v2: verificación fallida en el servidor.', result);
     } catch (err) {
-      console.warn('reCAPTCHA v2: error de red al verificar.', err);
+      console.warn('reCAPTCHA v2: error de red.', err);
       isVerifying = false;
       pendingElement = null;
-      showCaptchaToast('Hubo un problema al verificar. Intenta de nuevo.');
+      showCaptchaToast('Problema al verificar. Intenta de nuevo.');
       return;
     }
   }
 
   isVerifying = false;
-
   if (!ok) {
     pendingElement = null;
-    showCaptchaToast('Verificación fallida. Recarga la página e intenta de nuevo.');
+    showCaptchaToast('Verificación fallida. Recarga e intenta.');
     return;
   }
 
@@ -3314,33 +3428,23 @@ async function onCaptchaSuccess(token) {
   if (pendingElement) {
     const el = pendingElement;
     pendingElement = null;
-    if (!document.body.contains(el)) {
-      console.warn('reCAPTCHA v2: el elemento pendiente ya no está en el DOM.');
-      return;
-    }
+    if (!document.body.contains(el)) return;
     setTimeout(() => {
       skipCaptchaInterceptor = true;
-      try {
-        el.click();
-      } catch (err) {
-        console.error('reCAPTCHA v2: error al re-disparar click.', err);
-      }
+      try { el.click(); } catch (err) { console.error(err); }
       setTimeout(() => { skipCaptchaInterceptor = false; }, 0);
     }, 300);
-  } else {
-    showCaptchaToast('✓ Verificación exitosa. Ya puedes continuar.');
   }
 }
 
 function onCaptchaError() {
-  console.error('reCAPTCHA v2: error al cargar el widget.');
-  showCaptchaToast('No pudimos cargar la verificación. Recarga la página.');
+  console.error('reCAPTCHA v2: error al cargar.');
+  showCaptchaToast('No pudimos cargar la verificación.');
 }
 
 function onCaptchaExpired() {
   captchaV2Verified = false;
-  console.warn('reCAPTCHA v2: token expirado. Se pedirá verificar de nuevo.');
-  showCaptchaToast('La verificación expiró. Vuelve a marcar el captcha.');
+  showCaptchaToast('La verificación expiró. Vuelve a marcarla.');
 }
 
 window.onCaptchaSuccess = onCaptchaSuccess;
@@ -3370,7 +3474,7 @@ function showCaptchaToast(message) {
     toast.className = 'captcha-toast';
     document.body.appendChild(toast);
   }
-  toast.textContent = message || 'Verifica que no eres un robot para continuar';
+  toast.textContent = message || 'Verifica que no eres un robot.';
   void toast.offsetWidth;
   toast.classList.add('visible');
   clearTimeout(window._captchaToastTimer);
@@ -3381,18 +3485,14 @@ function showCaptchaToast(message) {
 
 document.addEventListener('click', (e) => {
   if (skipCaptchaInterceptor) return;
-
   const trigger = e.target.closest('[data-requires-captcha]');
   if (!trigger) return;
-
   if (captchaV2Verified) return;
-
   e.preventDefault();
   e.stopPropagation();
-
   pendingElement = trigger;
   focusCaptcha();
-  showCaptchaToast('Verifica que no eres un robot para continuar');
+  showCaptchaToast('Verifica que no eres un robot.');
 }, true);
 
 (function recaptchaWatchdog() {
@@ -3405,7 +3505,6 @@ document.addEventListener('click', (e) => {
     try { retries = parseInt(sessionStorage.getItem('recaptcha-v2-retry') || '0', 10) || 0; } catch(e) {}
     if (retries >= 2) {
       try { sessionStorage.removeItem('recaptcha-v2-retry'); } catch(e) {}
-      console.error('reCAPTCHA v2: no se pudo cargar tras 2 intentos.');
       return;
     }
     try { sessionStorage.setItem('recaptcha-v2-retry', String(retries + 1)); } catch(e) {}
@@ -3414,22 +3513,7 @@ document.addEventListener('click', (e) => {
 })();
 
 /* ═══════════════════════════════════════════════════════════════
-   MEJORA — Marcar abandono del carrito al cerrar la pestaña
-   ═══════════════════════════════════════════════════════════════ */
-window.addEventListener('beforeunload', () => {
-  if (R.stage !== 'welcome' && R.stage !== 'summary' && R.boxes.length > 0) {
-    try {
-      localStorage.setItem(ABANDONED_KEY, JSON.stringify({
-        stage: R.stage,
-        boxesCount: R.boxes.length,
-        ts: Date.now()
-      }));
-    } catch(e) {}
-  }
-});
-/* ═══════════════════════════════════════════════════════════════
-   MEJORA — Gestión del teclado virtual en móvil
-   Fix: el input y el último mensaje siempre visibles al escribir
+   MOBILE KEYBOARD
    ═══════════════════════════════════════════════════════════════ */
 (function setupMobileKeyboard() {
   if (!window.visualViewport) return;
@@ -3442,10 +3526,7 @@ window.addEventListener('beforeunload', () => {
     if (rafId) cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(() => {
       try {
-        $msgs.scrollTo({
-          top: $msgs.scrollHeight,
-          behavior: smooth ? 'smooth' : 'auto'
-        });
+        $msgs.scrollTo({ top: $msgs.scrollHeight, behavior: smooth ? 'smooth' : 'auto' });
       } catch (e) {
         $msgs.scrollTop = $msgs.scrollHeight;
       }
@@ -3453,7 +3534,6 @@ window.addEventListener('beforeunload', () => {
   };
 
   const adjustForKeyboard = () => {
-    // Solo si Roncaccio está abierto
     if (!$win.classList.contains('open')) {
       $win.classList.remove('keyboard-open');
       $win.style.height = '';
@@ -3462,27 +3542,20 @@ window.addEventListener('beforeunload', () => {
       return;
     }
 
-    // Altura del teclado = diferencia entre viewport "grande" y "pequeño"
     const windowHeight = window.innerHeight;
     const viewportHeight = vv.height;
     const keyboardHeight = Math.max(0, windowHeight - viewportHeight - vv.offsetTop);
-
-    // Umbral: si el "teclado" mide más de 100px, asumimos que está abierto
     const keyboardOpen = keyboardHeight > 100;
 
     if (keyboardOpen) {
       if (!lastKeyboardHeight || Math.abs(keyboardHeight - lastKeyboardHeight) > 20) {
-        // Ajustar la ventana del chat para que el input quede encima del teclado
         $win.classList.add('keyboard-open');
         $win.style.height = `${viewportHeight}px`;
         $win.style.transform = `translateY(${vv.offsetTop}px)`;
         lastKeyboardHeight = keyboardHeight;
-
-        // Scroll al final para ver el input y el último mensaje
         scrollToBottom(true);
       }
     } else {
-      // Teclado cerrado: restaurar
       if (lastKeyboardHeight !== 0) {
         $win.classList.remove('keyboard-open');
         $win.style.height = '';
@@ -3496,26 +3569,27 @@ window.addEventListener('beforeunload', () => {
   vv.addEventListener('resize', adjustForKeyboard);
   vv.addEventListener('scroll', adjustForKeyboard);
 
-  // Al enfocar el input: scroll al final
   if ($input) {
     $input.addEventListener('focus', () => {
       setTimeout(() => scrollToBottom(true), 250);
     });
   }
-
-  // Al escribir: asegurar que el input siempre visible
-  if ($input) {
-    $input.addEventListener('input', () => {
-      // Solo forzamos si el usuario está escribiendo
-      const rect = $inputWrap.getBoundingClientRect();
-      const vvBottom = vv.height + vv.offsetTop;
-      if (rect.bottom > vvBottom - 10) {
-        scrollToBottom(false);
-      }
-    });
-  }
 })();
-</script>
 
+/* ═══════════════════════════════════════════════════════════════
+   BEFOREUNLOAD
+   ═══════════════════════════════════════════════════════════════ */
+window.addEventListener('beforeunload', () => {
+  if (R.stage !== 'welcome' && R.stage !== 'summary' && R.boxes.length > 0) {
+    try {
+      localStorage.setItem(ABANDONED_KEY, JSON.stringify({
+        stage: R.stage,
+        boxesCount: R.boxes.length,
+        ts: Date.now()
+      }));
+    } catch(e) {}
+  }
+});
+</script>
 </body>
 </html>
