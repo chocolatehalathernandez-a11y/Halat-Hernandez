@@ -295,6 +295,14 @@ exports.handler = async (event) => {
     const isFollower = await checkUserIsFollower(instagramUserId);
 
     /* ─── ANTI-SPAM: 1 cupón por usuario por publicación ─── */
+    console.log('[DEBUG] Valores antes del select:', {
+      instagramUserId,
+      mediaId,
+      type_user: typeof instagramUserId,
+      type_media: typeof mediaId,
+      len_user: instagramUserId ? instagramUserId.length : 0,
+      len_media: mediaId ? mediaId.length : 0
+    });
     const db = getSupabase();
     const { data: existing, error: selectError } = await db
       .from('participaciones')
