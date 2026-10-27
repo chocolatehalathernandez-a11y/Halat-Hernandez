@@ -1335,6 +1335,7 @@
       font-family: var(--display);
       font-weight: 700;
       font-size: 1.3rem;
+      overflow: hidden;
     }
 
     .ron-launcher:hover {
@@ -1381,11 +1382,18 @@
       align-items: center;
       justify-content: center;
       border: 2px solid var(--navy-950);
+      z-index: 2;
     }
 
-    /* ═══════════════════════════════════════════════════════════════
-   RONCACCIO — REDISEÑO UX
-   ═══════════════════════════════════════════════════════════════ */
+    .ron-launcher img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      position: relative;
+      z-index: 1;
+    }
+
     .ron-window {
       position: fixed;
       top: 0;
@@ -1448,6 +1456,7 @@
       flex-shrink: 0;
       position: relative;
       box-shadow: 0 4px 14px rgba(201, 169, 97, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      overflow: hidden;
     }
 
     .ron-avatar::after {
@@ -1461,6 +1470,15 @@
       background: var(--wa-green);
       border: 2px solid var(--navy-900);
       box-shadow: 0 0 8px rgba(37, 211, 102, 0.6);
+      z-index: 2;
+    }
+
+    .ron-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
     }
 
     .ron-header-text {
@@ -1693,6 +1711,15 @@
       font-size: 1.35rem;
       color: var(--navy-900);
       box-shadow: 0 6px 20px rgba(201, 169, 97, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      overflow: hidden;
+    }
+
+    .msg.welcome-hero .wh-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
     }
 
     .msg.welcome-hero .wh-title {
@@ -3248,7 +3275,8 @@
                 cartas personalizadas junto a nuestro equipo.</div>
             </div>
           </div>
-          <button class="btn btn-gold" data-requires-captcha onclick="openRoncaccio()">Cotizar para empresa</button>
+          <button class="btn btn-gold" data-requires-captcha onclick="openRoncaccio()">Cotizar para empresa, evento o
+            regalo</button>
         </div>
         <div class="reveal">
           <div class="b2b-visual visual-wrap">
@@ -3357,13 +3385,16 @@
   <div class="ron-launcher" data-requires-captcha onclick="toggleRoncaccio()" role="button" tabindex="0"
     aria-label="Abrir asesor Roncaccio">
     <div class="pulse"></div>
-    <span>R</span>
+    <img src="images/roncaccio-avatar.png" alt="Roncaccio" onerror="this.style.display='none';">
     <span class="badge" id="ronBadge">1</span>
   </div>
 
   <div class="ron-window" id="ronWindow" role="dialog" aria-label="Asesor Roncaccio">
     <div class="ron-header">
-      <div class="ron-avatar">R</div>
+      <div class="ron-avatar">
+        <img src="images/roncaccio-avatar.png" alt="Roncaccio" onerror="this.style.display='none';">
+        <span onerror="this.style.display='block';">R</span>
+      </div>
       <div class="ron-header-text">
         <div class="name">Roncaccio</div>
         <div class="status">En línea · Asesor de la casa</div>
@@ -3704,10 +3735,14 @@
 
     function checkDomicilioMinimum() {
       if (R.orderType !== 'domicilio') return { ok: true };
-      const petits = R.boxes.filter(b => b.type === 'petit').length;
-      const others = R.boxes.filter(b => b.type !== 'petit').length;
-      if (others > 0) return { ok: true };
-      if (petits >= 2) return { ok: true };
+      const totalPetits = R.boxes
+        .filter(b => b.type === 'petit')
+        .reduce((sum, b) => sum + (b.quantity || 1), 0);
+      const totalOthers = R.boxes
+        .filter(b => b.type !== 'petit')
+        .reduce((sum, b) => sum + (b.quantity || 1), 0);
+      if (totalOthers > 0) return { ok: true };
+      if (totalPetits >= 2) return { ok: true };
       return {
         ok: false,
         msg: 'Para envíos el mínimo es <strong>2 Petit Coffret</strong> o <strong>1 Coffret Signature</strong>.'
@@ -3754,12 +3789,10 @@
 
     /* ═══════════════════════════════════════════════════════════════
        MOCK LOCAL — Validación de cupones para testing
-       Solo se ejecuta en localhost / file://
        ═══════════════════════════════════════════════════════════════ */
     function mockValidateCoupon(code) {
       const upper = String(code).toUpperCase();
 
-      /* ─── Lista de códigos de prueba válidos ─── */
       const MOCK_COUPONS = {
         'PROMO12XTEST': { discount: 12, days: 5, status: 'valid' },
         'PROMO15XDEMO': { discount: 15, days: 7, status: 'valid' },
@@ -3770,36 +3803,18 @@
 
       const coupon = MOCK_COUPONS[upper];
 
-      /* Código no está en la lista → no encontrado */
       if (!coupon) {
-        console.log(`[MOCK] Código "${upper}" no está en la lista de prueba`);
-        return {
-          valid: false,
-          reason: 'not_found',
-          message: 'Código no encontrado'
-        };
+        return { valid: false, reason: 'not_found', message: 'Código no encontrado' };
       }
 
-      /* Código expirado */
       if (coupon.status === 'expired') {
-        return {
-          valid: false,
-          reason: 'expired',
-          days_since_expired: Math.abs(coupon.days),
-          message: `Este cupón expiró hace ${Math.abs(coupon.days)} días`
-        };
+        return { valid: false, reason: 'expired', days_since_expired: Math.abs(coupon.days), message: `Este cupón expiró hace ${Math.abs(coupon.days)} días` };
       }
 
-      /* Código ya redimido */
       if (coupon.status === 'redeemed') {
-        return {
-          valid: false,
-          reason: 'already_redeemed',
-          message: 'Este cupón ya fue redimido'
-        };
+        return { valid: false, reason: 'already_redeemed', message: 'Este cupón ya fue redimido' };
       }
 
-      /* Código válido */
       return {
         valid: true,
         coupon_code: upper,
@@ -3904,6 +3919,7 @@
             type: b.type,
             name: BOX_TYPES[b.type].name,
             units: BOX_TYPES[b.type].units,
+            quantity: b.quantity || 1,
             flavorMode: b.flavorMode,
             flavors: { ...b.flavors }
           })),
@@ -3932,7 +3948,7 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       CUPÓN DE RETORNO (local)
+       CUPÓN DE RETORNO
        ═══════════════════════════════════════════════════════════════ */
     function generateCoupon(orderSuffix) {
       const suffix = orderSuffix || Math.random().toString(36).substring(2, 6).toUpperCase();
@@ -4066,6 +4082,59 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════
+       RE-VALIDACIÓN DE CUPÓN
+       ═══════════════════════════════════════════════════════════════ */
+    async function revalidateCoupon(showMessage = false) {
+      if (!R.coupon || !R.coupon.code) return { valid: true, silent: true };
+      if (R.coupon.pendingValidation) return { valid: true, pending: true };
+
+      try {
+        let data;
+        if (isLocalEnvironment()) {
+          data = mockValidateCoupon(R.coupon.code);
+        } else {
+          const res = await fetch('/api/validate-coupon', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ coupon_code: R.coupon.code })
+          });
+          data = await res.json();
+        }
+
+        if (!data.valid) {
+          const oldCode = R.coupon.code;
+          R.coupon = null;
+          save();
+
+          if (showMessage) {
+            const reasons = {
+              not_found: '❌ El cupón ya no existe en el sistema.',
+              already_redeemed: '⚠️ El cupón <strong>ya fue redimido</strong>. Solo se puede usar una vez.',
+              expired: '⏰ El cupón <strong>expiró</strong>. Válido 7 días.',
+              server_error: '⚠️ No pude verificar el cupón en este momento.'
+            };
+            botSay(
+              `<strong>Actualización de cupón</strong><br><br>` +
+              `El cupón <code class="coupon-code">${escapeHtml(oldCode)}</code> ya no es válido.<br>` +
+              `${reasons[data.reason] || reasons.server_error}`,
+              400, 'notice'
+            );
+          }
+          return { valid: false, reason: data.reason };
+        }
+
+        R.coupon.daysRemaining = data.days_remaining;
+        R.coupon.discount = data.discount_percent;
+        save();
+
+        return { valid: true, updated: true };
+      } catch (err) {
+        console.warn('Re-validación falló por red:', err);
+        return { valid: true, networkError: true };
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
        VALIDACIÓN DE CUPÓN — con fallback a WhatsApp
        ═══════════════════════════════════════════════════════════════ */
     async function handleCouponCode(rawCode) {
@@ -4099,16 +4168,9 @@
         connectionFailed = true;
       }
 
-      /* CASO 1: Sin conexión → igual se registra */
       if (connectionFailed || !data) {
-        R.coupon = {
-          code: code,
-          discount: null,
-          daysRemaining: null,
-          pendingValidation: true
-        };
+        R.coupon = { code: code, discount: null, daysRemaining: null, pendingValidation: true };
         save();
-
         botSay(
           '<strong>📝 Cupón registrado para validar</strong><br><br>' +
           `Código: <code class="coupon-code">${escapeHtml(code)}</code><br><br>` +
@@ -4116,7 +4178,6 @@
           `El asesor lo validará al confirmar por WhatsApp. ✓`,
           500, 'notice'
         );
-
         setTimeout(() => {
           if (R.boxes.length > 0 && R.contact.nombre) showSummary();
           else promptOrderType();
@@ -4124,7 +4185,6 @@
         return;
       }
 
-      /* CASO 2: Válido */
       if (data.valid) {
         const hadPrevious = R.coupon && R.coupon.code && R.coupon.code !== data.coupon_code;
         R.coupon = {
@@ -4151,7 +4211,6 @@
         return;
       }
 
-      /* CASO 3: Inválido → igual se registra */
       const reasons = {
         not_found: 'No lo encontramos en nuestro sistema.',
         already_redeemed: 'Ya fue redimido anteriormente.',
@@ -4182,9 +4241,6 @@
       }, 1800);
     }
 
-    /* ═══════════════════════════════════════════════════════════════
-       INGRESO MANUAL DE CUPÓN (desde welcome)
-       ═══════════════════════════════════════════════════════════════ */
     function askCouponCode() {
       R.stage = 'coupon-code';
       save();
@@ -4224,7 +4280,6 @@
       if (started) return;
       started = true;
 
-      /* Limpiar siempre — empezamos desde cero */
       clear();
       R.stage = 'welcome';
       R.orderType = '';
@@ -4313,7 +4368,7 @@
     function selectBox(type) {
       const bt = BOX_TYPES[type];
       addMsg(bt.name + ' · ' + bt.units + ' bombones', 'user');
-      R.boxes.push({ type: type, flavors: {}, flavorMode: '' });
+      R.boxes.push({ type: type, flavors: {}, flavorMode: '', quantity: 1 });
       R.currentIndex = R.boxes.length - 1;
       R.stage = 'flavor-mode';
       save();
@@ -4352,7 +4407,7 @@
         });
         save();
         botSay(`<strong>✦ Selección curada</strong><br>${flavorsPicked.map(f => '· ' + f.name).join('<br>')}`, 400);
-        setTimeout(() => promptNextAction(), 1100);
+        setTimeout(() => promptBoxQuantity(), 1100);
       } else {
         addMsg('Elegir mis sabores', 'user');
         botSay(`Personaliza hasta <strong>${BOX_TYPES[box.type].maxFlavors} sabores</strong>. Distribuye con + / −`, 400, 'notice');
@@ -4491,7 +4546,7 @@
       closeFlavorPanel();
       addMsg('Confirmar caja', 'user');
       botSay(`<strong>${bt.name}</strong> lista 🍫<br>${lines}`, 350);
-      setTimeout(() => promptNextAction(), 800);
+      setTimeout(() => promptBoxQuantity(), 800);
     }
 
     function cancelCurrentBox() {
@@ -4501,6 +4556,122 @@
       save();
       botSay('Caja eliminada.', 250);
       setTimeout(() => promptNextAction(), 600);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SELECTOR DE CANTIDAD — ¿Cuántas cajas iguales quiere?
+       ═══════════════════════════════════════════════════════════════ */
+    function promptBoxQuantity() {
+      const box = R.boxes[R.currentIndex];
+      const bt = BOX_TYPES[box.type];
+      const qty = box.quantity || 1;
+
+      botSay(
+        `¿Cuántas cajas <strong>${bt.name}</strong> quieres?<br><br>` +
+        `Toca <strong>+</strong> o <strong>−</strong> para ajustar la cantidad.`,
+        350
+      );
+
+      setTimeout(() => {
+        renderBoxQuantityControls();
+      }, 600);
+    }
+
+    function renderBoxQuantityControls() {
+      const box = R.boxes[R.currentIndex];
+      const bt = BOX_TYPES[box.type];
+      const qty = box.quantity || 1;
+
+      $flavorPanel.classList.add('active');
+
+      const $fpHeader = $flavorPanel.querySelector('.fp-header');
+      $fpHeader.innerHTML = `
+    <div class="fp-header-left">
+      <div class="fp-name">${bt.name}</div>
+      <div class="fp-sub">${bt.units} bombones · ${bt.size}</div>
+    </div>
+    <div class="fp-header-right">
+      <div class="stat"><span class="v">${qty}</span><span class="l">Cajas</span></div>
+    </div>
+  `;
+
+      $('fpProgress').style.display = 'none';
+      $('fpFlavors').innerHTML = '';
+
+      const $actions = $('fpActions');
+      $actions.innerHTML = '';
+
+      const btnMinus = document.createElement('button');
+      btnMinus.className = 'quick-btn ghost';
+      btnMinus.style.flex = '0 0 60px';
+      btnMinus.style.justifyContent = 'center';
+      btnMinus.style.fontSize = '1.5rem';
+      btnMinus.style.padding = '12px 0';
+      btnMinus.innerHTML = '−';
+      btnMinus.disabled = qty <= 1;
+      btnMinus.style.opacity = qty <= 1 ? '0.3' : '1';
+      btnMinus.onclick = () => {
+        if (box.quantity > 1) {
+          box.quantity--;
+          save();
+          renderBoxQuantityControls();
+        }
+      };
+
+      const qtyDisplay = document.createElement('div');
+      qtyDisplay.style.flex = '1';
+      qtyDisplay.style.textAlign = 'center';
+      qtyDisplay.style.padding = '12px';
+      qtyDisplay.style.background = 'rgba(201, 169, 97, 0.08)';
+      qtyDisplay.style.borderRadius = '12px';
+      qtyDisplay.style.border = '1px solid rgba(201, 169, 97, 0.3)';
+      qtyDisplay.innerHTML = `
+    <div style="font-family: var(--display); font-size: 1.8rem; color: var(--gold-400); font-weight: 700; line-height: 1;">${qty}</div>
+    <div style="font-size: 0.65rem; color: rgba(245, 239, 224, 0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px;">${qty === 1 ? 'caja' : 'cajas'}</div>
+  `;
+
+      const btnPlus = document.createElement('button');
+      btnPlus.className = 'quick-btn primary';
+      btnPlus.style.flex = '0 0 60px';
+      btnPlus.style.justifyContent = 'center';
+      btnPlus.style.fontSize = '1.5rem';
+      btnPlus.style.padding = '12px 0';
+      btnPlus.innerHTML = '+';
+      btnPlus.onclick = () => {
+        box.quantity = (box.quantity || 1) + 1;
+        save();
+        renderBoxQuantityControls();
+      };
+
+      $actions.appendChild(btnMinus);
+      $actions.appendChild(qtyDisplay);
+      $actions.appendChild(btnPlus);
+
+      setTimeout(() => {
+        renderQuick([
+          {
+            label: `Confirmar ${qty} ${qty === 1 ? 'caja' : 'cajas'}`,
+            sub: `${qty * bt.units} bombones en total`,
+            icon: '✓',
+            className: 'primary',
+            onClick: () => {
+              closeFlavorPanel();
+              const mensaje = qty === 1
+                ? `¡Listo! Tu <strong>${bt.name}</strong> quedó agregada.`
+                : `¡Excelente! <strong>${qty} cajas</strong> de ${bt.name} agregadas.`;
+              botSay(mensaje, 300);
+              setTimeout(() => promptNextAction(), 900);
+            }
+          },
+          {
+            label: 'Cancelar esta caja',
+            sub: 'Volver a selección',
+            icon: '×',
+            className: 'ghost',
+            onClick: cancelCurrentBox
+          }
+        ]);
+      }, 300);
     }
 
     function promptNextAction() {
@@ -4583,11 +4754,7 @@
         if (giftKeyword && !R.specialGift) {
           const giftDiscount = generateGiftDiscount();
           const giftCode = generateGiftCode(giftDiscount);
-          R.specialGift = {
-            code: giftCode,
-            discount: giftDiscount,
-            keyword: giftKeyword
-          };
+          R.specialGift = { code: giftCode, discount: giftDiscount, keyword: giftKeyword };
           save();
 
           setTimeout(() => {
@@ -4597,12 +4764,8 @@
               `Código: <code class="coupon-code">${giftCode}</code><br>` +
               `Descuento adicional: <strong>${giftDiscount}%</strong><br><br>` +
               `<div style="padding:10px 12px;background:rgba(245,158,11,0.1);border-left:3px solid #f59e0b;border-radius:4px;font-size:0.78rem;line-height:1.5;">` +
-              `<strong style="color:#fcd34d;">⚠️ Condición para aplicar:</strong><br>` +
-              `El descuento aplica <strong>solo si la compra incluye vino, flores o arreglo especial</strong>. ` +
-              `Se aplica sobre el total de la compra.<br>` +
-              `Si no se incluye el regalo, el descuento no aplica.` +
-              `</div><br>` +
-              `<em>El asesor validará esta condición al confirmar por WhatsApp.</em>`,
+              `<strong style="color:#fcd34d;">⚠️ Condición:</strong> aplica solo si la compra incluye ${giftKeyword}.` +
+              `</div>`,
               400
             );
           }, 500);
@@ -4634,14 +4797,16 @@
 
       R.boxes.forEach((box, i) => {
         const bt = BOX_TYPES[box.type];
+        const qty = box.quantity || 1;
         const flavorRows = FLAVORS
           .filter(f => (box.flavors[f.id] || 0) > 0)
           .map(f => `<div class="sb-row"><span class="sb-label">${f.short}</span><span class="sb-value">× ${box.flavors[f.id]}</span></div>`).join('');
         const card = `
       <div class="summary-block">
-        <div class="sb-header"><span class="sb-title">Caja ${i + 1}</span><span class="sb-badge">${box.flavorMode === 'sorpresa' ? 'Sorpresa' : 'Personalizada'}</span></div>
+        <div class="sb-header"><span class="sb-title">${qty === 1 ? 'Caja ' + (i + 1) : qty + ' × ' + bt.name}</span><span class="sb-badge">${box.flavorMode === 'sorpresa' ? 'Sorpresa' : 'Personalizada'}</span></div>
         <div class="sb-row"><span class="sb-label">Colección</span><span class="sb-value">${bt.name}</span></div>
-        <div class="sb-row"><span class="sb-label">Unidades</span><span class="sb-value">${bt.units} bombones</span></div>
+        <div class="sb-row"><span class="sb-label">Cantidad</span><span class="sb-value">${qty} ${qty === 1 ? 'caja' : 'cajas'}</span></div>
+        <div class="sb-row"><span class="sb-label">Unidades por caja</span><span class="sb-value">${bt.units} bombones</span></div>
         ${flavorRows}
         ${box.flavorMode === 'personalizado' ? `
           <div class="sb-row" style="border-top:1px solid rgba(201,169,97,0.15);margin-top:6px;padding-top:8px;">
@@ -4654,7 +4819,6 @@
         addMsg(card, 'bot');
       });
 
-      /* Cupón con estado validado o pendiente */
       if (R.coupon) {
         const isValidated = !R.coupon.pendingValidation && R.coupon.discount;
         const icon = isValidated ? '🎁' : '📝';
@@ -4662,9 +4826,6 @@
         const desc = isValidated
           ? `${R.coupon.discount}% de descuento sobre el total`
           : 'Será verificado por el asesor en WhatsApp';
-        const expireText = isValidated
-          ? `Vigente ${R.coupon.daysRemaining} días · No acumulable`
-          : 'Se confirmará antes del pago';
 
         const couponCard = `
       <div class="coupon-banner" ${isValidated ? '' : 'style="border-color:#f59e0b;background:linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.03));"'}>
@@ -4672,13 +4833,12 @@
         <div class="cb-title">${title}</div>
         <div class="cb-code" ${isValidated ? '' : 'style="border-color:#f59e0b;color:#fcd34d;"'}>${escapeHtml(R.coupon.code)}</div>
         <div class="cb-desc">${desc}</div>
-        <div class="cb-expire">${expireText}</div>
+        <div class="cb-expire">${isValidated ? 'Vigente · No acumulable' : 'Se confirmará antes del pago'}</div>
       </div>
     `;
         addMsg(couponCard, 'bot');
       }
 
-      /* Regalo sorpresa */
       if (R.specialGift) {
         const giftCard = `
       <div class="coupon-banner" style="border-color:#22c55e;background:linear-gradient(135deg, rgba(34,197,94,0.12), rgba(34,197,94,0.03));">
@@ -4687,13 +4847,11 @@
         <div class="cb-code" style="border-color:#22c55e;color:#86efac;">${escapeHtml(R.specialGift.code)}</div>
         <div class="cb-desc">${R.specialGift.discount}% adicional por tu interés en <strong>${escapeHtml(R.specialGift.keyword)}</strong></div>
         <div class="cb-expire" style="color:#fcd34d;">⚠️ Solo aplica si la compra incluye ${escapeHtml(R.specialGift.keyword)}</div>
-        <div class="cb-expire">Se aplica sobre el total · Válido 1 semana</div>
       </div>
     `;
         addMsg(giftCard, 'bot');
       }
 
-      /* Solicitud especial */
       if (R.contact.special && !/^no$/i.test(R.contact.special)) {
         const specialCard = `
       <div class="summary-block">
@@ -4706,7 +4864,6 @@
         addMsg(specialCard, 'bot');
       }
 
-      /* Contacto */
       let contactRows = `
     <div class="sb-row"><span class="sb-label">📛 Nombre</span><span class="sb-value">${escapeHtml(R.contact.nombre)}</span></div>
     <div class="sb-row"><span class="sb-label">📱 WhatsApp</span><span class="sb-value">${formatPhone(R.contact.telefono)}</span></div>
@@ -4730,7 +4887,7 @@
       <div class="sb-header"><span class="sb-title">Datos de contacto</span></div>
       ${contactRows}
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(201,169,97,0.15);font-size:0.68rem;color:rgba(245,239,224,0.5);line-height:1.5;">
-        🔒 Al enviar por WhatsApp, aceptas el tratamiento de tus datos para procesar el pedido. <a onclick="showPrivacyPolicy()" style="color:var(--gold-400);text-decoration:underline;cursor:pointer;">Ver política completa</a>
+        🔒 Al enviar por WhatsApp, aceptas el tratamiento de tus datos. <a onclick="showPrivacyPolicy()" style="color:var(--gold-400);text-decoration:underline;cursor:pointer;">Ver política</a>
       </div>
     </div>
   `;
@@ -4740,14 +4897,9 @@
         botSay('<strong>📦 Recuerda:</strong> mínimo <strong>24 horas de anticipación</strong>.', 400, 'notice');
       }, 1200);
 
-      /* Pregunta de cupón al final si no aplicó ninguno */
       setTimeout(() => {
         if (!R.coupon) {
-          botSay(
-            '<strong>🎁 ¿Tienes un cupón de Instagram?</strong><br><br>' +
-            'Si participaste en nuestras publicaciones y ganaste un código, puedes validarlo ahora.',
-            400
-          );
+          botSay('<strong>🎁 ¿Tienes un cupón de Instagram?</strong><br><br>Si participaste en nuestras publicaciones, puedes validarlo ahora.', 400);
           setTimeout(() => {
             renderQuick([
               { label: 'Sí, tengo cupón', sub: 'Ingresar código', icon: '🎁', className: 'primary', onClick: () => askCouponAtSummary() },
@@ -4760,15 +4912,10 @@
       }, 2100);
     }
 
-    /* Pregunta de cupón al final del resumen */
     function askCouponAtSummary() {
       R.stage = 'coupon-code';
       save();
-      botSay(
-        '<strong>🎁 Validar cupón</strong><br><br>' +
-        'Pega el código que recibiste por DM de Instagram (empieza con <strong>PROMO</strong>).',
-        350
-      );
+      botSay('<strong>🎁 Validar cupón</strong><br><br>Pega el código que recibiste por DM (empieza con <strong>PROMO</strong>).', 350);
       showInput(true, 'Ej: PROMO12XABC123M9Q3');
       setTimeout(() => {
         renderQuick([
@@ -4782,16 +4929,15 @@
       }, 600);
     }
 
-    /* Continuar a WhatsApp */
     function continueToWhatsApp() {
       botSay('¿Envío tu pedido por WhatsApp?', 400);
-      setTimeout(async () => await renderWhatsAppButton(), 600);
+      setTimeout(() => renderWhatsAppButton(), 600);
     }
 
     /* ═══════════════════════════════════════════════════════════════
        WHATSAPP
        ═══════════════════════════════════════════════════════════════ */
-    async function renderWhatsAppButton() {
+    function renderWhatsAppButton() {
       const url = buildWhatsAppUrl();
       renderQuick([
         {
@@ -4870,7 +5016,9 @@
 
       R.boxes.forEach((box, i) => {
         const bt = BOX_TYPES[box.type];
-        lines.push(`*Caja ${i + 1}:* ${bt.name} (${bt.units} bombones)`);
+        const qty = box.quantity || 1;
+        const header = qty === 1 ? `*Caja ${i + 1}:*` : `*${qty} × ${bt.name}:*`;
+        lines.push(`${header} ${qty === 1 ? bt.name + ' (' + bt.units + ' bombones)' : qty * bt.units + ' bombones en total'}`);
         lines.push(`_Modo:_ ${box.flavorMode === 'sorpresa' ? 'Sorpresa de la casa' : 'Personalizado (+costo)'}`);
         FLAVORS
           .filter(f => (box.flavors[f.id] || 0) > 0)
@@ -4878,61 +5026,50 @@
         lines.push('');
       });
 
-      /* Cupón: validado o pendiente */
       if (R.coupon) {
         const isValidated = !R.coupon.pendingValidation && R.coupon.discount;
         if (isValidated) {
           lines.push(`*🎁 CUPÓN VALIDADO*`);
           lines.push(`Código: ${R.coupon.code}`);
           lines.push(`Descuento: ${R.coupon.discount}% sobre el total`);
-          lines.push(`Vigencia: ${R.coupon.daysRemaining} día${R.coupon.daysRemaining !== 1 ? 's' : ''}`);
           lines.push(`_Validado automáticamente ✓_`);
         } else {
           lines.push(`*📝 CUPÓN PENDIENTE DE VALIDAR*`);
           lines.push(`Código: ${R.coupon.code}`);
           lines.push(`_Por favor validar en el momento del pago_`);
-          if (R.coupon.validationWarning) {
-            lines.push(`_Nota: ${R.coupon.validationWarning}_`);
-          }
         }
         lines.push('');
       }
 
-      /* Regalo sorpresa */
       if (R.specialGift) {
         lines.push(`*✨ REGALO SORPRESA*`);
         lines.push(`Código: ${R.specialGift.code}`);
         lines.push(`Descuento adicional: ${R.specialGift.discount}%`);
         lines.push(`_Interés detectado:_ ${R.specialGift.keyword}`);
         lines.push(`⚠️ _Condición: aplica solo si la compra incluye ${R.specialGift.keyword}_`);
-        lines.push(`_Se aplica sobre el total de la compra_`);
         lines.push('');
       }
 
-      /* Descuento total */
       const couponDiscount = (R.coupon && R.coupon.discount) ? R.coupon.discount : 0;
       const giftDiscount = R.specialGift ? R.specialGift.discount : 0;
 
       if (couponDiscount > 0 && giftDiscount > 0) {
         lines.push(`*💰 Descuento si cumple condiciones:* hasta ${couponDiscount + giftDiscount}%`);
-        lines.push(`_Cupón: ${couponDiscount}% · Regalo: ${giftDiscount}% (solo si incluye ${R.specialGift.keyword})_`);
-        lines.push(`_No incluye domicilio · No acumulable con otros cupones_`);
+        lines.push(`_No incluye domicilio · No acumulable_`);
         lines.push('');
       } else if (couponDiscount > 0) {
         lines.push(`*💰 Descuento:* ${couponDiscount}%`);
-        lines.push(`_No incluye domicilio · No acumulable con otros cupones_`);
+        lines.push(`_No incluye domicilio · No acumulable_`);
         lines.push('');
       } else if (giftDiscount > 0) {
         lines.push(`*💰 Descuento condicional:* ${giftDiscount}%`);
         lines.push(`_Solo aplica si la compra incluye ${R.specialGift.keyword}_`);
-        lines.push(`_Se aplica sobre el total · No acumulable_`);
         lines.push('');
       } else if (R.coupon && R.coupon.pendingValidation) {
         lines.push(`*💰 Descuento:* Pendiente de validación por el asesor`);
         lines.push('');
       }
 
-      /* Solicitud especial */
       if (R.contact.special && !/^no$/i.test(R.contact.special)) {
         lines.push(`*📝 Solicitud especial:*`);
         lines.push(R.contact.special);
@@ -5009,9 +5146,6 @@
       setTimeout(() => askContactField(), 600);
     }
 
-    /* ═══════════════════════════════════════════════════════════════
-       ENVÍO DE TEXTO
-       ═══════════════════════════════════════════════════════════════ */
     function sendRonc() {
       const v = $input.value.trim();
       if (!v) return;
@@ -5060,9 +5194,6 @@
       setTimeout(() => promptOrderType(), 600);
     }
 
-    /* ═══════════════════════════════════════════════════════════════
-       ABRIR / CERRAR
-       ═══════════════════════════════════════════════════════════════ */
     async function openRoncaccio() {
       if (!checkHoneypot()) return;
       $win.classList.add('open');
@@ -5223,7 +5354,6 @@
       if (isLocal) {
         captchaV2Verified = true;
         console.log('🧪 MODO TEST: captcha auto-verificado en localhost');
-        console.log('   Los [data-requires-captcha] no bloquearán clicks.');
       }
     })();
 
@@ -5306,6 +5436,7 @@
       }
     });
   </script>
+
 </body>
 
 </html>

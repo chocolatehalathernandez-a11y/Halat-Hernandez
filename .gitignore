@@ -1,17 +1,12 @@
-# Temporales de debug (no subir)
+*.bak
+new-functions.txt
+parte*.html
 debug.json
 ig.json
 page.json
 token.json
-
-# Backups
-*.bak
-
-# Sistema
-.DS_Store
-Thumbs.db
-
-# Entorno
 .env
 .env.local
 node_modules/
+.DS_Store
+Thumbs.db
